@@ -4,3 +4,4 @@ obj/
 riderModule.iml
 /_ReSharper.Caches/
 /Infrastructure/SqlServer/Shared/Database.cs
+.idea

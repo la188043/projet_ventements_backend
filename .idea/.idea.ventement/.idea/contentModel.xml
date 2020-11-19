@@ -36,6 +36,12 @@
             </e>
           </e>
         </e>
+        <e p="SqlServer" t="Include">
+          <e p="init-tables.sql" t="Include" />
+          <e p="Shared" t="Include">
+            <e p="Database.cs" t="Include" />
+          </e>
+        </e>
       </e>
       <e p="packages" t="ExcludeRecursive" />
       <e p="ventement.sln" t="IncludeFlat" />

@@ -9,14 +9,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="88a2554a-b8d2-4d87-8cae-369668acd5a0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApi/Program.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApi/Properties/launchSettings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApi/Startup.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApi/WebApi.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApi/appsettings.Development.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApi/appsettings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ventement.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ventement/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ventement/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ventement/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ventement/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Infrastructure.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +27,7 @@
         <option value="$PROJECT_DIR$/Domain/Class1.cs" />
         <option value="$PROJECT_DIR$/Infrastructure/Class1.cs" />
         <option value="$PROJECT_DIR$/Application/Class1.cs" />
+        <option value="$PROJECT_DIR$/Infrastructure/SqlServer/Shared/Database.cs" />
       </list>
     </option>
   </component>
@@ -87,13 +83,14 @@
       <option name="presentableId" value="Default" />
       <updated>1605793790678</updated>
       <workItem from="1605793795396" duration="87000" />
+      <workItem from="1605795797558" duration="158000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -105,6 +102,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />

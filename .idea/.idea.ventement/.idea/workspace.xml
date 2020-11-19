@@ -8,11 +8,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88a2554a-b8d2-4d87-8cae-369668acd5a0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ventement/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ventement/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ventement/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ventement/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Infrastructure.csproj" afterDir="false" />
-    </list>
+    <list default="true" id="88a2554a-b8d2-4d87-8cae-369668acd5a0" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -83,7 +79,7 @@
       <option name="presentableId" value="Default" />
       <updated>1605793790678</updated>
       <workItem from="1605793795396" duration="87000" />
-      <workItem from="1605795797558" duration="158000" />
+      <workItem from="1605795797558" duration="490000" />
     </task>
     <servers />
   </component>

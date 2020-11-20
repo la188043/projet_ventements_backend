@@ -9,6 +9,6 @@ namespace Application.Services.Users.Dto
         public DateTime Birthdate { get; set; }
         public string Email { get; set; }
         public string UserPassword { get; set; } // will encrypted then affected to EncryptedPassword
-        public char Gender { get; set; }
+        public string Gender { get; set; }
     }
 }

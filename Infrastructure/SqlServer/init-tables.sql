@@ -30,8 +30,8 @@ CREATE TABLE userv
 	birthdate						DATETIME		 				NOT NULL,
 	email								VARCHAR(150) UNIQUE NOT NULL,
 	encryptedPassword		VARCHAR(250) 				NOT NULL,
-	sexe 								CHAR(1) 		 				NOT NULL,  
-	administrator 			BIT					 				NOT NULL,	
+	gender 							CHAR(1) 		 				NOT NULL,  
+	administrator 			BIT DEFAULT(0),	
 	addressId						INT
 	
   PRIMARY KEY (id),

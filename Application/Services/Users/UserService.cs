@@ -63,7 +63,7 @@ namespace Application.Services.Users
                 Birthdate = user.Birthdate,
                 Email = user.Email,
                 EncryptedPassword = _passwordEncryption.HashPassword(new User(), user.UserPassword),
-                Gender = user.Gender
+                Gender = user.Gender[0]
             });
 
             var token = GenerateJwtToken(userFromDb);

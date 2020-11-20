@@ -16,7 +16,7 @@ namespace Infrastructure.SqlServer.Factories
                 Birthdate = reader.GetDateTime(reader.GetOrdinal(UserSqlServer.ColBirthDate)),
                 Email = reader.GetString(reader.GetOrdinal(UserSqlServer.ColEmail)),
                 EncryptedPassword = reader.GetString(reader.GetOrdinal(UserSqlServer.ColPassword)),
-                Gender = reader.GetChar(reader.GetOrdinal(UserSqlServer.ColGender)),
+                Gender = reader.GetString(reader.GetOrdinal(UserSqlServer.ColGender))[0],
                 Administrator = reader.GetBoolean(reader.GetOrdinal(UserSqlServer.ColAdmin)),
             };
         }

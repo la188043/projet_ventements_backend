@@ -22,8 +22,8 @@ namespace WebApi.Helpers
         public async Task Invoke(HttpContext context, IUserService userService)
         {
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
-
-            if (token == null)
+            
+            if (token != null)
                 AttachUserToContext(context, userService, token);
 
             await _next(context);

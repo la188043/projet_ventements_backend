@@ -11,6 +11,7 @@
         public static readonly string ColPassword = "encryptedPassword";
         public static readonly string ColGender = "gender";
         public static readonly string ColAdmin = "administrator";
+        public static readonly string ColAddress = "addressId";
 
         public static readonly string ReqQuery = $"SELECT * FROM {TableName}";
 
@@ -25,5 +26,10 @@
         ";
 
         public static readonly string ReqAuthenticate = ReqQuery + $" WHERE {ColEmail} = @{ColEmail}";
+
+        public static readonly string ReqAddAddressId = $@"
+            UPDATE {TableName} SET {ColAddress} = @{ColAddress}
+            WHERE {ColId} = @{ColId}
+        ";
     }
 }

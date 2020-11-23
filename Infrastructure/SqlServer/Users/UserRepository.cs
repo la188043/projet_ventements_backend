@@ -88,9 +88,19 @@ namespace Infrastructure.SqlServer.Users
             return null;
         }
 
-        public IAddress RegisterAddress(IAddress address)
+        public bool RegisterAddress(int idUser, IAddress address)
         {
-            throw new System.NotImplementedException();
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+                var cmd = connection.CreateCommand();
+                cmd.CommandText = UserSqlServer.ReqAddAddressId;
+
+                cmd.Parameters.AddWithValue($"@{UserSqlServer.ColId}", idUser);
+                cmd.Parameters.AddWithValue($"@{UserSqlServer.ColAddress}", address.Id);
+
+                return cmd.ExecuteNonQuery() > 0;
+            }
         }
     }
 }

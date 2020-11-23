@@ -93,26 +93,24 @@ namespace Application.Services.Users
             return new OutputDtoAuthenticateUser(userFromDb, token);
         }
 
-        public OutputDtoQueryAddress RegisterAddress(InputDtoAddAddress address)
+        public bool RegisterAddress(int idUser, InputDtoAddAddress address)
         {
             var addressFromDb = _addressService.CheckFromDb(address);
 
-            if (addressFromDb != null)
+            if (addressFromDb == null)
             {
                 // if the address already extists
-                _userRepository.RegisterAddress(new Address
-                {
-                    Id = addressFromDb.Id,
-                    Street = addressFromDb.Street,
-                    HomeNumber = addressFromDb.HomeNumber ,
-                    Zip = addressFromDb.Zip ,
-                    City = addressFromDb.City ,
-                });
+                addressFromDb = _addressService.Create(address);
             }
 
-            addressFromDb = _addressService.Create(address);
-
-            return addressFromDb;
+            return _userRepository.RegisterAddress(idUser, new Address
+            {
+                Id = addressFromDb.Id,
+                Street = addressFromDb.Street,
+                HomeNumber = addressFromDb.HomeNumber ,
+                Zip = addressFromDb.Zip ,
+                City = addressFromDb.City ,
+            });
         }
 
         public string GenerateJwtToken(IUser user)

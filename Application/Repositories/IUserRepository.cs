@@ -10,6 +10,6 @@ namespace Application.Repositories
         IUser GetById(int id);
         IUser Create(IUser user);
         IUser Authenticate(IUser user);
-        IAddress RegisterAddress(IAddress address);
+        bool RegisterAddress(int idUser, IAddress address);
     }
 }

@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application;
 using Application.Repositories;
+using Application.Services.Addresses;
 using Application.Services.Categories;
 using Application.Services.Users;
+using Infrastructure.SqlServer.Addresses;
 using Infrastructure.SqlServer.Categories;
 using Infrastructure.SqlServer.Users;
 using Microsoft.AspNetCore.Builder;
@@ -40,6 +42,8 @@ namespace WebApi
             services.AddSingleton<IPasswordEncryption, PasswordEncryption>();
             services.AddSingleton<ICategoryService, CategoryService>();
             services.AddSingleton<ICategoryRepository, CategoryRepository>();
+            services.AddSingleton<IAddressRepository, AddressRepository>();
+            services.AddSingleton<IAddressService, AddressService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

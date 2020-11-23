@@ -1,4 +1,5 @@
-﻿using Application.Services.Users;
+﻿using Application.Services.Addresses.Dto;
+using Application.Services.Users;
 using Application.Services.Users.Dto;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Helpers;
@@ -48,6 +49,17 @@ namespace WebApi.Controllers
         public ActionResult<OutputDtoQueryUser> Get(int id)
         {
             return Ok(_userService.GetById(id));
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("{idUser:int}/address")]
+        public ActionResult RegisterAddress(int idUser, [FromBody] InputDtoAddAddress address)
+        {
+            if (_userService.RegisterAddress(idUser, address))
+                return Ok();
+
+            return NotFound();
         }
     }
 }

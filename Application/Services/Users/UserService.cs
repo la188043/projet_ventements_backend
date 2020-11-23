@@ -5,7 +5,10 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using Application.Repositories;
+using Application.Services.Addresses;
+using Application.Services.Addresses.Dto;
 using Application.Services.Users.Dto;
+using Domain.Addresses;
 using Domain.Users;
 using Microsoft.IdentityModel.Tokens;
 
@@ -14,11 +17,14 @@ namespace Application.Services.Users
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
+        private readonly IAddressService _addressService;
         private readonly IPasswordEncryption _passwordEncryption;
 
-        public UserService(IUserRepository userRepository, IPasswordEncryption passwordEncryption)
+        public UserService(IUserRepository userRepository, IAddressService addressService,
+            IPasswordEncryption passwordEncryption)
         {
             _userRepository = userRepository;
+            _addressService = addressService;
             _passwordEncryption = passwordEncryption;
         }
 
@@ -83,8 +89,28 @@ namespace Application.Services.Users
                 return null;
 
             var token = GenerateJwtToken(userFromDb);
-            
+
             return new OutputDtoAuthenticateUser(userFromDb, token);
+        }
+
+        public bool RegisterAddress(int idUser, InputDtoAddAddress address)
+        {
+            var addressFromDb = _addressService.CheckFromDb(address);
+
+            if (addressFromDb == null)
+            {
+                // if the address already extists
+                addressFromDb = _addressService.Create(address);
+            }
+
+            return _userRepository.RegisterAddress(idUser, new Address
+            {
+                Id = addressFromDb.Id,
+                Street = addressFromDb.Street,
+                HomeNumber = addressFromDb.HomeNumber ,
+                Zip = addressFromDb.Zip ,
+                City = addressFromDb.City ,
+            });
         }
 
         public string GenerateJwtToken(IUser user)

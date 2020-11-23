@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using Application.Repositories;
+using Domain.Addresses;
 using Domain.Users;
 using Infrastructure.SqlServer.Factories;
 using Infrastructure.SqlServer.Shared;
@@ -85,6 +86,21 @@ namespace Infrastructure.SqlServer.Users
             }
 
             return null;
+        }
+
+        public bool RegisterAddress(int idUser, IAddress address)
+        {
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+                var cmd = connection.CreateCommand();
+                cmd.CommandText = UserSqlServer.ReqAddAddressId;
+
+                cmd.Parameters.AddWithValue($"@{UserSqlServer.ColId}", idUser);
+                cmd.Parameters.AddWithValue($"@{UserSqlServer.ColAddress}", address.Id);
+
+                return cmd.ExecuteNonQuery() > 0;
+            }
         }
     }
 }

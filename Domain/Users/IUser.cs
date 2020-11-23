@@ -1,4 +1,5 @@
 ﻿using System;
+using Domain.Addresses;
 using Domain.Shared;
 
 namespace Domain.Users
@@ -12,5 +13,6 @@ namespace Domain.Users
         string EncryptedPassword { get; set; }
         char Gender { get; set; }
         bool Administrator { get; set; }
+        IAddress Address { get; set; }
     }
 }

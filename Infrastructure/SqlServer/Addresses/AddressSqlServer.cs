@@ -16,5 +16,13 @@
             OUTPUT INSERTED.{ColId}
             VALUES (@{ColStreet}, @{ColHomeNumber}, @{ColZip}, @{ColCity})
         ";
+
+        public static readonly string ReqCheck = $@"
+            SELECT * FROM {TableName}
+            WHERE {ColStreet} LIKE @{ColStreet} 
+            AND {ColHomeNumber} = @{ColHomeNumber}
+            AND {ColZip} LIKE @{ColZip}
+            AND {ColCity} LIKE @{ColCity}
+        ";
     }
 }

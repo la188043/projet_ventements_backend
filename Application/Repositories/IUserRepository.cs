@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Domain.Addresses;
 using Domain.Users;
 
 namespace Application.Repositories
@@ -9,5 +10,6 @@ namespace Application.Repositories
         IUser GetById(int id);
         IUser Create(IUser user);
         IUser Authenticate(IUser user);
+        IAddress RegisterAddress(IAddress address);
     }
 }

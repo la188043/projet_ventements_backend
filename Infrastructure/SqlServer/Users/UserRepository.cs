@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using Application.Repositories;
+using Domain.Addresses;
 using Domain.Users;
 using Infrastructure.SqlServer.Factories;
 using Infrastructure.SqlServer.Shared;
@@ -85,6 +86,11 @@ namespace Infrastructure.SqlServer.Users
             }
 
             return null;
+        }
+
+        public IAddress RegisterAddress(IAddress address)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

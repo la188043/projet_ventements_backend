@@ -28,6 +28,28 @@ namespace Infrastructure.SqlServer.Addresses
             return null;
         }
 
+        public IAddress CheckFromDb(IAddress address)
+        {
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+                var cmd = connection.CreateCommand();
+                cmd.CommandText = AddressSqlServer.ReqCheck;
+                
+                cmd.Parameters.AddWithValue($"@{AddressSqlServer.ColStreet}", address.Street);
+                cmd.Parameters.AddWithValue($"@{AddressSqlServer.ColHomeNumber}", address.HomeNumber);
+                cmd.Parameters.AddWithValue($"@{AddressSqlServer.ColZip}", address.Zip);
+                cmd.Parameters.AddWithValue($"@{AddressSqlServer.ColCity}", address.City);
+
+                var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                while (reader.Read())
+                    return _factory.CreateFromReader(reader);
+            }
+
+            return null;
+        }
+
         public IAddress Create(IAddress address)
         {
             using (var connection = Database.GetConnection())

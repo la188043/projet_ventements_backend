@@ -28,6 +28,29 @@ namespace Application.Services.Addresses
             };
         }
 
+        public OutputDtoQueryAddress CheckFromDb(InputDtoAddAddress address)
+        {
+            var addressFromDb = _addressRepository.CheckFromDb(new Address
+            {
+                Street = address.Street,
+                HomeNumber = address.HomeNumber,
+                Zip = address.Zip,
+                City = address.City
+            });
+
+            if (addressFromDb == null)
+                return null;
+            
+            return new OutputDtoQueryAddress
+            {
+                Id = addressFromDb.Id,
+                Street = addressFromDb.Street,
+                HomeNumber = addressFromDb.HomeNumber,
+                Zip = addressFromDb.Zip,
+                City = addressFromDb.City
+            };
+        }
+
         public OutputDtoQueryAddress Create(InputDtoAddAddress address)
         {
             var addressFromDb = _addressRepository.Create(new Address

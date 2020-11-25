@@ -41,7 +41,7 @@ namespace WebApi.Controllers
           
            // Post
            [HttpPost]
-           public ActionResult<OutputDtoAddSubCategory> Post([FromBody] InputDtoAddSubCategory inputDtoAddSubCategory)
+           public ActionResult<OutputDtoQuerySubCategory> Post([FromBody] InputDtoAddSubCategory inputDtoAddSubCategory)
            {
                return Ok(_subCategoryService.Create(inputDtoAddSubCategory));
            }

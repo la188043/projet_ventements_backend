@@ -1,6 +1,7 @@
 ﻿using Application.Services.Categories;
 using Application.Services.Categories.Dto;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Helpers;
 
 namespace WebApi.Controllers
 {
@@ -21,12 +22,14 @@ namespace WebApi.Controllers
             return Ok(_categoryService.Query());
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult<OutputDtoAddCategory> Post([FromBody] InputDtoAddCategory inputDtoAddCategory)
         {
             return Ok(_categoryService.Create(inputDtoAddCategory));
         }
         
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         [Route("{id:int}")]
         public ActionResult Update(int id, InputDtoUpdateCategory inputDtoUpdateCategory)

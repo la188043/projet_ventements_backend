@@ -17,6 +17,7 @@ namespace WebApi.Controllers
            }
            
            // Query
+           /*
            [HttpGet]
            public ActionResult<OutputDtoQuerySubCategory> Query()
            {
@@ -57,7 +58,6 @@ namespace WebApi.Controllers
                }
                return NotFound();
            }
-           
+        */   
         }
-    
 }

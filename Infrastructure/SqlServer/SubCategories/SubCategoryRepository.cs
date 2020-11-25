@@ -78,7 +78,7 @@ namespace Infrastructure.SqlServer.SubCategories
         }
 
         // Post
-        public ISubCategory Create(ISubCategory subCategory)
+        public ISubCategory Create(int categoryId, ISubCategory subCategory)
         {
             using (var connection = Database.GetConnection())
             {
@@ -87,7 +87,7 @@ namespace Infrastructure.SqlServer.SubCategories
                 cmd.CommandText = SubCategorySqlServer.ReqAdd;
 
                 cmd.Parameters.AddWithValue($"@{SubCategorySqlServer.ColTitle}", subCategory.Title);
-                cmd.Parameters.AddWithValue($"@{SubCategorySqlServer.ColIdCategory}", subCategory.CategoryId);
+                cmd.Parameters.AddWithValue($"@{SubCategorySqlServer.ColIdCategory}", categoryId);
 
                 subCategory.Id = (int) cmd.ExecuteScalar();
             }

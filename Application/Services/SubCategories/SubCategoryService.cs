@@ -46,7 +46,7 @@ namespace Application.Services.SubCategories
             var subCategoryFromDto =
                 _subCategoryFactory.CreateFromCategoryTitle(categoryId, inputDtoAddSubCategory.Title);
             
-            var subCategoryInDb = _subCategoryRepository.Create(subCategoryFromDto);
+            var subCategoryInDb = _subCategoryRepository.Create(categoryId, subCategoryFromDto);
 
             return new OutputDtoQuerySubCategory
             {

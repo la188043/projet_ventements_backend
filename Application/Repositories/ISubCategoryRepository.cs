@@ -7,7 +7,7 @@ namespace Application.Repositories
     {
         IEnumerable<ISubCategory> Query();
         ISubCategory GetById(int id);
-        ISubCategory Create(ISubCategory subCategory);
+        ISubCategory Create(int categoryId, ISubCategory subCategory);
         bool Update(int id, ISubCategory subCategory);
         IEnumerable<ISubCategory> GetByCategoryId(int id);
     }

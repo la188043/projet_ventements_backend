@@ -2,7 +2,7 @@
 using System.Linq;
 using Application.Repositories;
 using Application.Services.SubCategories.Dto;
-using Domains.SubCategories;
+using Domain.SubCategories;
 
 namespace Application.Services.SubCategories
 {

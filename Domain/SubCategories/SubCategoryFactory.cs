@@ -1,15 +1,12 @@
-﻿using Domain;
-
-namespace Domains.SubCategories
+﻿namespace Domain.SubCategories
 {
-    public class SubCategoryFactory :ISubCategoryFactory
+    public class SubCategoryFactory : ISubCategoryFactory
     {
-     
-        public ISubCategory CreateFromCategoryTitle(int categoryId ,string title)
+        public ISubCategory CreateFromCategoryTitle(int categoryId, string title)
         {
             return new SubCategory
             {
-                CategoryId=categoryId,
+                CategoryId = categoryId,
                 Title = title
             };
         }

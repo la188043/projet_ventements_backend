@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Domains.SubCategories;
+using Domain.SubCategories;
 
 
 namespace Application.Repositories

@@ -1,6 +1,6 @@
 ﻿using System.Data.SqlClient;
 using Domain;
-using Domains.SubCategories;
+using Domain.SubCategories;
 using Infrastructure.SqlServer.Categories;
 using Infrastructure.SqlServer.SubCategories;
 

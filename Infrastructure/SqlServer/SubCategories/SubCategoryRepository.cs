@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using Application.Repositories;
-using Domains.SubCategories;
+using Domain.SubCategories;
 using Infrastructure.SqlServer.Categories;
 using Infrastructure.SqlServer.Factories;
 using Infrastructure.SqlServer.Shared;

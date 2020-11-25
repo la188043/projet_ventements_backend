@@ -1,9 +1,7 @@
-﻿using Domain;
-
-namespace Domains.SubCategories
+﻿namespace Domain.SubCategories
 {
     public interface ISubCategoryFactory
     {
-        ISubCategory CreateFromCategoryTitle(int categoryId ,string title);
+        ISubCategory CreateFromCategoryTitle(int categoryId, string title);
     }
 }

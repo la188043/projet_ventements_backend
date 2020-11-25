@@ -1,6 +1,4 @@
-﻿using Domains.SubCategories;
-
-namespace Application.Services.SubCategories.Dto
+﻿namespace Application.Services.SubCategories.Dto
 {
     public class OutputDtoQuerySubCategory
     {

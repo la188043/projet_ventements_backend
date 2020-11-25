@@ -1,14 +1,10 @@
-﻿using Domain;
-using Domain.Shared;
+﻿using Domain.Shared;
 
-namespace Domains.SubCategories
+namespace Domain.SubCategories
 {
-    public interface ISubCategory:IEntity
+    public interface ISubCategory : IEntity
     {
         public string Title { get; set; }
         public int CategoryId { get; set; }
-        
-        
-     
     }
 }

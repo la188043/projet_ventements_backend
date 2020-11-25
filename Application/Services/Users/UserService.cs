@@ -117,13 +117,18 @@ namespace Application.Services.Users
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(AppSettings.Secret);
+            
+            // Token claims
+            IList<Claim> tokenClaims = new List<Claim>();
+            tokenClaims.Add(new Claim("id", user.Id.ToString()));
+            if (user.Administrator)
+            {
+                tokenClaims.Add(new Claim(ClaimTypes.Role, "Admin"));
+            }
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[]
-                {
-                    new Claim("id", user.Id.ToString()),
-                }),
+                Subject = new ClaimsIdentity(tokenClaims),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials =
                     new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)

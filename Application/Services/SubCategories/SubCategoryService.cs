@@ -6,18 +6,17 @@ using Domain.SubCategories;
 
 namespace Application.Services.SubCategories
 {
-    public class SubCategoryService:ISubCategoryService
+    public class SubCategoryService : ISubCategoryService
     {
         private readonly ISubCategoryRepository _subCategoryRepository;
-        
+
         private readonly ISubCategoryFactory _subCategoryFactory = new SubCategoryFactory();
 
         public SubCategoryService(ISubCategoryRepository subCategoryRepository)
         {
             _subCategoryRepository = subCategoryRepository;
-           
         }
-        
+
         public IEnumerable<OutputDtoQuerySubCategory> Query()
         {
             return _subCategoryRepository
@@ -29,7 +28,7 @@ namespace Application.Services.SubCategories
                     CategoryId = subCategory.CategoryId
                 });
         }
-        
+
         public OutputDtoQuerySubCategory GetById(int id)
         {
             var category = _subCategoryRepository.GetById(id);
@@ -38,30 +37,33 @@ namespace Application.Services.SubCategories
             {
                 Id = category.Id,
                 Title = category.Title,
-                CategoryId=category.CategoryId
+                CategoryId = category.CategoryId
             };
         }
-        
-        public OutputDtoAddSubCategory Create(InputDtoAddSubCategory inputDtoAddSubCategory)
+
+        public OutputDtoQuerySubCategory Create(InputDtoAddSubCategory inputDtoAddSubCategory)
         {
-            var subCategoryFromDto = _subCategoryFactory.CreateFromCategoryTitle(inputDtoAddSubCategory.CategoryId,inputDtoAddSubCategory.Title);
+            var subCategoryFromDto =
+                _subCategoryFactory.CreateFromCategoryTitle(inputDtoAddSubCategory.CategoryId,
+                    inputDtoAddSubCategory.Title);
             var subCategoryInDb = _subCategoryRepository.Create(subCategoryFromDto);
 
-            return new OutputDtoAddSubCategory
+            return new OutputDtoQuerySubCategory 
             {
                 Id = subCategoryInDb.Id,
                 Title = subCategoryInDb.Title,
                 CategoryId = subCategoryInDb.CategoryId
             };
         }
-        
+
         public bool Update(int id, InputDtoUpdateSubCategory inputDtoUpdateSubCategory)
         {
-            var categoryFromDto = _subCategoryFactory.CreateFromCategoryTitle(inputDtoUpdateSubCategory.CategoryId,inputDtoUpdateSubCategory.Title);
+            var categoryFromDto = _subCategoryFactory.CreateFromCategoryTitle(inputDtoUpdateSubCategory.CategoryId,
+                inputDtoUpdateSubCategory.Title);
             return _subCategoryRepository.Update(id, categoryFromDto);
         }
-        
-        
+
+
         public IEnumerable<OutputDtoQuerySubCategory> GetByCategoryId(int id)
         {
             return _subCategoryRepository.GetByCategoryId(id)
@@ -72,7 +74,5 @@ namespace Application.Services.SubCategories
                     CategoryId = subCategory.CategoryId
                 });
         }
-        
-        
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Domain.SubCategories;
 
-
 namespace Application.Repositories
 {
     public interface ISubCategoryRepository
@@ -11,6 +10,5 @@ namespace Application.Repositories
         ISubCategory Create(ISubCategory subCategory);
         bool Update(int id, ISubCategory subCategory);
         IEnumerable<ISubCategory> GetByCategoryId(int id);
-     
     }
 }

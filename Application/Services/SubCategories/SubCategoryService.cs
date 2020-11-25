@@ -41,14 +41,14 @@ namespace Application.Services.SubCategories
             };
         }
 
-        public OutputDtoQuerySubCategory Create(InputDtoAddSubCategory inputDtoAddSubCategory)
+        public OutputDtoQuerySubCategory Create(int categoryId, InputDtoAddSubCategory inputDtoAddSubCategory)
         {
             var subCategoryFromDto =
-                _subCategoryFactory.CreateFromCategoryTitle(inputDtoAddSubCategory.CategoryId,
-                    inputDtoAddSubCategory.Title);
+                _subCategoryFactory.CreateFromCategoryTitle(categoryId, inputDtoAddSubCategory.Title);
+            
             var subCategoryInDb = _subCategoryRepository.Create(subCategoryFromDto);
 
-            return new OutputDtoQuerySubCategory 
+            return new OutputDtoQuerySubCategory
             {
                 Id = subCategoryInDb.Id,
                 Title = subCategoryInDb.Title,
@@ -64,9 +64,9 @@ namespace Application.Services.SubCategories
         }
 
 
-        public IEnumerable<OutputDtoQuerySubCategory> GetByCategoryId(int id)
+        public IEnumerable<OutputDtoQuerySubCategory> GetByCategoryId(int categoryId)
         {
-            return _subCategoryRepository.GetByCategoryId(id)
+            return _subCategoryRepository.GetByCategoryId(categoryId)
                 .Select(subCategory => new OutputDtoQuerySubCategory
                 {
                     Id = subCategory.Id,

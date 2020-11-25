@@ -12,7 +12,12 @@ namespace Infrastructure.SqlServer.SubCategories
         public static readonly string ReqQuery = $"SELECT * FROM {TableName}";
         public static readonly string ReqGetById = ReqQuery + $" WHERE {ColId} = @{ColId}";
 
-        public static readonly string REQ_POST = $@"INSERT INTO {TableName} ({ColTitle}, {ColIdCategory}) OUTPUT Inserted.{ColId} VALUES (@{ColTitle}, @{ColIdCategory})";
+        public static readonly string ReqAdd = $@"
+            INSERT INTO {TableName} ({ColTitle}, {ColIdCategory}) 
+            OUTPUT Inserted.{ColId} 
+            VALUES (@{ColTitle}, @{ColIdCategory})
+        ";
+        
         public static readonly string ReqPut = $@"
             UPDATE {TableName} SET
             {ColTitle} = @{ColTitle},
@@ -20,8 +25,10 @@ namespace Infrastructure.SqlServer.SubCategories
             WHERE {ColId} = @{ColId}
         ";
         
-        public static readonly string REQ_GET_BY_CATEGORY_ID = $"SELECT [{TableName}].[{ColId}], [{TableName}].[{ColTitle}], [{TableName}].[{ColIdCategory}]  FROM [{TableName}] " +
-                                                               $"WHERE [{TableName}].[{ColIdCategory}] = @{CategorySqlServer.ColId};";
+        public static readonly string ReqGetByCategoryId = $@"
+            SELECT * FROM {TableName}
+            WHERE {ColIdCategory} = @{ColIdCategory}
+        ";
         
     }
 }

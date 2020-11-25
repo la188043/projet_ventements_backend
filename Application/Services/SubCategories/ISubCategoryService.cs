@@ -9,7 +9,7 @@ namespace Application.Services.SubCategories
     {
         IEnumerable<OutputDtoQuerySubCategory> Query();
         OutputDtoQuerySubCategory GetById(int id);
-        OutputDtoQuerySubCategory Create(InputDtoAddSubCategory inputDtoAddSubCategory);
+        OutputDtoQuerySubCategory Create(int categoryId, InputDtoAddSubCategory inputDtoAddSubCategory);
         bool Update(int id, InputDtoUpdateSubCategory inputDtoUpdateSubCategory);
         IEnumerable<OutputDtoQuerySubCategory> GetByCategoryId(int id);
     }

@@ -29,7 +29,6 @@ namespace WebApi.Helpers
         public void OnAuthorization(AuthorizationFilterContext context)
         {
             var user = (OutputDtoQueryUser) context.HttpContext.Items["User"];
-            var token = context.HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
             if (user == null)
             {
                 context.Result = new JsonResult(new {message = "Not authorized access"})
@@ -40,32 +39,39 @@ namespace WebApi.Helpers
                 return;
             }
 
-            try
+            if (Roles == "Admin")
             {
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var key = Encoding.ASCII.GetBytes(AppSettings.Secret);
-                tokenHandler.ValidateToken(token, new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ClockSkew = TimeSpan.Zero
-                }, out SecurityToken validatedToken);
-
-                var jwtToken = (JwtSecurityToken) validatedToken;
-                string userRole = jwtToken.Claims.FirstOrDefault(x => x.Type == "role")?.Value;
+                var token = context.HttpContext.Request.Headers["Authorization"]
+                    .FirstOrDefault()?.Split(" ").Last();
                 
-                if (Roles == "Admin" && userRole  != "Admin")
+                try
                 {
-                    context.Result = new JsonResult(new {message = "Not authorized access"})
+                    var tokenHandler = new JwtSecurityTokenHandler();
+                    var key = Encoding.ASCII.GetBytes(AppSettings.Secret);
+                    tokenHandler.ValidateToken(token, new TokenValidationParameters
                     {
-                        StatusCode = StatusCodes.Status401Unauthorized
-                    };
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        ClockSkew = TimeSpan.Zero
+                    }, out SecurityToken validatedToken);
+
+                    var jwtToken = (JwtSecurityToken) validatedToken;
+                    string userRole = jwtToken.Claims.FirstOrDefault(x => x.Type == "role")?.Value;
+                    
+                    if (userRole  != "Admin")
+                    {
+                        context.Result = new JsonResult(new {message = "Not authorized access"})
+                        {
+                            StatusCode = StatusCodes.Status401Unauthorized
+                        };
+                    }
                 }
+                catch
+                {}
             }
-            catch
-            {}
+
         }
     }
 }

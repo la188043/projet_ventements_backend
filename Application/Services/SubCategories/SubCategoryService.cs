@@ -17,6 +17,7 @@ namespace Application.Services.SubCategories
             _subCategoryRepository = subCategoryRepository;
         }
 
+        // TODO Check utilité
         public IEnumerable<OutputDtoQuerySubCategory> Query()
         {
             return _subCategoryRepository
@@ -56,6 +57,7 @@ namespace Application.Services.SubCategories
             };
         }
 
+        // TODO Check utilité
         public bool Update(int id, InputDtoUpdateSubCategory inputDtoUpdateSubCategory)
         {
             var categoryFromDto = _subCategoryFactory.CreateFromCategoryTitle(inputDtoUpdateSubCategory.CategoryId,

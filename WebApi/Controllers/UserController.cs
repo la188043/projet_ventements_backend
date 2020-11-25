@@ -17,7 +17,7 @@ namespace WebApi.Controllers
             _userService = userService;
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public ActionResult<OutputDtoQueryUser> Query()
         {

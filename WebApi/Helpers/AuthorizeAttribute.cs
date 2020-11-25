@@ -30,6 +30,15 @@ namespace WebApi.Helpers
         {
             var user = (OutputDtoQueryUser) context.HttpContext.Items["User"];
             var token = context.HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+            if (user == null)
+            {
+                context.Result = new JsonResult(new {message = "Not authorized access"})
+                {
+                    StatusCode = StatusCodes.Status401Unauthorized
+                };
+
+                return;
+            }
 
             try
             {
@@ -47,14 +56,7 @@ namespace WebApi.Helpers
                 var jwtToken = (JwtSecurityToken) validatedToken;
                 string userRole = jwtToken.Claims.FirstOrDefault(x => x.Type == "role")?.Value;
                 
-                if (user == null)
-                {
-                    context.Result = new JsonResult(new {message = "Not authorized access"})
-                    {
-                        StatusCode = StatusCodes.Status401Unauthorized
-                    };
-                }
-                else if (Roles == "Admin" && userRole  != "Admin")
+                if (Roles == "Admin" && userRole  != "Admin")
                 {
                     context.Result = new JsonResult(new {message = "Not authorized access"})
                     {

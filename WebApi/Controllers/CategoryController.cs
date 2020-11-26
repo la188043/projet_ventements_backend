@@ -1,5 +1,7 @@
 ﻿using Application.Services.Categories;
 using Application.Services.Categories.Dto;
+using Application.Services.Items;
+using Application.Services.Items.Dto;
 using Application.Services.SubCategories;
 using Application.Services.SubCategories.Dto;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +15,12 @@ namespace WebApi.Controllers
     {
         private readonly ICategoryService _categoryService;
         private readonly ISubCategoryService _subCategoryService;
-
-        public CategoryController(ICategoryService categoryService, ISubCategoryService subCategoryService)
+        private readonly IItemService _itemService;
+        public CategoryController(ICategoryService categoryService, ISubCategoryService subCategoryService,IItemService itemService)
         {
             _categoryService = categoryService;
             _subCategoryService = subCategoryService;
+            _itemService = itemService;
         }
 
         [HttpGet]
@@ -62,5 +65,25 @@ namespace WebApi.Controllers
         {
             return Ok(_subCategoryService.GetByCategoryId(categoryId));
         }
+        
+        // items
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        [Route("{subcategoryId:int}/items")]
+        public ActionResult<OutputDtoQueryItem> AddItem(int subcategoryId,
+            [FromBody] InputDtoAddItem item)
+        {
+            return Ok(_itemService.Create(subcategoryId, item));
+        }
+
+        [HttpGet]
+        [Route("{subcategoryId:int}/items")]
+        public ActionResult<OutputDtoQueryItem> GetItems(int subcategoryId)
+        {
+            return Ok(_itemService.GetBySubCategoryId(subcategoryId));
+        }
+    
+       
+        
     }
 }

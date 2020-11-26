@@ -38,7 +38,7 @@ namespace Infrastructure.SqlServer.Users
             SELECT * FROM {AddressSqlServer.TableName}
             WHERE {AddressSqlServer.TableName}.{AddressSqlServer.ColId} IN
             (
-                SELECT {TableName}.{ColAddress} FROM {TableName}.{TableName}
+                SELECT {TableName}.{ColAddress} FROM {TableName}
                 WHERE {TableName}.{ColId} = @{ColId}
             )
         ";

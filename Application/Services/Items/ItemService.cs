@@ -9,8 +9,7 @@ namespace Application.Services.Items
     public class ItemService : IItemService
     {
         private readonly IItemRepository _itemRepository;
-        private readonly IItemFactory _itemFactory = new ItemFactory();
-
+        
         public ItemService(IItemRepository itemRepository)
         {
             _itemRepository = itemRepository;
@@ -52,9 +51,16 @@ namespace Application.Services.Items
 
         public OutputDtoQueryItem Create(int subcategoryId, InputDtoAddItem inputDtoAddItem)
         {
-            var itemFromDto = _itemFactory.CreateFromItemInformation(inputDtoAddItem.Label, inputDtoAddItem.Price,
-                inputDtoAddItem.Quantity, inputDtoAddItem.ImageItem, inputDtoAddItem.DescriptionItem,
-                inputDtoAddItem.Size, inputDtoAddItem.SubcategoryId);
+           var itemFromDto = new Item
+           {
+               Label = inputDtoAddItem.Label,
+               Price = inputDtoAddItem.Price,
+               Quantity = inputDtoAddItem.Quantity,
+               ImageItem = inputDtoAddItem.ImageItem,
+               DescriptionItem = inputDtoAddItem.DescriptionItem,
+               Size = inputDtoAddItem.Size,
+               SubcategoryId = inputDtoAddItem.SubcategoryId
+           }; 
 
             var ItemInDb = _itemRepository.Create(subcategoryId, itemFromDto);
 
@@ -73,9 +79,17 @@ namespace Application.Services.Items
 
         public bool Update(int id, InputDtoUpdateItem inputDtoUpdateItem)
         {
-            var itemFromDto = _itemFactory.CreateFromItemInformation(inputDtoUpdateItem.Label, inputDtoUpdateItem.Price,
-                inputDtoUpdateItem.Quantity, inputDtoUpdateItem.ImageItem, inputDtoUpdateItem.DescriptionItem,
-                inputDtoUpdateItem.Size, inputDtoUpdateItem.SubcategoryId);
+           var itemFromDto = new Item
+           {
+               Label = inputDtoUpdateItem.Label,
+               Price = inputDtoUpdateItem.Price,
+               Quantity = inputDtoUpdateItem.Quantity,
+               ImageItem = inputDtoUpdateItem.ImageItem,
+               DescriptionItem = inputDtoUpdateItem.DescriptionItem,
+               Size = inputDtoUpdateItem.Size,
+               SubcategoryId = inputDtoUpdateItem.SubcategoryId
+           }; 
+           
             return _itemRepository.Update(id, itemFromDto);
         }
 

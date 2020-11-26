@@ -7,7 +7,7 @@ using Application.Services.SubCategories;
 using Application.Services.Users;
 using Infrastructure.SqlServer.Addresses;
 using Infrastructure.SqlServer.Categories;
-using Infrastructure.SqlServer.Foods;
+using Infrastructure.SqlServer.Items;
 using Infrastructure.SqlServer.SubCategories;
 using Infrastructure.SqlServer.Users;
 using Microsoft.AspNetCore.Builder;
@@ -32,7 +32,7 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            
+
             // Dependency injection
             services.AddSingleton<IUserService, UserService>();
             services.AddSingleton<IUserRepository, UserRepository>();

@@ -16,7 +16,9 @@ namespace WebApi.Controllers
         private readonly ICategoryService _categoryService;
         private readonly ISubCategoryService _subCategoryService;
         private readonly IItemService _itemService;
-        public CategoryController(ICategoryService categoryService, ISubCategoryService subCategoryService,IItemService itemService)
+
+        public CategoryController(ICategoryService categoryService, ISubCategoryService subCategoryService,
+            IItemService itemService)
         {
             _categoryService = categoryService;
             _subCategoryService = subCategoryService;
@@ -65,7 +67,7 @@ namespace WebApi.Controllers
         {
             return Ok(_subCategoryService.GetByCategoryId(categoryId));
         }
-        
+
         // items
         [Authorize(Roles = "Admin")]
         [HttpPost]
@@ -82,8 +84,5 @@ namespace WebApi.Controllers
         {
             return Ok(_itemService.GetBySubCategoryId(subcategoryId));
         }
-    
-       
-        
     }
 }

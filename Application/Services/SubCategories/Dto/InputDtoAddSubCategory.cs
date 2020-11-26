@@ -1,6 +1,4 @@
-﻿using Domain;
-
-namespace Application.Services.SubCategories.Dto
+﻿namespace Application.Services.SubCategories.Dto
 {
     public class InputDtoAddSubCategory
     {

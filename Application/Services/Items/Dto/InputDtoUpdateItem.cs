@@ -1,9 +1,6 @@
-﻿using Domain.Items;
-
-
-namespace Application.Services.Items.Dto
+﻿namespace Application.Services.Items.Dto
 {
-    public  class InputDtoUpdateItem
+    public class InputDtoUpdateItem
     {
         public string Label { get; set; }
         public float Price { get; set; }

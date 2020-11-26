@@ -1,10 +1,7 @@
-﻿
-
-namespace Domain.Items
+﻿namespace Domain.Items
 {
     public class Item : IItem
     {
-        
         public int Id { get; set; }
         public string Label { get; set; }
         public float Price { get; set; }
@@ -12,7 +9,7 @@ namespace Domain.Items
         public string ImageItem { get; set; }
         public string DescriptionItem { get; set; }
         public string Size { get; set; }
-        
+
         public int SubcategoryId { get; set; }
 
         public Item()

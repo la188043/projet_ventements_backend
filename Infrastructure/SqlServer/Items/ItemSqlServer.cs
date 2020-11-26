@@ -19,8 +19,13 @@ namespace Infrastructure.SqlServer.Items
         public static readonly string ReqGetById = ReqQuery + $" WHERE {ColId} = @{ColId}";
 
         
-        public static readonly string ReqAdd = $@"INSERT INTO {TableName} ({ColLabel}, {ColPrice}, {ColQuantity}, {ColImageItem}, {ColDescriptionItem}, {ColSize}, {ColSubCategoryId}) OUTPUT 
-        Inserted.{ColId} VALUES (@{ColLabel}, @{ColPrice}, @{ColQuantity}, @{ColImageItem}, @{ColDescriptionItem}, @{ColSize}, @{ColSubCategoryId})";
+        public static readonly string ReqAdd = $@"
+            INSERT INTO {TableName} 
+            ({ColLabel}, {ColPrice}, {ColQuantity}, {ColImageItem}, {ColDescriptionItem}, {ColSize}, {ColSubCategoryId}) 
+            OUTPUT INSERTED.{ColId} 
+            VALUES 
+            (@{ColLabel}, @{ColPrice}, @{ColQuantity}, @{ColImageItem}, @{ColDescriptionItem}, @{ColSize}, @{ColSubCategoryId})
+        ";
         
         public static readonly string ReqPut = $@"
             UPDATE {TableName} SET

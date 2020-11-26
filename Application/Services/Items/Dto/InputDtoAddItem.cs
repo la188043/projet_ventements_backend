@@ -1,6 +1,4 @@
-﻿using Domain.Items;
-
-namespace Application.Services.Items.Dto
+﻿namespace Application.Services.Items.Dto
 {
     public class InputDtoAddItem
     {
@@ -9,8 +7,7 @@ namespace Application.Services.Items.Dto
         public int Quantity { get; set; }
         public string ImageItem { get; set; }
         public string DescriptionItem { get; set; }
-        public string Size { get; set; } 
+        public string Size { get; set; }
         public int SubcategoryId { get; set; }
-      
     }
 }

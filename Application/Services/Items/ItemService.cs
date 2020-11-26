@@ -29,9 +29,10 @@ namespace Application.Services.Items
                     ImageItem = item.ImageItem,
                     DescriptionItem = item.DescriptionItem,
                     Size = item.Size,
-                    SubcategoryId=item.SubcategoryId
+                    SubcategoryId = item.SubcategoryId
                 });
         }
+
         public OutputDtoQueryItem GetById(int id)
         {
             var item = _itemRepository.GetById(id);
@@ -45,16 +46,17 @@ namespace Application.Services.Items
                 ImageItem = item.ImageItem,
                 DescriptionItem = item.DescriptionItem,
                 Size = item.Size,
-                SubcategoryId=item.SubcategoryId
+                SubcategoryId = item.SubcategoryId
             };
         }
+
         public OutputDtoQueryItem Create(int subcategoryId, InputDtoAddItem inputDtoAddItem)
         {
             var itemFromDto = _itemFactory.CreateFromItemInformation(inputDtoAddItem.Label, inputDtoAddItem.Price,
                 inputDtoAddItem.Quantity, inputDtoAddItem.ImageItem, inputDtoAddItem.DescriptionItem,
                 inputDtoAddItem.Size, inputDtoAddItem.SubcategoryId);
-            
-            var ItemInDb = _itemRepository.Create(subcategoryId,itemFromDto);
+
+            var ItemInDb = _itemRepository.Create(subcategoryId, itemFromDto);
 
             return new OutputDtoQueryItem
             {
@@ -69,28 +71,29 @@ namespace Application.Services.Items
             };
         }
 
-           public bool Update(int id, InputDtoUpdateItem inputDtoUpdateItem)
-            {
-                var itemFromDto = _itemFactory.CreateFromItemInformation(inputDtoUpdateItem.Label, inputDtoUpdateItem.Price,inputDtoUpdateItem.Quantity,inputDtoUpdateItem.ImageItem,inputDtoUpdateItem.DescriptionItem,inputDtoUpdateItem.Size,inputDtoUpdateItem.SubcategoryId);
-                return _itemRepository.Update(id, itemFromDto);
-            }
-           
-           
-           public IEnumerable<OutputDtoQueryItem> GetBySubCategoryId(int subcategoryId)
-           {
-               return _itemRepository.GetBySubCategoryId(subcategoryId)
-                   .Select(item => new OutputDtoQueryItem
-                   {
-                       Id = item.Id,
-                       Label = item.Label,
-                       Price = item.Price,
-                       Quantity = item.Quantity,
-                       ImageItem = item.ImageItem,
-                       DescriptionItem =  item.DescriptionItem,
-                       Size = item.Size,
-                       SubcategoryId = item.SubcategoryId
-                   });
-           }
+        public bool Update(int id, InputDtoUpdateItem inputDtoUpdateItem)
+        {
+            var itemFromDto = _itemFactory.CreateFromItemInformation(inputDtoUpdateItem.Label, inputDtoUpdateItem.Price,
+                inputDtoUpdateItem.Quantity, inputDtoUpdateItem.ImageItem, inputDtoUpdateItem.DescriptionItem,
+                inputDtoUpdateItem.Size, inputDtoUpdateItem.SubcategoryId);
+            return _itemRepository.Update(id, itemFromDto);
         }
-}
 
+
+        public IEnumerable<OutputDtoQueryItem> GetBySubCategoryId(int subcategoryId)
+        {
+            return _itemRepository.GetBySubCategoryId(subcategoryId)
+                .Select(item => new OutputDtoQueryItem
+                {
+                    Id = item.Id,
+                    Label = item.Label,
+                    Price = item.Price,
+                    Quantity = item.Quantity,
+                    ImageItem = item.ImageItem,
+                    DescriptionItem = item.DescriptionItem,
+                    Size = item.Size,
+                    SubcategoryId = item.SubcategoryId
+                });
+        }
+    }
+}

@@ -1,4 +1,4 @@
-﻿﻿using Infrastructure.SqlServer.SubCategories;
+﻿using Infrastructure.SqlServer.SubCategories;
 
 namespace Infrastructure.SqlServer.Items
 {

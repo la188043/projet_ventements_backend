@@ -1,4 +1,4 @@
-﻿﻿using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using Application.Repositories;
 using Domain.Items;
@@ -57,7 +57,7 @@ namespace Infrastructure.SqlServer.Foods
 
                 return null;
             }
-
+            //Post
             public IItem Create(int subcategoryId,IItem item)
             {
                 using (var connection = Database.GetConnection())
@@ -80,7 +80,7 @@ namespace Infrastructure.SqlServer.Foods
                 return item;
             }
             
-            //Post
+            //Put
             public bool Update(int id, IItem item)
             {
                 using (var connection = Database.GetConnection())
@@ -103,7 +103,7 @@ namespace Infrastructure.SqlServer.Foods
                 }
             }
             
-            //Put
+            
             public IEnumerable<IItem> GetBySubCategoryId(int subcategoryId)
             {
                 IList<IItem> subcategories = new List<IItem>();

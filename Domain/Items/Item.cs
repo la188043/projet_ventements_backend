@@ -1,4 +1,6 @@
-﻿namespace Domain.Items
+﻿using Domain.SubCategories;
+
+namespace Domain.Items
 {
     public class Item : IItem
     {
@@ -10,7 +12,8 @@
         public string DescriptionItem { get; set; }
         public string Size { get; set; }
 
-        public int SubcategoryId { get; set; }
+        // public int SubcategoryId { get; set; }
+        public ISubCategory SubCategory { get; set; }
 
         public Item()
         {

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using Application.Repositories;
+using Application.Services.Addresses.Dto;
 using Domain.Addresses;
 using Domain.Users;
 using Infrastructure.SqlServer.Factories;
@@ -10,7 +11,8 @@ namespace Infrastructure.SqlServer.Users
 {
     public class UserRepository : IUserRepository
     {
-        private IInstanceFromReader<IUser> _factory = new UserFactory();
+        private IInstanceFromReader<IUser> _factoryUser = new UserFactory();
+        private IInstanceFromReader<IAddress> _factoryAddress = new AddressFactory();
         public IEnumerable<IUser> Query()
         {
             IList<IUser> users = new List<IUser>();
@@ -23,7 +25,7 @@ namespace Infrastructure.SqlServer.Users
                 var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 
                 while (reader.Read())
-                    users.Add(_factory.CreateFromReader(reader));
+                    users.Add(_factoryUser.CreateFromReader(reader));
             }
 
             return users;
@@ -42,7 +44,7 @@ namespace Infrastructure.SqlServer.Users
                 var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
 
                 while (reader.Read())
-                    return _factory.CreateFromReader(reader);
+                    return _factoryUser.CreateFromReader(reader);
             }
 
             return null;
@@ -82,7 +84,7 @@ namespace Infrastructure.SqlServer.Users
                 var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
 
                 while (reader.Read())
-                    return _factory.CreateFromReader(reader);
+                    return _factoryUser.CreateFromReader(reader);
             }
 
             return null;
@@ -101,6 +103,25 @@ namespace Infrastructure.SqlServer.Users
 
                 return cmd.ExecuteNonQuery() > 0;
             }
+        }
+
+        public IAddress GetUserAddress(int idUser)
+        {
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+                var cmd = connection.CreateCommand();
+                cmd.CommandText = UserSqlServer.ReqGetUserAddress;
+
+                cmd.Parameters.AddWithValue($@"@{UserSqlServer.ColId}", idUser);
+
+                var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                while (reader.Read())
+                    return _factoryAddress.CreateFromReader(reader);
+            }
+
+            return null;
         }
     }
 }

@@ -11,5 +11,6 @@ namespace Application.Services.Users
         OutputDtoAuthenticateUser Create(InputDtoAddUser user);
         OutputDtoAuthenticateUser Authenticate(InputDtoAuthenticateUser user);
         bool RegisterAddress(int idUser, InputDtoAddAddress address);
+        OutputDtoQueryAddress GetUserAddress(int idUser);
     }
 }

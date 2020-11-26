@@ -1,6 +1,7 @@
 ﻿using Application.Services.Addresses.Dto;
 using Application.Services.Users;
 using Application.Services.Users.Dto;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Helpers;
 
@@ -51,6 +52,7 @@ namespace WebApi.Controllers
             return Ok(_userService.GetById(id));
         }
 
+        // Addresses
         [Authorize]
         [HttpPost]
         [Route("{idUser:int}/address")]
@@ -60,6 +62,14 @@ namespace WebApi.Controllers
                 return Ok();
 
             return NotFound();
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("{idUser:int}/address")]
+        public ActionResult<OutputDtoQueryAddress> GetUserAddress(int idUser)
+        {
+            return Ok(_userService.GetUserAddress(idUser));
         }
     }
 }

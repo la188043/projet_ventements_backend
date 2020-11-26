@@ -113,6 +113,20 @@ namespace Application.Services.Users
             });
         }
 
+        public OutputDtoQueryAddress GetUserAddress(int idUser)
+        {
+            var addressFromDb = _userRepository.GetUserAddress(idUser);
+            
+            return new OutputDtoQueryAddress
+            {
+                Id = addressFromDb.Id,
+                Street = addressFromDb.Street,
+                HomeNumber = addressFromDb.HomeNumber,
+                Zip = addressFromDb.Zip,
+                City = addressFromDb.City
+            };
+        }
+
         public string GenerateJwtToken(IUser user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();

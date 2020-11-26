@@ -1,4 +1,6 @@
-﻿namespace Infrastructure.SqlServer.Users
+﻿using Infrastructure.SqlServer.Addresses;
+
+namespace Infrastructure.SqlServer.Users
 {
     public class UserSqlServer
     {
@@ -30,6 +32,15 @@
         public static readonly string ReqAddAddressId = $@"
             UPDATE {TableName} SET {ColAddress} = @{ColAddress}
             WHERE {ColId} = @{ColId}
+        ";
+
+        public static readonly string ReqGetUserAddress = $@"
+            SELECT * FROM {AddressSqlServer.TableName}
+            WHERE {AddressSqlServer.TableName}.{AddressSqlServer.ColId} IN
+            (
+                SELECT {TableName}.{ColAddress} FROM {TableName}.{TableName}
+                WHERE {TableName}.{ColId} = @{ColId}
+            )
         ";
     }
 }

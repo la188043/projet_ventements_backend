@@ -9,8 +9,14 @@ namespace Infrastructure.SqlServer.SubCategories
         public static readonly string ColTitle = "title";
         public static readonly string ColIdCategory = "categoryId";
         
-        public static readonly string ReqQuery = $"SELECT * FROM {TableName}";
-        public static readonly string ReqGetById = ReqQuery + $" WHERE {ColId} = @{ColId}";
+        // public static readonly string ReqQuery = $"SELECT * FROM {TableName}";
+        public static readonly string ReqQuery = $@"
+            SELECT * FROM {TableName}
+            INNER JOIN {CategorySqlServer.TableName}
+            ON {TableName}.{ColIdCategory} = {CategorySqlServer.TableName}.{CategorySqlServer.ColId}
+        ";
+
+        public static readonly string ReqGetById = ReqQuery + $" WHERE {TableName}.{ColId} = @{ColId}";
 
         public static readonly string ReqAdd = $@"
             INSERT INTO {TableName} ({ColTitle}, {ColIdCategory}) 
@@ -18,17 +24,16 @@ namespace Infrastructure.SqlServer.SubCategories
             VALUES (@{ColTitle}, @{ColIdCategory})
         ";
         
+        /*
         public static readonly string ReqPut = $@"
             UPDATE {TableName} SET
             {ColTitle} = @{ColTitle},
             {ColIdCategory} = @{ColIdCategory}
             WHERE {ColId} = @{ColId}
         ";
-        
-        public static readonly string ReqGetByCategoryId = $@"
-            SELECT * FROM {TableName}
-            WHERE {ColIdCategory} = @{ColIdCategory}
-        ";
-        
-    }
+        */
+
+        public static readonly string ReqGetByCategoryId =
+            ReqQuery + $" WHERE {TableName}.{ColIdCategory} = @{ColIdCategory}";
+   }
 }

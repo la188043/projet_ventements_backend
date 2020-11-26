@@ -2,10 +2,8 @@
 using System.Data;
 using Application.Repositories;
 using Domain.SubCategories;
-using Infrastructure.SqlServer.Categories;
 using Infrastructure.SqlServer.Factories;
 using Infrastructure.SqlServer.Shared;
-using SubCategoryFactory = Infrastructure.SqlServer.Factories.SubCategoryFactory;
 
 namespace Infrastructure.SqlServer.SubCategories
 {
@@ -14,6 +12,7 @@ namespace Infrastructure.SqlServer.SubCategories
         private readonly IInstanceFromReader<ISubCategory> _factory = new SubCategoryFactory();
 
         // Query
+        /*
         public IEnumerable<ISubCategory> Query()
         {
             IList<ISubCategory> categories = new List<ISubCategory>();
@@ -33,6 +32,7 @@ namespace Infrastructure.SqlServer.SubCategories
 
             return categories;
         }
+        */
 
         // Get
         public ISubCategory GetById(int id)
@@ -96,6 +96,7 @@ namespace Infrastructure.SqlServer.SubCategories
         }
 
         // Update
+        /*
         public bool Update(int id, ISubCategory subCategory)
         {
             using (var connection = Database.GetConnection())
@@ -112,5 +113,6 @@ namespace Infrastructure.SqlServer.SubCategories
                 return cmd.ExecuteNonQuery() > 0;
             }
         }
+        */
     }
 }

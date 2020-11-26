@@ -8,6 +8,6 @@
         public string ImageItem { get; set; }
         public string DescriptionItem { get; set; }
         public string Size { get; set; }
-        public int SubcategoryId { get; set; }
+        // public int SubcategoryId { get; set; }
     }
 }

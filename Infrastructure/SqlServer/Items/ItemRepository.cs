@@ -4,8 +4,6 @@ using Application.Repositories;
 using Domain.Items;
 using Infrastructure.SqlServer.Factories;
 using Infrastructure.SqlServer.Shared;
-using ItemFactory = Infrastructure.SqlServer.Factories.ItemFactory;
-
 
 namespace Infrastructure.SqlServer.Items
 {
@@ -71,7 +69,7 @@ namespace Infrastructure.SqlServer.Items
                 cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColImageItem}", item.ImageItem);
                 cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColDescriptionItem}", item.DescriptionItem);
                 cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColSize}", item.Size);
-                cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColSubCategoryId}", item.SubcategoryId);
+                cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColSubCategoryId}", subcategoryId);
 
                 item.Id = (int) cmd.ExecuteScalar();
             }
@@ -80,6 +78,7 @@ namespace Infrastructure.SqlServer.Items
         }
 
         //Put
+        /*
         public bool Update(int id, IItem item)
         {
             using (var connection = Database.GetConnection())
@@ -101,6 +100,7 @@ namespace Infrastructure.SqlServer.Items
                 return cmd.ExecuteNonQuery() > 0;
             }
         }
+        */
 
 
         public IEnumerable<IItem> GetBySubCategoryId(int subcategoryId)

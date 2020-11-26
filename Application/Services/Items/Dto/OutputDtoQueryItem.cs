@@ -9,6 +9,17 @@
         public string ImageItem { get; set; }
         public string DescriptionItem { get; set; }
         public string Size { get; set; }
-        public int SubcategoryId { get; set; }
+        // public int SubcategoryId { get; set; }
+        public class SubCategory
+        {
+            public int Id { get; set; }
+            public string Title { get; set; }
+
+            public class Category
+            {
+                public int Id { get; set; }
+                public string Title { get; set; }
+            }
+        }
     }
 }

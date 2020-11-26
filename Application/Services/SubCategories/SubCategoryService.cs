@@ -9,71 +9,89 @@ namespace Application.Services.SubCategories
     public class SubCategoryService : ISubCategoryService
     {
         private readonly ISubCategoryRepository _subCategoryRepository;
+        private readonly ICategoryRepository _categoryRepository;
 
-        private readonly ISubCategoryFactory _subCategoryFactory = new SubCategoryFactory();
-
-        public SubCategoryService(ISubCategoryRepository subCategoryRepository)
+        public SubCategoryService(ISubCategoryRepository subCategoryRepository, ICategoryRepository categoryRepository)
         {
             _subCategoryRepository = subCategoryRepository;
+            _categoryRepository = categoryRepository;
         }
 
-        // TODO Check utilité
+        /*
         public IEnumerable<OutputDtoQuerySubCategory> Query()
         {
             return _subCategoryRepository
                 .Query()
-                .Select(subCategory => new OutputDtoQuerySubCategory
+                .Select(subCategory =>
                 {
-                    Id = subCategory.Id,
-                    Title = subCategory.Title,
-                    CategoryId = subCategory.CategoryId
+                    var category = new OutputDtoQuerySubCategory.Category
+                    {
+                        Title = subCategory.Category.Title
+                    };
+                    
+                    return new OutputDtoQuerySubCategory
+                    {
+                        Id = subCategory.Id,
+                        Title = subCategory.Title
+                    };
                 });
         }
+        */
 
         public OutputDtoQuerySubCategory GetById(int id)
         {
-            var category = _subCategoryRepository.GetById(id);
+            var subcategory = _subCategoryRepository.GetById(id);
 
+            var category = new OutputDtoQuerySubCategory.Category
+            {
+                Title = subcategory.Category.Title
+            };
+            
             return new OutputDtoQuerySubCategory
             {
-                Id = category.Id,
-                Title = category.Title,
-                CategoryId = category.CategoryId
+                Id = subcategory.Id,
+                Title = subcategory.Title,
             };
         }
 
         public OutputDtoQuerySubCategory Create(int categoryId, InputDtoAddSubCategory inputDtoAddSubCategory)
         {
-            var subCategoryFromDto =
-                _subCategoryFactory.CreateFromCategoryTitle(categoryId, inputDtoAddSubCategory.Title);
+            var categoryFromDto = _categoryRepository.GetById(categoryId);
+            var subCategoryFromDto = new SubCategory
+            {
+                Title = inputDtoAddSubCategory.Title,
+                Category = categoryFromDto
+            };
             
             var subCategoryInDb = _subCategoryRepository.Create(categoryId, subCategoryFromDto);
 
+            var category = new OutputDtoQuerySubCategory.Category
+            {
+                Title = subCategoryInDb.Category.Title
+            };
+            
             return new OutputDtoQuerySubCategory
             {
                 Id = subCategoryInDb.Id,
                 Title = subCategoryInDb.Title,
-                CategoryId = subCategoryInDb.CategoryId
             };
         }
-
-        // TODO Check utilité
-        public bool Update(int id, InputDtoUpdateSubCategory inputDtoUpdateSubCategory)
-        {
-            var categoryFromDto = _subCategoryFactory.CreateFromCategoryTitle(inputDtoUpdateSubCategory.CategoryId,
-                inputDtoUpdateSubCategory.Title);
-            return _subCategoryRepository.Update(id, categoryFromDto);
-        }
-
 
         public IEnumerable<OutputDtoQuerySubCategory> GetByCategoryId(int categoryId)
         {
             return _subCategoryRepository.GetByCategoryId(categoryId)
-                .Select(subCategory => new OutputDtoQuerySubCategory
+                .Select(subCategory =>
                 {
-                    Id = subCategory.Id,
-                    Title = subCategory.Title,
-                    CategoryId = subCategory.CategoryId
+                    var category = new OutputDtoQuerySubCategory.Category
+                    {
+                        Title = subCategory.Category.Title
+                    };                   
+                    
+                    return new OutputDtoQuerySubCategory
+                    {
+                        Id = subCategory.Id,
+                        Title = subCategory.Title,
+                    };
                 });
         }
     }

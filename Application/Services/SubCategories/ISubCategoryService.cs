@@ -7,10 +7,10 @@ namespace Application.Services.SubCategories
 {
     public interface ISubCategoryService
     {
-        IEnumerable<OutputDtoQuerySubCategory> Query();
+        // IEnumerable<OutputDtoQuerySubCategory> Query();
         OutputDtoQuerySubCategory GetById(int id);
         OutputDtoQuerySubCategory Create(int categoryId, InputDtoAddSubCategory inputDtoAddSubCategory);
-        bool Update(int id, InputDtoUpdateSubCategory inputDtoUpdateSubCategory);
+        // bool Update(int id, InputDtoUpdateSubCategory inputDtoUpdateSubCategory);
         IEnumerable<OutputDtoQuerySubCategory> GetByCategoryId(int id);
     }
 }

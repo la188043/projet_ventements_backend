@@ -14,9 +14,13 @@ namespace Infrastructure.SqlServer.Items
         public static readonly string ColSize = "size";
         public static readonly string ColSubCategoryId = "subcategoryId";
         
-        public static readonly string ReqQuery = $"SELECT * FROM {TableName}";
+        public static readonly string ReqQuery = $@"
+            SELECT * FROM {TableName}
+            INNER JOIN {SubCategorySqlServer.TableName} 
+            ON {TableName}.{ColSubCategoryId} = {SubCategorySqlServer.TableName}.{SubCategorySqlServer.ColId}
+        ";
 
-        public static readonly string ReqGetById = ReqQuery + $" WHERE {ColId} = @{ColId}";
+        public static readonly string ReqGetById = ReqQuery + $" WHERE {TableName}.{ColId} = @{ColId}";
 
         
         public static readonly string ReqAdd = $@"
@@ -27,6 +31,7 @@ namespace Infrastructure.SqlServer.Items
             (@{ColLabel}, @{ColPrice}, @{ColQuantity}, @{ColImageItem}, @{ColDescriptionItem}, @{ColSize}, @{ColSubCategoryId})
         ";
         
+        /*
         public static readonly string ReqPut = $@"
             UPDATE {TableName} SET
             {ColLabel} = @{ColLabel},
@@ -38,11 +43,9 @@ namespace Infrastructure.SqlServer.Items
             {ColSubCategoryId} = @{ColSubCategoryId}
             WHERE {ColId} = @{ColId}
         ";
+        */
         
-        public static readonly string ReqGetBySubCategoryId = $@"
-            SELECT * FROM {TableName}
-            WHERE {ColSubCategoryId} = @{ColSubCategoryId}
-        ";
+        public static readonly string ReqGetBySubCategoryId = ReqQuery + $" WHERE {TableName}.{ColSubCategoryId} = @{ColSubCategoryId}";
     }
     
 }

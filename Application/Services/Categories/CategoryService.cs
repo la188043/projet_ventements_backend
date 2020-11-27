@@ -2,7 +2,6 @@
 using System.Linq;
 using Application.Repositories;
 using Application.Services.Categories.Dto;
-using Domain;
 using Domain.Categories;
 
 namespace Application.Services.Categories
@@ -10,8 +9,7 @@ namespace Application.Services.Categories
     public class CategoryService:ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
-        private readonly ICategoryFactory _categoryFactory = new CategoryFactory();
-
+        
         public CategoryService(ICategoryRepository categoryRepository)
         {
             _categoryRepository = categoryRepository;
@@ -21,17 +19,36 @@ namespace Application.Services.Categories
         {
             return _categoryRepository
                 .Query()
-                .Select(category => new OutputDtoQueryCategory
+                .Select(category =>
                 {
-                    Id = category.Id,
-                    Title = category.Title,
+                    OutputDtoQueryCategory.Category parentCategory = null;
+                    if (category.ParentCategory != null)
+                    {
+                        parentCategory = new OutputDtoQueryCategory.Category
+                        {
+                            Id = category.ParentCategory.Id,
+                            Title = category.ParentCategory.Title
+                        };
+                    }
+                    
+                    return new OutputDtoQueryCategory
+                    {
+                        Id = category.Id,
+                        Title = category.Title,
+                        ParentCategory = parentCategory
+                    };
                 });
         }
 
-        public OutputDtoAddCategory Create(InputDtoAddCategory inputDtoAddCategory)
+        public OutputDtoQueryCategory GetById(int id)
         {
-            var categoryFromDto = _categoryFactory.CreateFromTitle(inputDtoAddCategory.Title);
-            var categoryInDb = _categoryRepository.Create(categoryFromDto);
+            throw new System.NotImplementedException();
+        }
+
+        public OutputDtoAddCategory CreateCategory(InputDtoAddCategory inputDtoAddCategory)
+        {
+            var categoryFromDto = new Category {Title = inputDtoAddCategory.Title};
+            var categoryInDb = _categoryRepository.CreateCategory(categoryFromDto);
 
             return new OutputDtoAddCategory
             {
@@ -40,10 +57,16 @@ namespace Application.Services.Categories
             };
         }
 
-        public bool Update(int id, InputDtoUpdateCategory inputDtoUpdateCategory)
+        public OutputDtoAddCategory CreateSubCategory(int parentCategoryId, InputDtoAddCategory inputDtoAddCategory)
         {
-            var categoryFromDto = _categoryFactory.CreateFromTitle(inputDtoUpdateCategory.Title);
-            return _categoryRepository.Update(id, categoryFromDto);
+            var categoryFromDto = new Category {Title = inputDtoAddCategory.Title};
+            var categoryInDb = _categoryRepository.CreateSubCategory(parentCategoryId, categoryFromDto);
+            
+            return new OutputDtoAddCategory
+            {
+                Id = categoryInDb.Id,
+                Title = categoryInDb.Title
+            };
         }
     }
 }

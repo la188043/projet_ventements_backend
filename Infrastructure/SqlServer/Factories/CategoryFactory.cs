@@ -10,11 +10,21 @@ namespace Infrastructure.SqlServer.Factories
     {
         public ICategory CreateFromReader(SqlDataReader reader)
         {
+            Category parentCategory  = null;
+            if (!reader.IsDBNull(reader.GetOrdinal(CategorySqlServer.ColAliasParentId)))
+            {
+                parentCategory = new Category
+                {
+                    Id = reader.GetInt32(reader.GetOrdinal(CategorySqlServer.ColAliasParentId)),
+                    Title = reader.GetString(reader.GetOrdinal(CategorySqlServer.ColAliasParentTitle))
+                };
+            }
+            
             return new Category()
             {
-                Id = reader.GetInt32(reader.GetOrdinal(CategorySqlServer.ColId)),
-                Title = reader.GetString(reader.GetOrdinal(CategorySqlServer.ColTitle)),
-                
+                Id = reader.GetInt32(reader.GetOrdinal(CategorySqlServer.ColAliasChildId)),
+                Title = reader.GetString(reader.GetOrdinal(CategorySqlServer.ColAliasChildTitle)),
+                ParentCategory = parentCategory
             };
         }
     }

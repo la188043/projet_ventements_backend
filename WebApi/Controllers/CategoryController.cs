@@ -35,20 +35,7 @@ namespace WebApi.Controllers
         [HttpPost]
         public ActionResult<OutputDtoAddCategory> Post([FromBody] InputDtoAddCategory inputDtoAddCategory)
         {
-            return Ok(_categoryService.Create(inputDtoAddCategory));
-        }
-
-        [Authorize(Roles = "Admin")]
-        [HttpPut]
-        [Route("{id:int}")]
-        public ActionResult Update(int id, InputDtoUpdateCategory inputDtoUpdateCategory)
-        {
-            if (_categoryService.Update(id, inputDtoUpdateCategory))
-            {
-                return Ok();
-            }
-
-            return NotFound();
+            return Ok(_categoryService.CreateCategory(inputDtoAddCategory));
         }
 
         // SubCategories
@@ -56,9 +43,9 @@ namespace WebApi.Controllers
         [HttpPost]
         [Route("{categoryId:int}/subcategories")]
         public ActionResult<OutputDtoQuerySubCategory> AddSubCategory(int categoryId,
-            [FromBody] InputDtoAddSubCategory subCategory)
+            [FromBody] InputDtoAddCategory subCategory)
         {
-            return Ok(_subCategoryService.Create(categoryId, subCategory));
+            return Ok(_categoryService.CreateSubCategory(categoryId, subCategory));
         }
 
         [HttpGet]

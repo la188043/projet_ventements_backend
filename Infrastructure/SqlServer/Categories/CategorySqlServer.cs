@@ -9,13 +9,18 @@
         public static readonly string ColTitle = "title";
         public static readonly string ColCategoryId = "categoryId";
 
+        public static readonly string ColAliasParentId = "parentId";
+        public static readonly string ColAliasParentTitle = "parentTitle";
+        public static readonly string ColAliasChildId = "childId";
+        public static readonly string ColAliasChildTitle = "childTitle";
+
         public static readonly string ReqQuery = $@"
-            SELECT {TableAliasParentCategory}.{ColId},
-                   {TableAliasParentCategory}.{ColTitle},
-                   {TableAliasChildCategory}.{ColId},
-                   {TableAliasChildCategory}.{ColTitle}
-            FROM {TableName} {TableAliasParentCategory}
-            LEFT JOIN {TableName} {TableAliasChildCategory}
+            SELECT {TableAliasParentCategory}.{ColId} AS {ColAliasParentId},
+                   {TableAliasParentCategory}.{ColTitle} AS {ColAliasParentTitle},
+                   {TableAliasChildCategory}.{ColId} AS {ColAliasChildId},
+                   {TableAliasChildCategory}.{ColTitle} AS {ColAliasChildTitle}
+            FROM {TableName} {TableAliasChildCategory}
+            LEFT JOIN {TableName} {TableAliasParentCategory}
             ON {TableAliasChildCategory}.{ColCategoryId} = {TableAliasParentCategory}.{ColId}
         ";
 

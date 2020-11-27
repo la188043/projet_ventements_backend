@@ -18,8 +18,8 @@ namespace Infrastructure.SqlServer.Factories
                 
                 Category = new Category
                 {
-                    Id = reader.GetInt32(reader.GetOrdinal(CategorySqlServer.ColId)),
-                    Title = reader.GetString(reader.GetOrdinal(CategorySqlServer.ColTitle))
+                    Id = reader.GetInt32(reader.GetOrdinal(SubCategorySqlServer.ColParentCategoryId)),
+                    Title = reader.GetString(reader.GetOrdinal(SubCategorySqlServer.ColParentCategoryTitle))
                 }
             };
         }

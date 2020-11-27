@@ -51,6 +51,7 @@ namespace Application.Services.SubCategories
             {
                 Id = subcategory.Id,
                 Title = subcategory.Title,
+                ParentCategory = category
             };
         }
 
@@ -91,6 +92,7 @@ namespace Application.Services.SubCategories
                     {
                         Id = subCategory.Id,
                         Title = subCategory.Title,
+                        ParentCategory = category
                     };
                 });
         }

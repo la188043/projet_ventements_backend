@@ -8,10 +8,17 @@ namespace Infrastructure.SqlServer.SubCategories
         public static readonly string ColId = "id";
         public static readonly string ColTitle = "title";
         public static readonly string ColIdCategory = "categoryId";
+
+        public static readonly string ColParentCategoryId = "parentCategoryId";
+        public static readonly string ColParentCategoryTitle = "parentCategoryTitle";
         
         // public static readonly string ReqQuery = $"SELECT * FROM {TableName}";
         public static readonly string ReqQuery = $@"
-            SELECT * FROM {TableName}
+            SELECT {TableName}.{ColId},
+                   {TableName}.{ColTitle},
+                   {CategorySqlServer.TableName}.{CategorySqlServer.ColId} AS {ColParentCategoryId},
+                   {CategorySqlServer.TableName}.{CategorySqlServer.ColTitle} AS {ColParentCategoryTitle}
+            FROM {TableName}
             INNER JOIN {CategorySqlServer.TableName}
             ON {TableName}.{ColIdCategory} = {CategorySqlServer.TableName}.{CategorySqlServer.ColId}
         ";

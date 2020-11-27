@@ -1,4 +1,4 @@
-﻿using Domain.Categories;
+﻿using System.Collections.Generic;
 
 namespace Application.Services.Categories.Dto
 {
@@ -6,7 +6,7 @@ namespace Application.Services.Categories.Dto
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public Category ParentCategory { get; set; }
+        public IEnumerable<Category> SubCategories { get; set; }
 
         public class Category
         {

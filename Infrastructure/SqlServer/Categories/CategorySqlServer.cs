@@ -22,6 +22,7 @@
             FROM {TableName} {TableAliasChildCategory}
             LEFT JOIN {TableName} {TableAliasParentCategory}
             ON {TableAliasChildCategory}.{ColCategoryId} = {TableAliasParentCategory}.{ColId}
+            WHERE {TableAliasParentCategory}.{ColId} IS NULL
         ";
 
         /*

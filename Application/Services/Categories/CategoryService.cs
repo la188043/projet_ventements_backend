@@ -21,21 +21,19 @@ namespace Application.Services.Categories
                 .Query()
                 .Select(category =>
                 {
-                    OutputDtoQueryCategory.Category parentCategory = null;
-                    if (category.ParentCategory != null)
-                    {
-                        parentCategory = new OutputDtoQueryCategory.Category
-                        {
-                            Id = category.ParentCategory.Id,
-                            Title = category.ParentCategory.Title
-                        };
-                    }
+                    var subcategories = 
+                        _categoryRepository.GetByCategoryId(category.Id)
+                            .Select(subcategory => new OutputDtoQueryCategory.Category
+                            {
+                                Id = subcategory.Id,
+                                Title = subcategory.Title
+                            });
                     
                     return new OutputDtoQueryCategory
                     {
                         Id = category.Id,
                         Title = category.Title,
-                        ParentCategory = parentCategory
+                        SubCategories = subcategories
                     };
                 });
         }
@@ -50,21 +48,10 @@ namespace Application.Services.Categories
             return _categoryRepository.GetByCategoryId(parentCategoryId)
                 .Select(category =>
                 {
-                    OutputDtoQueryCategory.Category parentCategory = null;
-                    if (category.ParentCategory != null)
-                    {
-                        parentCategory = new OutputDtoQueryCategory.Category
-                        {
-                            Id = category.ParentCategory.Id,
-                            Title = category.ParentCategory.Title
-                        };
-                    }
-
                     return new OutputDtoQueryCategory
                     {
                         Id = category.Id,
                         Title = category.Title,
-                        ParentCategory = parentCategory
                     };
                 });
         }

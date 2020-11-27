@@ -1,9 +1,8 @@
-﻿using Application.Services.Categories;
+﻿using System;
+using Application.Services.Categories;
 using Application.Services.Categories.Dto;
 using Application.Services.Items;
 using Application.Services.Items.Dto;
-using Application.Services.SubCategories;
-using Application.Services.SubCategories.Dto;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Helpers;
 
@@ -14,14 +13,11 @@ namespace WebApi.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
-        private readonly ISubCategoryService _subCategoryService;
         private readonly IItemService _itemService;
 
-        public CategoryController(ICategoryService categoryService, ISubCategoryService subCategoryService,
-            IItemService itemService)
+        public CategoryController(ICategoryService categoryService, IItemService itemService)
         {
             _categoryService = categoryService;
-            _subCategoryService = subCategoryService;
             _itemService = itemService;
         }
 
@@ -42,7 +38,7 @@ namespace WebApi.Controllers
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [Route("{categoryId:int}/subcategories")]
-        public ActionResult<OutputDtoQuerySubCategory> AddSubCategory(int categoryId,
+        public ActionResult<OutputDtoAddCategory> AddSubCategory(int categoryId,
             [FromBody] InputDtoAddCategory subCategory)
         {
             return Ok(_categoryService.CreateSubCategory(categoryId, subCategory));
@@ -50,9 +46,9 @@ namespace WebApi.Controllers
 
         [HttpGet]
         [Route("{categoryId:int}/subcategories")]
-        public ActionResult<OutputDtoQuerySubCategory> GetSubCategories(int categoryId)
+        public ActionResult<OutputDtoQueryCategory> GetSubCategories(int categoryId)
         {
-            return Ok(_subCategoryService.GetByCategoryId(categoryId));
+            return Ok(_categoryService.GetByCategoryId(categoryId));
         }
 
         // items
@@ -69,7 +65,7 @@ namespace WebApi.Controllers
         [Route("{subcategoryId:int}/items")]
         public ActionResult<OutputDtoQueryItem> GetItems(int subcategoryId)
         {
-            return Ok(_itemService.GetBySubCategoryId(subcategoryId));
+            return Ok(_itemService.GetByCategoryId(subcategoryId));
         }
     }
 }

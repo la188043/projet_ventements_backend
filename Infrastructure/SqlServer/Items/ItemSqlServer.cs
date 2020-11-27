@@ -1,4 +1,4 @@
-﻿using Infrastructure.SqlServer.SubCategories;
+﻿using Infrastructure.SqlServer.Categories;
 
 namespace Infrastructure.SqlServer.Items
 {
@@ -16,8 +16,8 @@ namespace Infrastructure.SqlServer.Items
         
         public static readonly string ReqQuery = $@"
             SELECT * FROM {TableName}
-            INNER JOIN {SubCategorySqlServer.TableName} 
-            ON {TableName}.{ColSubCategoryId} = {SubCategorySqlServer.TableName}.{SubCategorySqlServer.ColId}
+            INNER JOIN {CategorySqlServer.TableName} 
+            ON {TableName}.{ColSubCategoryId} = {CategorySqlServer.TableName}.{CategorySqlServer.ColId}
         ";
 
         public static readonly string ReqGetById = ReqQuery + $" WHERE {TableName}.{ColId} = @{ColId}";

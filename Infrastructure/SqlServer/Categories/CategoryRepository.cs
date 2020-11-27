@@ -55,6 +55,25 @@ namespace Infrastructure.SqlServer.Categories
             return null;
         }
 
+        public IEnumerable<ICategory> GetByCategoryId(int parentCategoryId)
+        {
+            IList<ICategory> subcategories = new List<ICategory>();
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+                var cmd = connection.CreateCommand();
+                cmd.CommandText = CategorySqlServer.ReqGetByCategoryId;
+
+                cmd.Parameters.AddWithValue($"@{CategorySqlServer.ColCategoryId}", parentCategoryId);
+
+                var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                while (reader.Read())
+                    subcategories.Add(_factory.CreateFromReader(reader));
+            }
+
+            return subcategories;
+        }
+
         public ICategory CreateCategory(ICategory category)
         {
             using (var connection = Database.GetConnection())

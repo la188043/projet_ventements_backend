@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Application.Repositories;
 using Application.Services.Items.Dto;
-using Application.Services.SubCategories.Dto;
 using Domain.Items;
 
 namespace Application.Services.Items
@@ -10,12 +10,12 @@ namespace Application.Services.Items
     public class ItemService : IItemService
     {
         private readonly IItemRepository _itemRepository;
-        private readonly ISubCategoryRepository _subCategoryRepository;
+        private readonly ICategoryRepository _categoryRepository;
 
-        public ItemService(IItemRepository itemRepository, ISubCategoryRepository subCategoryRepository)
+        public ItemService(IItemRepository itemRepository, ICategoryRepository categoryRepository)
         {
             _itemRepository = itemRepository;
-            _subCategoryRepository = subCategoryRepository;
+            _categoryRepository = categoryRepository;
         }
 
         public IEnumerable<OutputDtoQueryItem> Query()
@@ -24,16 +24,10 @@ namespace Application.Services.Items
                 .Query()
                 .Select(item =>
                 {
-                    var category = new OutputDtoQueryItem.SubCategory.Category
+                    var category = new OutputDtoQueryItem.Category
                     {
-                        Id = item.SubCategory.Category.Id,
-                        Title = item.SubCategory.Category.Title
-                    };
-
-                    var subcategory = new OutputDtoQueryItem.SubCategory
-                    {
-                        Id = item.SubCategory.Id,
-                        Title = item.SubCategory.Title
+                        Id = item.Category.Id,
+                        Title = item.Category.Title
                     };
 
                     return new OutputDtoQueryItem
@@ -53,16 +47,16 @@ namespace Application.Services.Items
         {
             var item = _itemRepository.GetById(id);
 
-            var category = new OutputDtoQueryItem.SubCategory.Category
+            var category = new OutputDtoQueryItem.Category
             {
-                Id = item.SubCategory.Category.Id,
-                Title = item.SubCategory.Category.Title
+                Id = item.Category.Id,
+                Title = item.Category.Title
             };
 
-            var subcategory = new OutputDtoQueryItem.SubCategory
+            var subcategory = new OutputDtoQueryItem.Category
             {
-                Id = item.SubCategory.Id,
-                Title = item.SubCategory.Title
+                Id = item.Category.Id,
+                Title = item.Category.Title
             };
             
             return new OutputDtoQueryItem
@@ -79,8 +73,8 @@ namespace Application.Services.Items
 
         public OutputDtoQueryItem Create(int subcategoryId, InputDtoAddItem inputDtoAddItem)
         {
-            var subcategoryFromDto = _subCategoryRepository.GetById(subcategoryId);
-            
+            var subcategoryFromDto = _categoryRepository.GetById(subcategoryId);
+
             var itemFromDto = new Item
             {
                 Label = inputDtoAddItem.Label,
@@ -89,23 +83,23 @@ namespace Application.Services.Items
                 ImageItem = inputDtoAddItem.ImageItem,
                 DescriptionItem = inputDtoAddItem.DescriptionItem,
                 Size = inputDtoAddItem.Size,
-                SubCategory = subcategoryFromDto
+                Category = subcategoryFromDto
             };
 
             var itemInDb = _itemRepository.Create(subcategoryId, itemFromDto);
 
-            var category = new OutputDtoQueryItem.SubCategory.Category
+            var category = new OutputDtoQueryItem.Category
             {
-                Id = itemInDb.SubCategory.Category.Id,
-                Title = itemInDb.SubCategory.Category.Title
+                Id = itemInDb.Category.Id,
+                Title = itemInDb.Category.Title
             };
-            
-            var subcategory = new OutputDtoQueryItem.SubCategory
+
+            var subcategory = new OutputDtoQueryItem.Category
             {
-                Id = itemInDb.SubCategory.Id,
-                Title = itemInDb.SubCategory.Title
+                Id = itemInDb.Category.Id,
+                Title = itemInDb.Category.Title
             };
-            
+
             return new OutputDtoQueryItem
             {
                 Id = itemInDb.Id,
@@ -115,7 +109,7 @@ namespace Application.Services.Items
                 ImageItem = itemInDb.ImageItem,
                 DescriptionItem = itemInDb.DescriptionItem,
                 Size = itemInDb.Size,
-        };
+            };
         }
 
         /*
@@ -136,21 +130,16 @@ namespace Application.Services.Items
         */
 
 
-        public IEnumerable<OutputDtoQueryItem> GetBySubCategoryId(int subcategoryId)
+        public IEnumerable<OutputDtoQueryItem> GetByCategoryId(int subcategoryId)
         {
-            return _itemRepository.GetBySubCategoryId(subcategoryId)
+            /*
+            return _itemRepository.GetByCategoryId(subcategoryId)
                 .Select(item =>
                 {
-                    var category = new OutputDtoQueryItem.SubCategory.Category
+                    var category = new OutputDtoQueryItem.Category
                     {
-                        Id = item.SubCategory.Category.Id,
-                        Title = item.SubCategory.Category.Title
-                    };
-                    
-                    var subcategory = new OutputDtoQueryItem.SubCategory
-                    {
-                        Id = item.SubCategory.Id,
-                        Title = item.SubCategory.Title
+                        Id = item.Category.Category.Id,
+                        Title = item.Category.Category.Title
                     };
                     
                     return new OutputDtoQueryItem
@@ -164,6 +153,9 @@ namespace Application.Services.Items
                         Size = item.Size,
                     };
                 });
+                */
+
+            throw new NotImplementedException();
         }
     }
 }

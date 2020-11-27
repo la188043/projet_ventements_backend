@@ -1,6 +1,5 @@
-﻿using Domain.Shared;
-using Domain.SubCategories;
-
+﻿using Domain.Categories;
+using Domain.Shared;
 
 namespace Domain.Items
 {
@@ -12,7 +11,6 @@ namespace Domain.Items
         string ImageItem { get; set; }
         string DescriptionItem { get; set; }
         string Size { get; set; }
-        // int SubcategoryId { get; set; }
-        ISubCategory SubCategory { get; set; }
+        ICategory Category { get; set; }
     }
 }

@@ -24,8 +24,25 @@
             ON {TableAliasChildCategory}.{ColCategoryId} = {TableAliasParentCategory}.{ColId}
         ";
 
+        /*
         public static readonly string ReqGetById =
             ReqQuery + $" WHERE {TableAliasParentCategory}.{ColId} = @{ColId}";
+        */
+
+        public static readonly string ReqGetById = $@"
+            SELECT * FROM {TableName} WHERE {ColId} = @{ColId}
+        ";
+
+        public static readonly string ReqGetByCategoryId = $@"
+           SELECT {TableAliasChildCategory}.{ColId} AS {ColAliasChildId},
+                  {TableAliasChildCategory}.{ColTitle} AS {ColAliasChildTitle},
+                  {TableAliasParentCategory}.{ColId} AS {ColAliasParentId},
+                  {TableAliasParentCategory}.{ColTitle} AS {ColAliasParentTitle}
+            FROM {TableName} {TableAliasChildCategory}
+            INNER JOIN {TableName} {TableAliasParentCategory}
+            ON {TableAliasChildCategory}.{ColCategoryId} = {TableAliasParentCategory}.{ColId}
+            WHERE {TableAliasParentCategory}.{ColId} = @{ColCategoryId}
+        ";
 
         public static readonly string ReqCreateCategory = $@"
             INSERT INTO {TableName} ({ColTitle})

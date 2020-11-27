@@ -45,6 +45,30 @@ namespace Application.Services.Categories
             throw new System.NotImplementedException();
         }
 
+        public IEnumerable<OutputDtoQueryCategory> GetByCategoryId(int parentCategoryId)
+        {
+            return _categoryRepository.GetByCategoryId(parentCategoryId)
+                .Select(category =>
+                {
+                    OutputDtoQueryCategory.Category parentCategory = null;
+                    if (category.ParentCategory != null)
+                    {
+                        parentCategory = new OutputDtoQueryCategory.Category
+                        {
+                            Id = category.ParentCategory.Id,
+                            Title = category.ParentCategory.Title
+                        };
+                    }
+
+                    return new OutputDtoQueryCategory
+                    {
+                        Id = category.Id,
+                        Title = category.Title,
+                        ParentCategory = parentCategory
+                    };
+                });
+        }
+
         public OutputDtoAddCategory CreateCategory(InputDtoAddCategory inputDtoAddCategory)
         {
             var categoryFromDto = new Category {Title = inputDtoAddCategory.Title};

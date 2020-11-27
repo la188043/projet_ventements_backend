@@ -7,6 +7,7 @@ using Application.Services.Categories.Dto;
     {
         IEnumerable<OutputDtoQueryCategory> Query();
         OutputDtoQueryCategory GetById(int id);
+        IEnumerable<OutputDtoQueryCategory> GetByCategoryId(int parentCategoryId);
         OutputDtoAddCategory CreateCategory(InputDtoAddCategory inputDtoAddCategory);
         OutputDtoAddCategory CreateSubCategory(int parentCategoryId, InputDtoAddCategory inputDtoAddCategory);
     }

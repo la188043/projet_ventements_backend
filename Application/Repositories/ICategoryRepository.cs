@@ -7,6 +7,7 @@ namespace Application.Repositories
     {
         IEnumerable<ICategory> Query();
         ICategory GetById(int id);
+        IEnumerable<ICategory> GetByCategoryId(int parentCategoryId);
         ICategory CreateCategory(ICategory category);
         ICategory CreateSubCategory(int parentCategoryId, ICategory childCategory);
     }

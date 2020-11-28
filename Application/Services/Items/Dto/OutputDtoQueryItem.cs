@@ -9,7 +9,7 @@
         public string ImageItem { get; set; }
         public string DescriptionItem { get; set; }
         public string Size { get; set; }
-        public Category ParentCategory { get; set; }
+        public Category ItemCategory { get; set; }
         public class Category
         {
             public int Id { get; set; }

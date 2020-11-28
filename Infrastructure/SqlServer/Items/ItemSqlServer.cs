@@ -12,12 +12,21 @@ namespace Infrastructure.SqlServer.Items
         public static readonly string ColImageItem = "imageItem";
         public static readonly string ColDescriptionItem = "descriptionItem";
         public static readonly string ColSize = "size";
-        public static readonly string ColSubCategoryId = "subcategoryId";
+        public static readonly string ColCategoryId = "categoryId";
         
         public static readonly string ReqQuery = $@"
-            SELECT * FROM {TableName}
+            SELECT {TableName}.{ColId},
+                   {TableName}.{ColLabel},
+                   {TableName}.{ColPrice},
+                   {TableName}.{ColQuantity},
+                   {TableName}.{ColImageItem},
+                   {TableName}.{ColDescriptionItem},
+                   {TableName}.{ColSize},
+                   {TableName}.{ColCategoryId},
+                   {CategorySqlServer.TableName}.{CategorySqlServer.ColTitle},
+            FROM {TableName}
             INNER JOIN {CategorySqlServer.TableName} 
-            ON {TableName}.{ColSubCategoryId} = {CategorySqlServer.TableName}.{CategorySqlServer.ColId}
+            ON {TableName}.{ColCategoryId} = {CategorySqlServer.TableName}.{CategorySqlServer.ColId}
         ";
 
         public static readonly string ReqGetById = ReqQuery + $" WHERE {TableName}.{ColId} = @{ColId}";
@@ -25,10 +34,10 @@ namespace Infrastructure.SqlServer.Items
         
         public static readonly string ReqAdd = $@"
             INSERT INTO {TableName} 
-            ({ColLabel}, {ColPrice}, {ColQuantity}, {ColImageItem}, {ColDescriptionItem}, {ColSize}, {ColSubCategoryId}) 
+            ({ColLabel}, {ColPrice}, {ColQuantity}, {ColImageItem}, {ColDescriptionItem}, {ColSize}, {ColCategoryId}) 
             OUTPUT INSERTED.{ColId} 
             VALUES 
-            (@{ColLabel}, @{ColPrice}, @{ColQuantity}, @{ColImageItem}, @{ColDescriptionItem}, @{ColSize}, @{ColSubCategoryId})
+            (@{ColLabel}, @{ColPrice}, @{ColQuantity}, @{ColImageItem}, @{ColDescriptionItem}, @{ColSize}, @{ColCategoryId})
         ";
         
         /*
@@ -40,12 +49,12 @@ namespace Infrastructure.SqlServer.Items
             {ColImageItem} = @{ColImageItem},
             {ColDescriptionItem} = @{ColDescriptionItem},
             {ColSize} = @{ColSize},
-            {ColSubCategoryId} = @{ColSubCategoryId}
+            {ColCategoryId} = @{ColCategoryId}
             WHERE {ColId} = @{ColId}
         ";
         */
         
-        public static readonly string ReqGetBySubCategoryId = ReqQuery + $" WHERE {TableName}.{ColSubCategoryId} = @{ColSubCategoryId}";
+        public static readonly string ReqGetBySubCategoryId = ReqQuery + $" WHERE {TableName}.{ColCategoryId} = @{ColCategoryId}";
     }
     
 }

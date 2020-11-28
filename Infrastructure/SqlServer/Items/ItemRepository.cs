@@ -45,7 +45,7 @@ namespace Infrastructure.SqlServer.Items
 
                 var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
 
-                if (reader.Read())
+                while (reader.Read())
                 {
                     return _factory.CreateFromReader(reader);
                 }
@@ -55,7 +55,7 @@ namespace Infrastructure.SqlServer.Items
         }
 
         //Post
-        public IItem Create(int subcategoryId, IItem item)
+        public IItem Create(int categoryId, IItem item)
         {
             using (var connection = Database.GetConnection())
             {
@@ -69,7 +69,7 @@ namespace Infrastructure.SqlServer.Items
                 cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColImageItem}", item.ImageItem);
                 cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColDescriptionItem}", item.DescriptionItem);
                 cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColSize}", item.Size);
-                cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColSubCategoryId}", subcategoryId);
+                cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColCategoryId}", categoryId);
 
                 item.Id = (int) cmd.ExecuteScalar();
             }
@@ -103,7 +103,7 @@ namespace Infrastructure.SqlServer.Items
         */
 
 
-        public IEnumerable<IItem> GetBySubCategoryId(int subcategoryId)
+        public IEnumerable<IItem> GetBySubCategoryId(int categoryId)
         {
             IList<IItem> subcategories = new List<IItem>();
             using (var connection = Database.GetConnection())
@@ -111,7 +111,7 @@ namespace Infrastructure.SqlServer.Items
                 connection.Open();
                 var cmd = connection.CreateCommand();
                 cmd.CommandText = ItemSqlServer.ReqGetBySubCategoryId;
-                cmd.Parameters.AddWithValue($"{ItemSqlServer.ColSubCategoryId}", subcategoryId);
+                cmd.Parameters.AddWithValue($"{ItemSqlServer.ColCategoryId}", categoryId);
 
                 var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
 

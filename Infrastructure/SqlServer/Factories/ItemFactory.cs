@@ -1,5 +1,7 @@
 ﻿using System.Data.SqlClient;
+using Domain.Categories;
 using Domain.Items;
+using Infrastructure.SqlServer.Categories;
 using Infrastructure.SqlServer.Items;
 
 namespace Infrastructure.SqlServer.Factories
@@ -8,7 +10,7 @@ namespace Infrastructure.SqlServer.Factories
     {
         public IItem CreateFromReader(SqlDataReader reader)
         {
-            return new Item()
+            return new Item
             {
                 Id = reader.GetInt32(reader.GetOrdinal(ItemSqlServer.ColId)),
                 Label = reader.GetString(reader.GetOrdinal(ItemSqlServer.ColLabel)),
@@ -17,6 +19,12 @@ namespace Infrastructure.SqlServer.Factories
                 ImageItem = reader.GetString(reader.GetOrdinal(ItemSqlServer.ColImageItem)),
                 DescriptionItem = reader.GetString(reader.GetOrdinal(ItemSqlServer.ColDescriptionItem)),
                 Size = reader.GetString(reader.GetOrdinal(ItemSqlServer.ColSize)),
+                
+                Category = new Category
+                {
+                    Id = reader.GetInt32(reader.GetOrdinal(ItemSqlServer.ColCategoryId)),
+                    Title = reader.GetString(reader.GetOrdinal(CategorySqlServer.ColTitle))
+                }
             };
         }
     }

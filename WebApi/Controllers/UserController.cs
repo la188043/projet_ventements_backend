@@ -1,7 +1,6 @@
 ﻿using Application.Services.Addresses.Dto;
 using Application.Services.Users;
 using Application.Services.Users.Dto;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Helpers;
 

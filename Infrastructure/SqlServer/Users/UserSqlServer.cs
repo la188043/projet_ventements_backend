@@ -15,9 +15,26 @@ namespace Infrastructure.SqlServer.Users
         public static readonly string ColAdmin = "administrator";
         public static readonly string ColAddress = "addressId";
 
-        public static readonly string ReqQuery = $"SELECT * FROM {TableName}";
+        public static readonly string ReqQuery = $@"
+            SELECT {TableName}.{ColId},
+                   {TableName}.{ColFirstname},
+                   {TableName}.{ColLastname},
+                   {TableName}.{ColBirthDate},
+                   {TableName}.{ColEmail},
+                   {TableName}.{ColPassword},
+                   {TableName}.{ColGender},
+                   {TableName}.{ColAdmin},
+                   {TableName}.{ColAddress},
+                   {AddressSqlServer.TableName}.{AddressSqlServer.ColStreet},
+                   {AddressSqlServer.TableName}.{AddressSqlServer.ColHomeNumber},
+                   {AddressSqlServer.TableName}.{AddressSqlServer.ColZip},
+                   {AddressSqlServer.TableName}.{AddressSqlServer.ColCity}
+            FROM {TableName}
+            LEFT JOIN {AddressSqlServer.TableName}
+            ON {TableName}.{ColAddress} = {AddressSqlServer.TableName}.{AddressSqlServer.ColId}
+        ";
 
-        public static readonly string ReqGetById = ReqQuery + $" WHERE {ColId} = @{ColId}";
+        public static readonly string ReqGetById = ReqQuery + $" WHERE {TableName}.{ColId} = @{ColId}";
 
         public static readonly string ReqCreate = $@"
             INSERT INTO {TableName} 

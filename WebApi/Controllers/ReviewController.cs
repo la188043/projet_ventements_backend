@@ -1,6 +1,7 @@
 ﻿using Application.Services.Reviews;
 using Application.Services.Reviews.Dto;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Helpers;
 
 namespace WebApi.Controllers
 {
@@ -15,6 +16,13 @@ namespace WebApi.Controllers
             _reviewService = reviewService;
         }
 
+        [HttpGet]
+        public ActionResult<OutputDtoQueryReview> Query()
+        {
+            return Ok(_reviewService.Query());
+        }
+        
+        [Authorize]
         [HttpPost]
         [Route("{uservId:int}/item/{itemId:int}")]
         public ActionResult<OutputDtoQueryReview> Post(int uservId, int itemId,
@@ -23,6 +31,7 @@ namespace WebApi.Controllers
             return Ok(_reviewService.Create(uservId, itemId, inputDtoAddReview));
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         [Route("{id:int}")]
         public ActionResult DeleteReview(int id, int userId)
@@ -36,6 +45,7 @@ namespace WebApi.Controllers
         }
 
 
+        [Authorize]
         [HttpPut]
         [Route("{id:int}")]
         public ActionResult Update(int id, InputDtoUpdateReview inputDtoUpdateReview)

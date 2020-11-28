@@ -1,5 +1,7 @@
 ﻿using Application.Services.Items;
 using Application.Services.Items.Dto;
+using Application.Services.Reviews;
+using Application.Services.Reviews.Dto;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Helpers;
 
@@ -10,10 +12,12 @@ namespace WebApi.Controllers
     public class ItemController : ControllerBase
     {
         private readonly IItemService _itemService;
+        private readonly IReviewService _reviewService;
 
-        public ItemController(IItemService itemService)
+        public ItemController(IItemService itemService, IReviewService reviewService)
         {
             _itemService = itemService;
+            _reviewService = reviewService;
         }
 
         [HttpGet]
@@ -34,6 +38,14 @@ namespace WebApi.Controllers
                 return Ok();
 
             return NotFound();
+        }
+        
+        // Reviews
+        [HttpGet]
+        [Route("{itemId:int}/reviews")]
+        public ActionResult<OutputDtoQueryReview> GetReviewsByItemId(int itemId)
+        {
+            return Ok(_reviewService.GetByItemId(itemId));
         }
     }
 }

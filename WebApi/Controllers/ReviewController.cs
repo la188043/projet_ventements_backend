@@ -17,7 +17,7 @@ namespace WebApi.Controllers
 
         [HttpPost]
         [Route("{uservId:int}/item/{itemId:int}")]
-        public ActionResult<OutputDtoAddReview> Post(int uservId, int itemId,
+        public ActionResult<OutputDtoQueryReview> Post(int uservId, int itemId,
             [FromBody] InputDtoAddReview inputDtoAddReview)
         {
             return Ok(_reviewService.Create(uservId, itemId, inputDtoAddReview));

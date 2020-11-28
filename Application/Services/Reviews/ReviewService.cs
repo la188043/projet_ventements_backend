@@ -1,4 +1,6 @@
-﻿using Application.Repositories;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Application.Repositories;
 using Application.Services.Reviews.Dto;
 using Domain.reviews;
 
@@ -7,18 +9,64 @@ namespace Application.Services.Reviews
 {
     public class ReviewService:IReviewService
     {
-        private readonly IUserRepository _userRepository;
-        private readonly IItemRepository _itemRepository;
         private readonly IReviewRepository _reviewRepository;
-        private readonly IReviewFactory _reviewFactory= new ReviewFactory();
 
-        public ReviewService(IUserRepository userRepository, IItemRepository itemRepository, IReviewRepository reviewRepository)
+        public ReviewService(IReviewRepository reviewRepository)
         {
-            _userRepository = userRepository;
-            _itemRepository = itemRepository;
             _reviewRepository = reviewRepository;
         }
-        public OutputDtoAddReview Create(int uservId, int itemId, InputDtoAddReview review)
+
+        public IEnumerable<OutputDtoQueryReview> Query()
+        {
+            return _reviewRepository
+                .Query()
+                .Select(review => new OutputDtoQueryReview
+                {
+                    Id = review.Id,
+                    Stars = review.Stars,
+                    Likes = review.Likes,
+                    Title = review.Title,
+                    DescriptionReview = review.DescriptionReview,
+                    Reviewer = new OutputDtoQueryReview.User
+                    {
+                        Id = review.Reviewer.Id,
+                        Firstname = review.Reviewer.Firstname,
+                        Lastname = review.Reviewer.Lastname
+                    },
+                    ItemReviewed = new OutputDtoQueryReview.Item
+                    {
+                        Id = review.ItemReviewed.Id,
+                        Label = review.ItemReviewed.Label
+                    }
+                });
+        }
+
+        public IEnumerable<OutputDtoQueryReview> GetByItemId(int itemId)
+        {
+            return _reviewRepository
+                .GetByItemId(itemId)
+                .Select(review => new OutputDtoQueryReview
+                {
+                    Id = review.Id,
+                    Stars = review.Stars,
+                    Likes = review.Likes,
+                    Title = review.Title,
+                    DescriptionReview = review.DescriptionReview,
+                    Reviewer = new OutputDtoQueryReview.User
+                    {
+                        Id = review.Reviewer.Id,
+                        Firstname = review.Reviewer.Firstname,
+                        Lastname = review.Reviewer.Lastname
+                    },
+                    ItemReviewed = new OutputDtoQueryReview.Item
+                    {
+                        Id = review.ItemReviewed.Id,
+                        Label = review.ItemReviewed.Label
+                    }
+                });
+        }
+
+        public OutputDtoQueryReview Create(int uservId, int itemId, InputDtoAddReview review)
         {
             var userv = _userRepository.GetById(uservId);
             var item = _itemRepository.GetById(itemId);
@@ -31,7 +79,7 @@ namespace Application.Services.Reviews
                 DescriptionReview = review.DescriptionReview
             });
             
-           return new OutputDtoAddReview
+           return new OutputDtoQueryReview
             {
                 Id = reviewFromDb.Id,
                 Stars = review.Stars,

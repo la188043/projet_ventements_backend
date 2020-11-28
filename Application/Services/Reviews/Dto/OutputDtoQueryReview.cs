@@ -4,7 +4,7 @@ using Domain.Users;
 
 namespace Application.Services.Reviews.Dto
 {
-    public class OutputDtoAddReview
+    public class OutputDtoQueryReview
     {
         public int Id { get; set; }
         public int Stars { get; set; }

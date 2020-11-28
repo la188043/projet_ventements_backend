@@ -1,11 +1,14 @@
-﻿using Application.Services.Reviews.Dto;
+﻿using System.Collections.Generic;
+using Application.Services.Reviews.Dto;
 
 
 namespace Application.Services.Reviews
 {
     public interface IReviewService
     {
-        OutputDtoAddReview Create(int uservId,int itemId,InputDtoAddReview review);
+        IEnumerable<OutputDtoQueryReview> Query();
+        IEnumerable<OutputDtoQueryReview> GetByItemId(int itemId);
+        OutputDtoQueryReview Create(int uservId, int itemId, InputDtoAddReview review);
         bool Delete(int id);
         bool Update(int id, InputDtoUpdateReview inputDtoUpdateReview);
     }

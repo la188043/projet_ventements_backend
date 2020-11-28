@@ -59,7 +59,6 @@ namespace Infrastructure.SqlServer.Reviews
                 cmd.CommandText = ReviewSqlServer.ReqCreate;
 
                 cmd.Parameters.AddWithValue($"@{ReviewSqlServer.ColStars}", review.Stars);
-                cmd.Parameters.AddWithValue($"@{ReviewSqlServer.ColLikes}", review.Likes);
                 cmd.Parameters.AddWithValue($"@{ReviewSqlServer.ColTitle}", review.Title);
                 cmd.Parameters.AddWithValue($"@{ReviewSqlServer.ColDescriptionReview}", review.DescriptionReview);
                 cmd.Parameters.AddWithValue($"@{ReviewSqlServer.ColItemId}", itemId);

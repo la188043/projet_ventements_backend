@@ -35,9 +35,9 @@ namespace Infrastructure.SqlServer.Reviews
         public static readonly string ReqGetByItemId = ReqQuery + $" WHERE {TableName}.{ColItemId} = @{ColItemId}";
         
         public static readonly string ReqCreate = $@"
-            INSERT INTO {TableName} ({ColStars}, {ColLikes}, {ColTitle}, {ColDescriptionReview}, {ColItemId}, {ColUserId}) 
+            INSERT INTO {TableName} ({ColStars}, {ColTitle}, {ColDescriptionReview}, {ColItemId}, {ColUserId}) 
             OUTPUT INSERTED.{ColId} 
-            VALUES (@{ColStars}, @{ColLikes}, @{ColTitle}, @{ColDescriptionReview}, @{ColItemId}, @{ColUserId})
+            VALUES (@{ColStars}, @{ColTitle}, @{ColDescriptionReview}, @{ColItemId}, @{ColUserId})
         ";
 
         public static readonly string ReqDelete = $@"DELETE FROM {TableName} WHERE {ColId} = @{ColId}";

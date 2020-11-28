@@ -22,24 +22,20 @@ namespace Application.Services.Items
         {
             return _itemRepository
                 .Query()
-                .Select(item =>
+                .Select(item => new OutputDtoQueryItem
                 {
-                    var category = new OutputDtoQueryItem.Category
+                    Id = item.Id,
+                    Label = item.Label,
+                    Price = item.Price,
+                    Quantity = item.Quantity,
+                    ImageItem = item.ImageItem,
+                    DescriptionItem = item.DescriptionItem,
+                    Size = item.Size,
+                    ItemCategory = new OutputDtoQueryItem.Category
                     {
                         Id = item.Category.Id,
                         Title = item.Category.Title
-                    };
-
-                    return new OutputDtoQueryItem
-                    {
-                        Id = item.Id,
-                        Label = item.Label,
-                        Price = item.Price,
-                        Quantity = item.Quantity,
-                        ImageItem = item.ImageItem,
-                        DescriptionItem = item.DescriptionItem,
-                        Size = item.Size,
-                    };
+                    }
                 });
         }
 
@@ -47,18 +43,6 @@ namespace Application.Services.Items
         {
             var item = _itemRepository.GetById(id);
 
-            var category = new OutputDtoQueryItem.Category
-            {
-                Id = item.Category.Id,
-                Title = item.Category.Title
-            };
-
-            var subcategory = new OutputDtoQueryItem.Category
-            {
-                Id = item.Category.Id,
-                Title = item.Category.Title
-            };
-            
             return new OutputDtoQueryItem
             {
                 Id = item.Id,
@@ -68,12 +52,17 @@ namespace Application.Services.Items
                 ImageItem = item.ImageItem,
                 DescriptionItem = item.DescriptionItem,
                 Size = item.Size,
+                ItemCategory = new OutputDtoQueryItem.Category
+                {
+                    Id = item.Category.Id,
+                    Title = item.Category.Title
+                }
             };
         }
 
-        public OutputDtoQueryItem Create(int subcategoryId, InputDtoAddItem inputDtoAddItem)
+        public OutputDtoQueryItem Create(int categoryId, InputDtoAddItem inputDtoAddItem)
         {
-            var subcategoryFromDto = _categoryRepository.GetById(subcategoryId);
+            var categoryFromDto = _categoryRepository.GetById(categoryId);
 
             var itemFromDto = new Item
             {
@@ -83,22 +72,10 @@ namespace Application.Services.Items
                 ImageItem = inputDtoAddItem.ImageItem,
                 DescriptionItem = inputDtoAddItem.DescriptionItem,
                 Size = inputDtoAddItem.Size,
-                Category = subcategoryFromDto
+                Category = categoryFromDto
             };
 
-            var itemInDb = _itemRepository.Create(subcategoryId, itemFromDto);
-
-            var category = new OutputDtoQueryItem.Category
-            {
-                Id = itemInDb.Category.Id,
-                Title = itemInDb.Category.Title
-            };
-
-            var subcategory = new OutputDtoQueryItem.Category
-            {
-                Id = itemInDb.Category.Id,
-                Title = itemInDb.Category.Title
-            };
+            var itemInDb = _itemRepository.Create(categoryId, itemFromDto);
 
             return new OutputDtoQueryItem
             {
@@ -109,6 +86,11 @@ namespace Application.Services.Items
                 ImageItem = itemInDb.ImageItem,
                 DescriptionItem = itemInDb.DescriptionItem,
                 Size = itemInDb.Size,
+                ItemCategory = new OutputDtoQueryItem.Category
+                {
+                    Id = itemInDb.Category.Id,
+                    Title = itemInDb.Category.Title
+                }
             };
         }
 
@@ -130,32 +112,25 @@ namespace Application.Services.Items
         */
 
 
-        public IEnumerable<OutputDtoQueryItem> GetByCategoryId(int subcategoryId)
+        public IEnumerable<OutputDtoQueryItem> GetByCategoryId(int categoryId)
         {
-            /*
-            return _itemRepository.GetByCategoryId(subcategoryId)
-                .Select(item =>
+            return _itemRepository
+                .GetBySubCategoryId(categoryId)
+                .Select(item => new OutputDtoQueryItem
                 {
-                    var category = new OutputDtoQueryItem.Category
+                    Id = item.Id,
+                    Label = item.Label,
+                    Price = item.Price,
+                    Quantity = item.Quantity,
+                    ImageItem = item.ImageItem,
+                    DescriptionItem = item.DescriptionItem,
+                    Size = item.Size,
+                    ItemCategory = new OutputDtoQueryItem.Category
                     {
-                        Id = item.Category.Category.Id,
-                        Title = item.Category.Category.Title
-                    };
-                    
-                    return new OutputDtoQueryItem
-                    {
-                        Id = item.Id,
-                        Label = item.Label,
-                        Price = item.Price,
-                        Quantity = item.Quantity,
-                        ImageItem = item.ImageItem,
-                        DescriptionItem = item.DescriptionItem,
-                        Size = item.Size,
-                    };
+                        Id = item.Category.Id,
+                        Title = item.Category.Title
+                    }
                 });
-                */
-
-            throw new NotImplementedException();
         }
     }
 }

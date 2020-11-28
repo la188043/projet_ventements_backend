@@ -1,7 +1,8 @@
-﻿using Application.Services.Categories;
+﻿using System;
+using Application.Services.Categories;
 using Application.Services.Categories.Dto;
-using Application.Services.SubCategories;
-using Application.Services.SubCategories.Dto;
+using Application.Services.Items;
+using Application.Services.Items.Dto;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Helpers;
 
@@ -12,55 +13,64 @@ namespace WebApi.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
-        private readonly ISubCategoryService _subCategoryService;
+        private readonly IItemService _itemService;
 
-        public CategoryController(ICategoryService categoryService, ISubCategoryService subCategoryService)
+        public CategoryController(ICategoryService categoryService, IItemService itemService)
         {
             _categoryService = categoryService;
-            _subCategoryService = subCategoryService;
+            _itemService = itemService;
         }
 
+        // Response : each parent category with its child categories
         [HttpGet]
         public ActionResult<OutputDtoQueryCategory> Query()
         {
             return Ok(_categoryService.Query());
         }
 
-        [Authorize(Roles = "Admin")]
-        [HttpPost]
-        public ActionResult<OutputDtoAddCategory> Post([FromBody] InputDtoAddCategory inputDtoAddCategory)
-        {
-            return Ok(_categoryService.Create(inputDtoAddCategory));
-        }
-
-        [Authorize(Roles = "Admin")]
-        [HttpPut]
+        [HttpGet]
         [Route("{id:int}")]
-        public ActionResult Update(int id, InputDtoUpdateCategory inputDtoUpdateCategory)
+        public ActionResult<OutputDtoQueryCategory> Get(int id)
         {
-            if (_categoryService.Update(id, inputDtoUpdateCategory))
-            {
-                return Ok();
-            }
+            var response = _categoryService.GetById(id);
+
+            if (response != null)
+                return Ok(response);
 
             return NotFound();
         }
 
-        // SubCategories
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public ActionResult<OutputDtoAddCategory> CreateCategory([FromBody] InputDtoAddCategory inputDtoAddCategory)
+        {
+            return Ok(_categoryService.CreateCategory(inputDtoAddCategory));
+        }
+
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [Route("{categoryId:int}/subcategories")]
-        public ActionResult<OutputDtoQuerySubCategory> AddSubCategory(int categoryId,
-            [FromBody] InputDtoAddSubCategory subCategory)
+        public ActionResult<OutputDtoAddCategory> CreateSubCategory(int categoryId,
+            [FromBody] InputDtoAddCategory subCategory)
         {
-            return Ok(_subCategoryService.Create(categoryId, subCategory));
+            return Ok(_categoryService.CreateSubCategory(categoryId, subCategory));
+        }
+
+        // items
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        [Route("{categoryId:int}/items")]
+        public ActionResult<OutputDtoQueryItem> AddItem(int categoryId,
+            [FromBody] InputDtoAddItem item)
+        {
+            return Ok(_itemService.Create(categoryId, item));
         }
 
         [HttpGet]
-        [Route("{categoryId:int}/subcategories")]
-        public ActionResult<OutputDtoQuerySubCategory> GetSubCategories(int categoryId)
+        [Route("{categoryId:int}/items")]
+        public ActionResult<OutputDtoQueryItem> GetItems(int categoryId)
         {
-            return Ok(_subCategoryService.GetByCategoryId(categoryId));
+            return Ok(_itemService.GetByCategoryId(categoryId));
         }
     }
 }

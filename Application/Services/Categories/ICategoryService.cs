@@ -6,7 +6,9 @@ using Application.Services.Categories.Dto;
     public interface ICategoryService
     {
         IEnumerable<OutputDtoQueryCategory> Query();
-        OutputDtoAddCategory Create(InputDtoAddCategory inputDtoAddCategory);
-        bool Update(int id, InputDtoUpdateCategory inputDtoUpdateCategory);
+        OutputDtoQueryCategory GetById(int id);
+        IEnumerable<OutputDtoQueryCategory> GetByCategoryId(int parentCategoryId);
+        OutputDtoAddCategory CreateCategory(InputDtoAddCategory inputDtoAddCategory);
+        OutputDtoAddCategory CreateSubCategory(int parentCategoryId, InputDtoAddCategory inputDtoAddCategory);
     }
 }

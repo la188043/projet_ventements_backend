@@ -2,11 +2,11 @@ using Application;
 using Application.Repositories;
 using Application.Services.Addresses;
 using Application.Services.Categories;
-using Application.Services.SubCategories;
+using Application.Services.Items;
 using Application.Services.Users;
 using Infrastructure.SqlServer.Addresses;
 using Infrastructure.SqlServer.Categories;
-using Infrastructure.SqlServer.SubCategories;
+using Infrastructure.SqlServer.Items;
 using Infrastructure.SqlServer.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,7 +30,7 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            
+
             // Dependency injection
             services.AddSingleton<IUserService, UserService>();
             services.AddSingleton<IUserRepository, UserRepository>();
@@ -39,8 +39,8 @@ namespace WebApi
             services.AddSingleton<ICategoryRepository, CategoryRepository>();
             services.AddSingleton<IAddressRepository, AddressRepository>();
             services.AddSingleton<IAddressService, AddressService>();
-            services.AddSingleton<ISubCategoryService, SubCategoryService>();
-            services.AddSingleton<ISubCategoryRepository, SubCategoryRepository>();
+            services.AddSingleton<IItemService, ItemService>();
+            services.AddSingleton<IItemRepository, ItemRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

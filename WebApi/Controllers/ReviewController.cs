@@ -34,7 +34,7 @@ namespace WebApi.Controllers
         [Authorize(Roles = "Admin")]
         [HttpDelete]
         [Route("{id:int}")]
-        public ActionResult DeleteReview(int id, int userId)
+        public ActionResult DeleteReview(int id)
         {
             if (_reviewService.Delete(id))
             {

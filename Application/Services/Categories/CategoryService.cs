@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Application.Repositories;
 using Application.Services.Categories.Dto;
@@ -48,12 +49,21 @@ namespace Application.Services.Categories
                     Title = subcategory.Title
                 });
 
-            return new OutputDtoQueryCategory
+            OutputDtoQueryCategory categoryFromDto = null;
+            try
             {
-                Id = category.Id,
-                Title = category.Title,
-                SubCategories = subcategories
-            };
+                categoryFromDto = new OutputDtoQueryCategory
+                {
+                    Id = category.Id,
+                    Title = category.Title,
+                    SubCategories = subcategories
+                };
+            }
+            catch
+            {
+            }
+
+            return categoryFromDto;
         }
 
         public IEnumerable<OutputDtoQueryCategory> GetByCategoryId(int parentCategoryId)

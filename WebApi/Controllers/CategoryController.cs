@@ -32,7 +32,12 @@ namespace WebApi.Controllers
         [Route("{id:int}")]
         public ActionResult<OutputDtoQueryCategory> Get(int id)
         {
-            return Ok(_categoryService.GetById(id));
+            var response = _categoryService.GetById(id);
+
+            if (response != null)
+                return Ok(response);
+
+            return NotFound();
         }
 
         [Authorize(Roles = "Admin")]

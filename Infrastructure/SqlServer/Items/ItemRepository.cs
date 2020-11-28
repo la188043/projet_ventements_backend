@@ -103,14 +103,14 @@ namespace Infrastructure.SqlServer.Items
         */
 
 
-        public IEnumerable<IItem> GetBySubCategoryId(int categoryId)
+        public IEnumerable<IItem> GetByCategoryId(int categoryId)
         {
             IList<IItem> subcategories = new List<IItem>();
             using (var connection = Database.GetConnection())
             {
                 connection.Open();
                 var cmd = connection.CreateCommand();
-                cmd.CommandText = ItemSqlServer.ReqGetBySubCategoryId;
+                cmd.CommandText = ItemSqlServer.ReqGetByCategoryId;
                 cmd.Parameters.AddWithValue($"{ItemSqlServer.ColCategoryId}", categoryId);
 
                 var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);

@@ -59,18 +59,18 @@ namespace WebApi.Controllers
         // items
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        [Route("{subcategoryId:int}/items")]
-        public ActionResult<OutputDtoQueryItem> AddItem(int subcategoryId,
+        [Route("{categoryId:int}/items")]
+        public ActionResult<OutputDtoQueryItem> AddItem(int categoryId,
             [FromBody] InputDtoAddItem item)
         {
-            return Ok(_itemService.Create(subcategoryId, item));
+            return Ok(_itemService.Create(categoryId, item));
         }
 
         [HttpGet]
-        [Route("{subcategoryId:int}/items")]
-        public ActionResult<OutputDtoQueryItem> GetItems(int subcategoryId)
+        [Route("{categoryId:int}/items")]
+        public ActionResult<OutputDtoQueryItem> GetItems(int categoryId)
         {
-            return Ok(_itemService.GetByCategoryId(subcategoryId));
+            return Ok(_itemService.GetByCategoryId(categoryId));
         }
     }
 }

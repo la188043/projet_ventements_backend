@@ -115,7 +115,7 @@ namespace Application.Services.Items
         public IEnumerable<OutputDtoQueryItem> GetByCategoryId(int categoryId)
         {
             return _itemRepository
-                .GetBySubCategoryId(categoryId)
+                .GetByCategoryId(categoryId)
                 .Select(item => new OutputDtoQueryItem
                 {
                     Id = item.Id,

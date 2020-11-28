@@ -23,7 +23,7 @@ namespace Infrastructure.SqlServer.Items
                    {TableName}.{ColDescriptionItem},
                    {TableName}.{ColSize},
                    {TableName}.{ColCategoryId},
-                   {CategorySqlServer.TableName}.{CategorySqlServer.ColTitle},
+                   {CategorySqlServer.TableName}.{CategorySqlServer.ColTitle}
             FROM {TableName}
             INNER JOIN {CategorySqlServer.TableName} 
             ON {TableName}.{ColCategoryId} = {CategorySqlServer.TableName}.{CategorySqlServer.ColId}
@@ -54,7 +54,7 @@ namespace Infrastructure.SqlServer.Items
         ";
         */
         
-        public static readonly string ReqGetBySubCategoryId = ReqQuery + $" WHERE {TableName}.{ColCategoryId} = @{ColCategoryId}";
+        public static readonly string ReqGetByCategoryId = ReqQuery + $" WHERE {TableName}.{ColCategoryId} = @{ColCategoryId}";
     }
     
 }

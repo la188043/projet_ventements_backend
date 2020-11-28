@@ -8,8 +8,8 @@ using Infrastructure.SqlServer.Users;
 
 namespace Infrastructure.SqlServer.Factories
 {
-    public class ReviewFactory: IInstanceFromReader<IReview> 
-    {  
+    public class ReviewFactory : IInstanceFromReader<IReview>
+    {
         public IReview CreateFromReader(SqlDataReader reader)
         {
             return new Review
@@ -19,8 +19,8 @@ namespace Infrastructure.SqlServer.Factories
                 Likes = reader.GetInt32(reader.GetOrdinal(ReviewSqlServer.ColLikes)),
                 Title = reader.GetString(reader.GetOrdinal(ReviewSqlServer.ColTitle)),
                 DescriptionReview = reader.GetString(reader.GetOrdinal(ReviewSqlServer.ColDescriptionReview)),
-                
-                User =new User()
+
+                User = new User()
                 {
                     Id = reader.GetInt32(reader.GetOrdinal(ReviewSqlServer.ColId)),
                     Firstname = reader.GetString(reader.GetOrdinal(UserSqlServer.ColFirstname)),
@@ -31,9 +31,9 @@ namespace Infrastructure.SqlServer.Factories
                     Gender = reader.GetString(reader.GetOrdinal(UserSqlServer.ColGender))[0],
                     Administrator = reader.GetBoolean(reader.GetOrdinal(UserSqlServer.ColAdmin))
                 },
-                
+
                 Item = new Item()
-                {   
+                {
                     Id = reader.GetInt32(reader.GetOrdinal(ReviewSqlServer.ColId)),
                     Label = reader.GetString(reader.GetOrdinal(ItemSqlServer.ColLabel)),
                     Price = (float) reader.GetDouble(reader.GetOrdinal(ItemSqlServer.ColPrice)),
@@ -41,10 +41,8 @@ namespace Infrastructure.SqlServer.Factories
                     ImageItem = reader.GetString(reader.GetOrdinal(ItemSqlServer.ColImageItem)),
                     DescriptionItem = reader.GetString(reader.GetOrdinal(ItemSqlServer.ColDescriptionItem)),
                     Size = reader.GetString(reader.GetOrdinal(ItemSqlServer.ColSize)),
-                   // SubcategoryId = reader.GetInt32(reader.GetOrdinal(ItemSqlServer.ColSubCategoryId))
+                    // SubcategoryId = reader.GetInt32(reader.GetOrdinal(ItemSqlServer.ColSubCategoryId))
                 }
-              
-                
             };
         }
     }

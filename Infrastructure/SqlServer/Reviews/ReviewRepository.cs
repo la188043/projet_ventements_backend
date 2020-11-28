@@ -6,7 +6,7 @@ using Infrastructure.SqlServer.Shared;
 
 namespace Infrastructure.SqlServer.Reviews
 {
-    public class ReviewRepository:IReviewRepository
+    public class ReviewRepository : IReviewRepository
     {
         public IReview Create(IUser userv, IItem item, IReview review)
         {
@@ -20,7 +20,7 @@ namespace Infrastructure.SqlServer.Reviews
                 connection.Open();
                 var cmd = connection.CreateCommand();
                 cmd.CommandText = ReviewSqlServer.ReqCreate;
-                
+
                 cmd.Parameters.AddWithValue($"@{ReviewSqlServer.ColStars}", review.Stars);
                 cmd.Parameters.AddWithValue($"@{ReviewSqlServer.ColLikes}", review.Likes);
                 cmd.Parameters.AddWithValue($"@{ReviewSqlServer.ColTitle}", review.Title);
@@ -33,6 +33,7 @@ namespace Infrastructure.SqlServer.Reviews
 
             return Review;
         }
+
         public bool Delete(int id)
         {
             using (var connection = Database.GetConnection())
@@ -41,9 +42,9 @@ namespace Infrastructure.SqlServer.Reviews
                 var cmd = connection.CreateCommand();
 
                 cmd.CommandText = ReviewSqlServer.ReqDelete;
-                
+
                 cmd.Parameters.AddWithValue($"@{ReviewSqlServer.ColId}", id);
-                
+
                 return cmd.ExecuteNonQuery() > 0;
             }
         }

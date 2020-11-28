@@ -3,7 +3,7 @@ using Domain.Users;
 
 namespace Domain.reviews
 {
-    public class Review:IReview
+    public class Review : IReview
     {
         public int Id { get; set; }
         public int Stars { get; set; }
@@ -11,7 +11,6 @@ namespace Domain.reviews
         public string Title { get; set; }
         public string DescriptionReview { get; set; }
         public IUser User { get; set; }
-        public IItem Item{ get; set; }
-        
+        public IItem Item { get; set; }
     }
 }

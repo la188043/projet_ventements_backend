@@ -1,6 +1,6 @@
 ﻿namespace Domain.reviews
 {
-    public class ReviewFactory:IReviewFactory
+    public class ReviewFactory : IReviewFactory
     {
         public IReview Update(int stars, string descriptionReview)
         {

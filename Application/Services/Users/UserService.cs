@@ -32,15 +32,29 @@ namespace Application.Services.Users
         {
             return _userRepository
                 .Query()
-                .Select(user => new OutputDtoQueryUser
+                .Select(user =>
                 {
-                    Id = user.Id,
-                    Firstname = user.Firstname,
-                    Lastname = user.Lastname,
-                    Birthdate = user.Birthdate,
-                    Email = user.Email,
-                    Gender = user.Gender,
-                    Administrator = user.Administrator
+                    var userAddress = user.Address != null ? new OutputDtoQueryUser.Address
+                    {
+                        Id = user.Address.Id,
+                        Street = user.Address.Street,
+                        HomeNumber = user.Address.HomeNumber,
+                        Zip = user.Address.Zip,
+                        City = user.Address.City
+                    } : null;
+                                                              
+                    
+                    return new OutputDtoQueryUser
+                    {
+                        Id = user.Id,
+                        Firstname = user.Firstname,
+                        Lastname = user.Lastname,
+                        Birthdate = user.Birthdate,
+                        Email = user.Email,
+                        Gender = user.Gender,
+                        Administrator = user.Administrator,
+                        UserAddress = userAddress
+                    };
                 });
         }
 
@@ -48,6 +62,17 @@ namespace Application.Services.Users
         {
             var user = _userRepository.GetById(id);
 
+            var userAddress = user.Address != null
+                ? new OutputDtoQueryUser.Address
+                {
+                    Id = user.Address.Id,
+                    Street = user.Address.Street,
+                    HomeNumber = user.Address.HomeNumber,
+                    Zip = user.Address.Zip,
+                    City = user.Address.City
+                }
+                : null;
+            
             return new OutputDtoQueryUser
             {
                 Id = user.Id,
@@ -56,7 +81,8 @@ namespace Application.Services.Users
                 Birthdate = user.Birthdate,
                 Email = user.Email,
                 Gender = user.Gender,
-                Administrator = user.Administrator
+                Administrator = user.Administrator,
+                UserAddress = userAddress
             };
         }
 
@@ -95,13 +121,8 @@ namespace Application.Services.Users
 
         public bool RegisterAddress(int idUser, InputDtoAddAddress address)
         {
-            var addressFromDb = _addressService.CheckFromDb(address);
-
-            if (addressFromDb == null)
-            {
-                // if the address already extists
-                addressFromDb = _addressService.Create(address);
-            }
+            // Si null on le créé (?? = nullish operator)
+            var addressFromDb = _addressService.CheckFromDb(address) ?? _addressService.Create(address);
 
             return _userRepository.RegisterAddress(idUser, new Address
             {

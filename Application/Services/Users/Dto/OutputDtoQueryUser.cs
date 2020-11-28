@@ -11,5 +11,15 @@ namespace Application.Services.Users.Dto
         public string Email { get; set; }
         public char Gender { get; set; }
         public bool Administrator { get; set; }
+        public Address UserAddress { get; set; }
+
+        public class Address
+        {
+            public int Id { get; set; }
+            public string Street { get; set; }
+            public int HomeNumber { get; set; }
+            public string Zip { get; set; }
+            public string City { get; set; }
+        }
     }
 }

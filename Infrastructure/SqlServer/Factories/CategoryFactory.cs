@@ -22,7 +22,7 @@ namespace Infrastructure.SqlServer.Factories
             {
             }
 
-            return new Category()
+            return new Category
             {
                 Id = reader.GetInt32(reader.GetOrdinal(CategorySqlServer.ColAliasChildId)),
                 Title = reader.GetString(reader.GetOrdinal(CategorySqlServer.ColAliasChildTitle)),

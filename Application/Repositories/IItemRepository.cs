@@ -8,7 +8,8 @@ namespace Application.Repositories
     {
         IEnumerable<IItem> Query();
         IItem GetById(int id);
-        IItem Create(int subcategoryId, IItem item);
         IEnumerable<IItem> GetByCategoryId(int id);
+        IItem Create(int categoryId, IItem item);
+        public bool Update(int id, IItem item);
     }
 }

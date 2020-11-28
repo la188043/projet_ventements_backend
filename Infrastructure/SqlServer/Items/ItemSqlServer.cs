@@ -40,7 +40,6 @@ namespace Infrastructure.SqlServer.Items
             (@{ColLabel}, @{ColPrice}, @{ColQuantity}, @{ColImageItem}, @{ColDescriptionItem}, @{ColSize}, @{ColCategoryId})
         ";
         
-        /*
         public static readonly string ReqPut = $@"
             UPDATE {TableName} SET
             {ColLabel} = @{ColLabel},
@@ -49,10 +48,8 @@ namespace Infrastructure.SqlServer.Items
             {ColImageItem} = @{ColImageItem},
             {ColDescriptionItem} = @{ColDescriptionItem},
             {ColSize} = @{ColSize},
-            {ColCategoryId} = @{ColCategoryId}
             WHERE {ColId} = @{ColId}
         ";
-        */
         
         public static readonly string ReqGetByCategoryId = ReqQuery + $" WHERE {TableName}.{ColCategoryId} = @{ColCategoryId}";
     }

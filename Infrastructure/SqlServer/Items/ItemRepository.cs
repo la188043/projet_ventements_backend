@@ -54,6 +54,27 @@ namespace Infrastructure.SqlServer.Items
             return null;
         }
 
+        public IEnumerable<IItem> GetByCategoryId(int categoryId)
+        {
+            IList<IItem> subcategories = new List<IItem>();
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+                var cmd = connection.CreateCommand();
+                cmd.CommandText = ItemSqlServer.ReqGetByCategoryId;
+                cmd.Parameters.AddWithValue($"{ItemSqlServer.ColCategoryId}", categoryId);
+
+                var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                while (reader.Read())
+                {
+                    subcategories.Add(_factory.CreateFromReader(reader));
+                }
+            }
+
+            return subcategories;
+        }
+        
         //Post
         public IItem Create(int categoryId, IItem item)
         {
@@ -78,7 +99,6 @@ namespace Infrastructure.SqlServer.Items
         }
 
         //Put
-        /*
         public bool Update(int id, IItem item)
         {
             using (var connection = Database.GetConnection())
@@ -89,39 +109,16 @@ namespace Infrastructure.SqlServer.Items
                 cmd.CommandText = ItemSqlServer.ReqPut;
 
                 cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColId}", id);
+                
                 cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColLabel}", item.Label);
                 cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColPrice}", item.Price);
                 cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColQuantity}", item.Quantity);
                 cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColImageItem}", item.ImageItem);
                 cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColDescriptionItem}", item.DescriptionItem);
                 cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColSize}", item.Size);
-                cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColSubCategoryId}", item.SubcategoryId);
 
                 return cmd.ExecuteNonQuery() > 0;
             }
-        }
-        */
-
-
-        public IEnumerable<IItem> GetByCategoryId(int categoryId)
-        {
-            IList<IItem> subcategories = new List<IItem>();
-            using (var connection = Database.GetConnection())
-            {
-                connection.Open();
-                var cmd = connection.CreateCommand();
-                cmd.CommandText = ItemSqlServer.ReqGetByCategoryId;
-                cmd.Parameters.AddWithValue($"{ItemSqlServer.ColCategoryId}", categoryId);
-
-                var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-
-                while (reader.Read())
-                {
-                    subcategories.Add(_factory.CreateFromReader(reader));
-                }
-            }
-
-            return subcategories;
         }
     }
 }

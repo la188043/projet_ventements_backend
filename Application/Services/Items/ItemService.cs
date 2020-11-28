@@ -59,6 +59,27 @@ namespace Application.Services.Items
             };
         }
 
+        public IEnumerable<OutputDtoQueryItem> GetByCategoryId(int categoryId)
+        {
+            return _itemRepository
+                .GetByCategoryId(categoryId)
+                .Select(item => new OutputDtoQueryItem
+                {
+                    Id = item.Id,
+                    Label = item.Label,
+                    Price = item.Price,
+                    Quantity = item.Quantity,
+                    ImageItem = item.ImageItem,
+                    DescriptionItem = item.DescriptionItem,
+                    Size = item.Size,
+                    ItemCategory = new OutputDtoQueryItem.Category
+                    {
+                        Id = item.Category.Id,
+                        Title = item.Category.Title
+                    }
+                });
+        }
+        
         public OutputDtoQueryItem Create(int categoryId, InputDtoAddItem inputDtoAddItem)
         {
             var categoryFromDto = _categoryRepository.GetById(categoryId);
@@ -93,7 +114,6 @@ namespace Application.Services.Items
             };
         }
 
-        /*
         public bool Update(int id, InputDtoUpdateItem inputDtoUpdateItem)
         {
             var itemFromDto = new Item
@@ -107,29 +127,6 @@ namespace Application.Services.Items
             };
 
             return _itemRepository.Update(id, itemFromDto);
-        }
-        */
-
-
-        public IEnumerable<OutputDtoQueryItem> GetByCategoryId(int categoryId)
-        {
-            return _itemRepository
-                .GetByCategoryId(categoryId)
-                .Select(item => new OutputDtoQueryItem
-                {
-                    Id = item.Id,
-                    Label = item.Label,
-                    Price = item.Price,
-                    Quantity = item.Quantity,
-                    ImageItem = item.ImageItem,
-                    DescriptionItem = item.DescriptionItem,
-                    Size = item.Size,
-                    ItemCategory = new OutputDtoQueryItem.Category
-                    {
-                        Id = item.Category.Id,
-                        Title = item.Category.Title
-                    }
-                });
         }
     }
 }

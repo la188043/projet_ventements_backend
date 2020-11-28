@@ -21,5 +21,17 @@ namespace WebApi.Controllers
         {
             return Ok(_itemService.GetById(id));
         }
+
+        [HttpPut]
+        [Route("{id:int}")]
+        public ActionResult Update(int id, InputDtoUpdateItem inputDtoUpdateItem)
+        {
+            var response = _itemService.Update(id, inputDtoUpdateItem);
+
+            if (response)
+                return Ok();
+
+            return NotFound();
+        }
     }
 }

@@ -1,4 +1,7 @@
-﻿namespace Infrastructure.SqlServer.Reviews
+﻿using Infrastructure.SqlServer.Items;
+using Infrastructure.SqlServer.Users;
+
+namespace Infrastructure.SqlServer.Reviews
 {
     public class ReviewSqlServer
     {
@@ -11,6 +14,26 @@
         public static readonly string ColItemId = "itemId";
         public static readonly string ColUserId = "uservId";
 
+        public static readonly string ReqQuery = $@"
+            SELECT {TableName}.{ColId},
+                   {TableName}.{ColStars},
+                   {TableName}.{ColLikes},
+                   {TableName}.{ColTitle},
+                   {TableName}.{ColDescriptionReview},
+                   {TableName}.{ColUserId},
+                   {UserSqlServer.TableName}.{UserSqlServer.ColFirstname},
+                   {UserSqlServer.TableName}.{UserSqlServer.ColLastname},
+                   {TableName}.{ColItemId},
+                   {ItemSqlServer.TableName}.{ItemSqlServer.ColLabel}
+            FROM {TableName}
+            INNER JOIN {UserSqlServer.TableName} 
+            ON {TableName}.{ColUserId} = {UserSqlServer.TableName}.{UserSqlServer.ColId}
+            INNER JOIN {ItemSqlServer.TableName}
+            ON {TableName}.{ColItemId} = {ItemSqlServer.TableName}.{ItemSqlServer.ColId}
+        ";
+
+        public static readonly string ReqGetByItemId = ReqQuery + $" WHERE {TableName}.{ColItemId} = @{ColItemId}";
+        
         public static readonly string ReqCreate = $@"
             INSERT INTO {TableName} ({ColStars}, {ColLikes}, {ColTitle}, {ColDescriptionReview}, {ColItemId}, {ColUserId}) 
             OUTPUT INSERTED.{ColId} 

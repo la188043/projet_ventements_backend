@@ -10,7 +10,7 @@ namespace Domain.reviews
         public int Likes { get; set; }
         public string Title { get; set; }
         public string DescriptionReview { get; set; }
-        IUser User { get; set; }
-        IItem Item { get; set; }
+        IUser Reviewer { get; set; }
+        IItem ItemReviewed { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿﻿namespace Domain.reviews
+﻿namespace Domain.reviews
 {
     public interface IReviewFactory
     {

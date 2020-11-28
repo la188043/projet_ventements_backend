@@ -3,7 +3,6 @@ USE sql_ventements_project;
 DROP TABLE IF EXISTS addressuserv;
 DROP TABLE IF EXISTS userv;
 DROP TABLE IF EXISTS category;
--- DROP TABLE IF EXISTS subcategory;
 DROP TABLE IF EXISTS item;
 DROP TABLE IF EXISTS bag;
 DROP TABLE IF EXISTS orderv;
@@ -48,25 +47,13 @@ CREATE TABLE category
     FOREIGN KEY (categoryId) REFERENCES category(id)
 );
 
-/*
-CREATE TABLE subcategory
-(
-	id 			INT IDENTITY 	NOT NULL,
-	title 		VARCHAR(100) 	NOT NULL,
-	categoryId 	INT 			NOT NULL,
-
-	PRIMARY KEY (id),
-	FOREIGN KEY (categoryId) REFERENCES category (id)
-);
-*/
-
 CREATE TABLE item
 (
     id                  INT IDENTITY    NOT NULL,
     label               VARCHAR(100)    NOT NULL,
 	price               FLOAT           NOT NULL,
 	quantity            INT             NOT NULL,
-	imageItem           VARCHAR(100)    NOT NULL,
+	imageItem           VARCHAR(400)    NOT NULL,
 	descriptionItem     VARCHAR(1000)   NOT NULL,
 	size                VARCHAR(10)     NOT NULL,
 	categoryId          INT             NOT NULL,

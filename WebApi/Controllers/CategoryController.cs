@@ -21,34 +21,34 @@ namespace WebApi.Controllers
             _itemService = itemService;
         }
 
+        // Response : each parent category with its child categories
         [HttpGet]
         public ActionResult<OutputDtoQueryCategory> Query()
         {
             return Ok(_categoryService.Query());
         }
 
+        [HttpGet]
+        [Route("{id:int}")]
+        public ActionResult<OutputDtoQueryCategory> Get(int id)
+        {
+            return Ok(_categoryService.GetById(id));
+        }
+
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public ActionResult<OutputDtoAddCategory> Post([FromBody] InputDtoAddCategory inputDtoAddCategory)
+        public ActionResult<OutputDtoAddCategory> CreateCategory([FromBody] InputDtoAddCategory inputDtoAddCategory)
         {
             return Ok(_categoryService.CreateCategory(inputDtoAddCategory));
         }
 
-        // SubCategories
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [Route("{categoryId:int}/subcategories")]
-        public ActionResult<OutputDtoAddCategory> AddSubCategory(int categoryId,
+        public ActionResult<OutputDtoAddCategory> CreateSubCategory(int categoryId,
             [FromBody] InputDtoAddCategory subCategory)
         {
             return Ok(_categoryService.CreateSubCategory(categoryId, subCategory));
-        }
-
-        [HttpGet]
-        [Route("{categoryId:int}/subcategories")]
-        public ActionResult<OutputDtoQueryCategory> GetSubCategories(int categoryId)
-        {
-            return Ok(_categoryService.GetByCategoryId(categoryId));
         }
 
         // items

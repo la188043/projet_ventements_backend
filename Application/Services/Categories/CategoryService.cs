@@ -40,7 +40,20 @@ namespace Application.Services.Categories
 
         public OutputDtoQueryCategory GetById(int id)
         {
-            throw new System.NotImplementedException();
+            var category = _categoryRepository.GetById(id);
+            var subcategories = _categoryRepository.GetByCategoryId(id)
+                .Select(subcategory => new OutputDtoQueryCategory.Category
+                {
+                    Id = subcategory.Id,
+                    Title = subcategory.Title
+                });
+
+            return new OutputDtoQueryCategory
+            {
+                Id = category.Id,
+                Title = category.Title,
+                SubCategories = subcategories
+            };
         }
 
         public IEnumerable<OutputDtoQueryCategory> GetByCategoryId(int parentCategoryId)

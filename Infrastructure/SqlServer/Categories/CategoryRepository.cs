@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-using System.Globalization;
 using Application.Repositories;
-using Domain;
 using Domain.Categories;
 using Infrastructure.SqlServer.Factories;
 using Infrastructure.SqlServer.Shared;
-
 
 namespace Infrastructure.SqlServer.Categories
 {
@@ -21,7 +18,7 @@ namespace Infrastructure.SqlServer.Categories
             {
                 connection.Open();
                 var cmd = connection.CreateCommand();
-                cmd.CommandText = CategorySqlServer.ReqQuery;
+                cmd.CommandText = CategorySqlServer.ReqQueryAll;
 
                 var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
 
@@ -46,7 +43,7 @@ namespace Infrastructure.SqlServer.Categories
 
                 var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
 
-                if (reader.Read())
+                while (reader.Read())
                 {
                     return _factory.CreateFromReader(reader);
                 }

@@ -22,23 +22,23 @@
             FROM {TableName} {TableAliasChildCategory}
             LEFT JOIN {TableName} {TableAliasParentCategory}
             ON {TableAliasChildCategory}.{ColCategoryId} = {TableAliasParentCategory}.{ColId}
-            WHERE {TableAliasParentCategory}.{ColId} IS NULL
+            
         ";
 
-        /*
-        public static readonly string ReqGetById =
-            ReqQuery + $" WHERE {TableAliasParentCategory}.{ColId} = @{ColId}";
-        */
+        public static readonly string ReqQueryAll = ReqQuery + $" WHERE {TableAliasParentCategory}.{ColId} IS NULL";
 
+        public static readonly string ReqGetById =
+            ReqQuery + $" WHERE {TableAliasChildCategory}.{ColId} = @{ColId}";
+
+        /*
         public static readonly string ReqGetById = $@"
             SELECT * FROM {TableName} WHERE {ColId} = @{ColId}
         ";
+        */
 
         public static readonly string ReqGetByCategoryId = $@"
            SELECT {TableAliasChildCategory}.{ColId} AS {ColAliasChildId},
-                  {TableAliasChildCategory}.{ColTitle} AS {ColAliasChildTitle},
-                  {TableAliasParentCategory}.{ColId} AS {ColAliasParentId},
-                  {TableAliasParentCategory}.{ColTitle} AS {ColAliasParentTitle}
+                  {TableAliasChildCategory}.{ColTitle} AS {ColAliasChildTitle}
             FROM {TableName} {TableAliasChildCategory}
             INNER JOIN {TableName} {TableAliasParentCategory}
             ON {TableAliasChildCategory}.{ColCategoryId} = {TableAliasParentCategory}.{ColId}

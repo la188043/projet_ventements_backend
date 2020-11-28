@@ -34,15 +34,20 @@ namespace WebApi
             services.AddControllers();
 
             // Dependency injection
+            services.AddSingleton<IPasswordEncryption, PasswordEncryption>();
+
             services.AddSingleton<IUserService, UserService>();
             services.AddSingleton<IUserRepository, UserRepository>();
-            services.AddSingleton<IPasswordEncryption, PasswordEncryption>();
+
             services.AddSingleton<ICategoryService, CategoryService>();
             services.AddSingleton<ICategoryRepository, CategoryRepository>();
+
             services.AddSingleton<IAddressRepository, AddressRepository>();
             services.AddSingleton<IAddressService, AddressService>();
+
             services.AddSingleton<IItemService, ItemService>();
             services.AddSingleton<IItemRepository, ItemRepository>();
+
             services.AddSingleton<IReviewService, ReviewService>();
             services.AddSingleton<IReviewRepository, ReviewRepository>();
         }

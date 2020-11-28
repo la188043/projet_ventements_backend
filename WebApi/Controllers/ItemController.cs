@@ -1,6 +1,7 @@
 ﻿using Application.Services.Items;
 using Application.Services.Items.Dto;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Helpers;
 
 namespace WebApi.Controllers
 {
@@ -22,6 +23,7 @@ namespace WebApi.Controllers
             return Ok(_itemService.GetById(id));
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         [Route("{id:int}")]
         public ActionResult Update(int id, InputDtoUpdateItem inputDtoUpdateItem)

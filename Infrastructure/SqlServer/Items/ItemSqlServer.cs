@@ -47,7 +47,7 @@ namespace Infrastructure.SqlServer.Items
             {ColQuantity} = @{ColQuantity},
             {ColImageItem} = @{ColImageItem},
             {ColDescriptionItem} = @{ColDescriptionItem},
-            {ColSize} = @{ColSize},
+            {ColSize} = @{ColSize}
             WHERE {ColId} = @{ColId}
         ";
         

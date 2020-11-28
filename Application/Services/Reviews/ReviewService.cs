@@ -7,7 +7,7 @@ using Domain.reviews;
 
 namespace Application.Services.Reviews
 {
-    public class ReviewService:IReviewService
+    public class ReviewService : IReviewService
     {
         private readonly IReviewRepository _reviewRepository;
 
@@ -68,37 +68,31 @@ namespace Application.Services.Reviews
 
         public OutputDtoQueryReview Create(int uservId, int itemId, InputDtoAddReview review)
         {
-            var userv = _userRepository.GetById(uservId);
-            var item = _itemRepository.GetById(itemId);
-            
-            var reviewFromDb = _reviewRepository.Create(userv, item, new Review
+            var reviewFromDb = _reviewRepository.Create(uservId, itemId, new Review
             {
                 Stars = review.Stars,
-                Likes = review.Likes,
                 Title = review.Title,
                 DescriptionReview = review.DescriptionReview
             });
-            
-           return new OutputDtoQueryReview
+
+            return new OutputDtoQueryReview
             {
                 Id = reviewFromDb.Id,
                 Stars = review.Stars,
-                Likes = review.Likes,
                 Title = review.Title,
-                DescriptionReview = review.DescriptionReview ,
-                User=userv,
-                Item=item
+                DescriptionReview = review.DescriptionReview
             };
         }
 
         public bool Delete(int id)
         {
-            return _reviewRepository.Delete( id);
+            return _reviewRepository.Delete(id);
         }
 
-        public bool Update(int id,InputDtoUpdateReview inputDtoUpdateReview)
+        public bool Update(int id, InputDtoUpdateReview inputDtoUpdateReview)
         {
-            var reviewFromDto = _reviewFactory.Update(inputDtoUpdateReview.Stars,inputDtoUpdateReview.DescriptionReview);
+            var reviewFromDto = new Review
+                {Stars = inputDtoUpdateReview.Stars, DescriptionReview = inputDtoUpdateReview.DescriptionReview};
             return _reviewRepository.Update(id, reviewFromDto);
         }
     }

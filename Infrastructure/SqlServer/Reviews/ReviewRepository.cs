@@ -50,13 +50,8 @@ namespace Infrastructure.SqlServer.Reviews
             return reviews;
         }
 
-        public IReview Create(IUser userv, IItem item, IReview review)
+        public IReview Create(int uservId, int itemId, IReview review)
         {
-            var Review = new Review
-            {
-                User = userv,
-                Item = item
-            };
             using (var connection = Database.GetConnection())
             {
                 connection.Open();
@@ -67,13 +62,13 @@ namespace Infrastructure.SqlServer.Reviews
                 cmd.Parameters.AddWithValue($"@{ReviewSqlServer.ColLikes}", review.Likes);
                 cmd.Parameters.AddWithValue($"@{ReviewSqlServer.ColTitle}", review.Title);
                 cmd.Parameters.AddWithValue($"@{ReviewSqlServer.ColDescriptionReview}", review.DescriptionReview);
-                cmd.Parameters.AddWithValue($"@{ReviewSqlServer.ColItemId}", item.Id);
-                cmd.Parameters.AddWithValue($"@{ReviewSqlServer.ColUserId}", userv.Id);
+                cmd.Parameters.AddWithValue($"@{ReviewSqlServer.ColItemId}", itemId);
+                cmd.Parameters.AddWithValue($"@{ReviewSqlServer.ColUserId}", uservId);
 
-                Review.Id = (int) cmd.ExecuteScalar();
+                review.Id = (int) cmd.ExecuteScalar();
             }
 
-            return Review;
+            return review;
         }
 
         public bool Delete(int id)

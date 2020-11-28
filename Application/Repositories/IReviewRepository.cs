@@ -9,7 +9,7 @@ namespace Application.Repositories
     {
         IEnumerable<IReview> Query();
         IEnumerable<IReview> GetByItemId(int itemId);
-        IReview Create(IUser uservId, IItem itemId, IReview review);
+        IReview Create(int uservId, int itemId, IReview review);
         bool Delete(int id);
         bool Update(int id, IReview review);
     }

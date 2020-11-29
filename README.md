@@ -47,7 +47,6 @@
 
 | Utility     | Method | Route                                                     | Role Required |
 | ----------- | ------ | --------------------------------------------------------- | ------------- |
-| Get all     | GET    | https://localhost:5001/api/reviews/                       | None          |
 | Get by item | GET    | https://localhost:5001/api/items/{itemId}/reviews         | None          |
 | Add         | POST   | https://localhost:5001/api/reviews/{userId}/item/{itemId} | User          |
 | Update      | PUT    | https://localhost:5001/api/reviews/{reviewId}             | User          |

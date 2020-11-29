@@ -32,7 +32,6 @@ namespace Infrastructure.SqlServer.WishLists
 
         public static readonly string ReqGetByUserId = ReqQuery + $" WHERE {TableName}.{ColUserId} = @{ColUserId}";
 
-        //A verifier
         public static readonly string ReqCreate = $@"
             INSERT INTO {TableName} ({ColDate}, {ColItemId}, {ColUserId}) 
             OUTPUT INSERTED.{ColId} 

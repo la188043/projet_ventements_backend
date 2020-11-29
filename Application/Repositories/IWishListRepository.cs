@@ -10,7 +10,7 @@ namespace Application.Repositories
     {
         IEnumerable<IWishlist> Query();
         IEnumerable<IWishlist> GetByUserId(int uservId);
-        IWishlist Add(int uservId, int itemId, IWishlist wishList);
+        IWishlist Add(int uservId, int itemId);
         bool Delete(int id);
     }
 }

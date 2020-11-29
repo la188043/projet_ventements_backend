@@ -51,21 +51,18 @@ namespace Infrastructure.SqlServer.WishLists
             return wishlists;
         }
 
-        public IWishlist Add(int uservId, int itemId, IWishlist wishList)
+        public IWishlist Add(int uservId, int itemId)
         {
             using (var connection = Database.GetConnection())
             {
                 connection.Open();
                 var cmd = connection.CreateCommand();
                 cmd.CommandText = WishListSqlServer.ReqCreate;
-                cmd.Parameters.AddWithValue($"@{WishListSqlServer.ColDate}", wishList.AddedAt);
                 cmd.Parameters.AddWithValue($"@{WishListSqlServer.ColItemId}", itemId);
                 cmd.Parameters.AddWithValue($"@{WishListSqlServer.ColUserId}", uservId);
 
-                wishList.Id = (int) cmd.ExecuteScalar();
+                return new WishList {Id = (int) cmd.ExecuteScalar()};
             }
-
-            return wishList;
         }
 
         public bool Delete(int id)

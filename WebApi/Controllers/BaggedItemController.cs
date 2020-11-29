@@ -7,7 +7,7 @@ using WebApi.Helpers;
 namespace WebApi.Controllers
 {
     [ApiController]
-    [Route("api/baggedItem")]
+    [Route("api/baggedItems")]
     public class BaggedItemController : ControllerBase
     {
         private readonly IBaggedItemService _baggedItemService;

@@ -86,7 +86,7 @@ namespace WebApi.Controllers
         }
 
         [Authorize]
-        [HttpPost]
+        [HttpDelete]
         [Route("{userId:int}/bag/empty")]
         public ActionResult<int> EmptyBag(int userId)
         {

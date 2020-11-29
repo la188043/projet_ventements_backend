@@ -5,7 +5,7 @@ namespace Application.Repositories
 {
     public interface IBaggedItemRepository
     {
-        IEnumerable<IBaggedItem> QueryUserBag(int userId);
+        IEnumerable<IBaggedItem> GetByUserId(int userId);
         IBaggedItem AddToBag(int userId, int itemId, IBaggedItem baggedItem);
         int EmptyBag(int userId);
         bool DeleteItem(int baggedItemId);

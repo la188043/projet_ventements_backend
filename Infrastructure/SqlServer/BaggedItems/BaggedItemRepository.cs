@@ -11,7 +11,7 @@ namespace Infrastructure.SqlServer.BaggedItems
     {
         private readonly IInstanceFromReader<IBaggedItem> _factory = new BaggedItemFactory();
         
-        public IEnumerable<IBaggedItem> QueryUserBag(int userId)
+        public IEnumerable<IBaggedItem> GetByUserId(int userId)
         {
             IList<IBaggedItem> items = new List<IBaggedItem>();
             using (var connection = Database.GetConnection())

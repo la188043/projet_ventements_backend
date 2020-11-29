@@ -62,13 +62,5 @@ namespace WebApi.Controllers
 
             return NotFound();
         }
-
-        [Authorize]
-        [HttpGet]
-        [Route("{idUser:int}/address")]
-        public ActionResult<OutputDtoQueryAddress> GetUserAddress(int idUser)
-        {
-            return Ok(_userService.GetUserAddress(idUser));
-        }
     }
 }

@@ -89,7 +89,7 @@ CREATE TABLE review
 (
     id      			INT IDENTITY    NOT NULL,
     stars   			INT             NOT NULL,
-    likes   			INT             NOT NULL,
+    likes   			INT DEFAULT 0,
 	title				VARCHAR(30)     NOT NULL,
 	descriptionReview	VARCHAR(1000)   NOT NULL,
 	itemId				INT             NOT NULL,

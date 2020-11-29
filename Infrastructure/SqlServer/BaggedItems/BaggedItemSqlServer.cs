@@ -33,6 +33,7 @@ namespace Infrastructure.SqlServer.BaggedItems
         public static readonly string ReqCreate = $@"
             INSERT INTO {TableName}
             ({ColAddedAt}, {ColQuantity}, {ColSize}, {ColUserId}, {ColItemId})
+            OUTPUT INSERTED.{ColId}
             VALUES
             (GETDATE(), @{ColQuantity}, @{ColSize}, @{ColUserId}, @{ColItemId})
         ";
@@ -41,6 +42,7 @@ namespace Infrastructure.SqlServer.BaggedItems
 
         public static readonly string ReqDeleteItem = $"DELETE FROM {TableName} WHERE {ColId} = @{ColId}";
 
-        public static readonly string ReqUpdateQuantity = $"UPDATE {TableName} SET {ColQuantity} = @{ColQuantity}";
+        public static readonly string ReqUpdateQuantity = 
+            $"UPDATE {TableName} SET {ColQuantity} = @{ColQuantity} WHERE {ColId} = @{ColId}";
     }
 }

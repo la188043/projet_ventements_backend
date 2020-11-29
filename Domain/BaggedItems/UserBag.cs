@@ -29,7 +29,7 @@ namespace Domain.BaggedItems
 
         public float ComputeTotalPrice()
         {
-            return Items.Select(item => item.AddedItem.Price).Sum();
+            return Items.Select(item => item.AddedItem.Price * item.Quantity).Sum();
         }
     }
 }

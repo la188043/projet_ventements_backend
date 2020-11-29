@@ -48,7 +48,7 @@ namespace WebApi.Controllers
         [Authorize]
         [HttpPut]
         [Route("{id:int}")]
-        public ActionResult Update(int id, InputDtoUpdateReview inputDtoUpdateReview)
+        public ActionResult Update(int id, [FromBody] InputDtoUpdateReview inputDtoUpdateReview)
         {
             if (_reviewService.Update(id, inputDtoUpdateReview))
             {

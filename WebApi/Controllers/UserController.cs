@@ -1,4 +1,6 @@
 ﻿using Application.Services.Addresses.Dto;
+using Application.Services.BaggedItems;
+using Application.Services.BaggedItems.Dto;
 using Application.Services.Users;
 using Application.Services.Users.Dto;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +13,12 @@ namespace WebApi.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IBaggedItemService _baggedItemService;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, IBaggedItemService baggedItemService)
         {
             _userService = userService;
+            _baggedItemService = baggedItemService;
         }
 
         [Authorize(Roles = "Admin")]
@@ -61,6 +65,24 @@ namespace WebApi.Controllers
                 return Ok();
 
             return NotFound();
+        }
+        
+        // Bag
+        [Authorize]
+        [HttpGet]
+        [Route("{userId:int}/bag")]
+        public ActionResult<OutputDtoQueryUserBaggedItem> GetBagByUserId(int userId)
+        {
+            return Ok(_baggedItemService.GetByUserId(userId));
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("{userId:int}/bag/{itemId:int}")]
+        public ActionResult<OutputDtoAddBaggedItem> AddToBag(int userId, int itemId,
+            [FromBody] InputDtoAddItemToBag inputDtoAddItemToBag)
+        {
+            return Ok(_baggedItemService.AddToBag(userId, itemId, inputDtoAddItemToBag));
         }
     }
 }

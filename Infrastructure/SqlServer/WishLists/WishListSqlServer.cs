@@ -30,6 +30,8 @@ namespace Infrastructure.SqlServer.WishLists
             ON {TableName}.{ColItemId} = {ItemSqlServer.TableName}.{ItemSqlServer.ColId}
         ";
 
+        public static readonly string ReqGetById = ReqQuery + $" WHERE {TableName}.{ColId} = @{ColId}";
+
         public static readonly string ReqGetByUserId = ReqQuery + $" WHERE {TableName}.{ColUserId} = @{ColUserId}";
 
         public static readonly string ReqCreate = $@"

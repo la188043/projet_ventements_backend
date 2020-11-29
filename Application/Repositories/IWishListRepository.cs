@@ -9,6 +9,7 @@ namespace Application.Repositories
     public interface IWishListRepository
     {
         IEnumerable<IWishlist> Query();
+        IWishlist GetById(int id);
         IEnumerable<IWishlist> GetByUserId(int uservId);
         IWishlist Add(int uservId, int itemId);
         bool Delete(int id);

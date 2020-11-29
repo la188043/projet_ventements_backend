@@ -46,6 +46,31 @@ namespace Application.Services.WishLists
                 });
         }
 
+        public OutputDtoQueryWishLists GetById(int id)
+        {
+            var wishlistFromDb = _wishListRepository.GetById(id);
+            
+            return new OutputDtoQueryWishLists
+            {
+                Id = wishlistFromDb.Id,
+                AddedAt = wishlistFromDb.AddedAt,
+                UserWishList = new OutputDtoQueryWishLists.User
+                {
+                    Id = wishlistFromDb.UserWishList.Id,
+                    Firstname = wishlistFromDb.UserWishList.Firstname,
+                    Lastname = wishlistFromDb.UserWishList.Lastname
+                },
+                ItemWishList = new OutputDtoQueryWishLists.Item
+                {
+                    Id = wishlistFromDb.ItemWishList.Id,
+                    Label = wishlistFromDb.ItemWishList.Label,
+                    Price = wishlistFromDb.ItemWishList.Price,
+                    ImageItem = wishlistFromDb.ItemWishList.ImageItem,
+                    DescriptionItem = wishlistFromDb.ItemWishList.DescriptionItem
+                }
+            };
+        }
+
         public IEnumerable<OutputDtoQueryWishLists> GetByUserId(int uservId)
         {
             return _wishListRepository
@@ -63,27 +88,19 @@ namespace Application.Services.WishLists
                     ItemWishList = new OutputDtoQueryWishLists.Item
                     {
                         Id = wishList.ItemWishList.Id,
-                        Label = wishList.ItemWishList.Label
+                        Label = wishList.ItemWishList.Label,
+                        Price = wishList.ItemWishList.Price,
+                        ImageItem = wishList.ItemWishList.ImageItem,
+                        DescriptionItem = wishList.ItemWishList.DescriptionItem
                     }
                 });
         }
 
-        public OutputDtoQueryWishLists Add(int uservId, int itemId, InputDtoAddWishList wishList)
+        public OutputDtoQueryWishLists Add(int uservId, int itemId)
         {
-            //var itemss = _itemRepository.GetById(itemId);
-            var user = _userRepository.GetById(uservId);
-            var wishlistFromDb = _wishListRepository.Add(uservId, itemId, new WishList
-            {
-                // AddedAt = wishList.AddedAt,
-            });
+            var wishlistFromAdd = _wishListRepository.Add(uservId, itemId);
 
-            return new OutputDtoQueryWishLists
-            {
-                Id = wishlistFromDb.Id,
-                AddedAt = wishList.AddedAt,
-                //    ItemWishList = OutputDtoQueryWishLists.itemss,
-                // UserWishList = OutputDtoQueryWishLists.user
-            };
+            return GetById(wishlistFromAdd.Id);
         }
 
         public bool Delete(int id)

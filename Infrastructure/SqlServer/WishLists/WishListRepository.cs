@@ -31,6 +31,25 @@ namespace Infrastructure.SqlServer.WishLists
             return wishlists;
         }
 
+        public IWishlist GetById(int id)
+        {
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+                var cmd = connection.CreateCommand();
+                cmd.CommandText = WishListSqlServer.ReqGetById;
+
+                cmd.Parameters.AddWithValue($"@{WishListSqlServer.ColId}", id);
+
+                var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                while (reader.Read())
+                    return _factory.CreateFromReader(reader);
+            }
+            
+            return null;
+        }
+
         public IEnumerable<IWishlist> GetByUserId(int uservId)
         {
             IList<IWishlist> wishlists = new List<IWishlist>();

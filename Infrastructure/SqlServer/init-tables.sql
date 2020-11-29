@@ -108,5 +108,5 @@ CREATE TABLE orderv
     bagId	 	INT             NOT NULL,
 
     PRIMARY KEY (id),
-    FOREIGN KEY (bagId) REFERENCES bag(id),
+    FOREIGN KEY (bagId) REFERENCES baggedItem(id),
 );

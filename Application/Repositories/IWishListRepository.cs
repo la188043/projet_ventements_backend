@@ -1,4 +1,4 @@
-﻿﻿using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Domain.Addresses;
 using Domain.Items;
 using Domain.Users;
@@ -10,8 +10,7 @@ namespace Application.Repositories
     {
         IEnumerable<IWishlist> Query();
         IEnumerable<IWishlist> GetByUserId(int uservId);
-        IWishlist Add(int uservId, int itemId, IWishlist wishList); 
+        IWishlist Add(int uservId, int itemId, IWishlist wishList);
         bool Delete(int id);
-  
     }
 }

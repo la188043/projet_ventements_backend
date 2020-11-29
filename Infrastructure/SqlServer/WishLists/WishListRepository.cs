@@ -1,4 +1,4 @@
-﻿﻿using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using Application.Repositories;
 using Domain.Items;
@@ -11,7 +11,8 @@ namespace Infrastructure.SqlServer.WishLists
 {
     public class WishListRepository : IWishListRepository
     {
-private readonly IInstanceFromReader<IWishlist> _factory = new WishListFactory();
+        private readonly IInstanceFromReader<IWishlist> _factory = new WishListFactory();
+
         public IEnumerable<IWishlist> Query()
         {
             IList<IWishlist> wishlists = new List<IWishlist>();
@@ -22,7 +23,7 @@ private readonly IInstanceFromReader<IWishlist> _factory = new WishListFactory()
                 cmd.CommandText = WishListSqlServer.ReqQuery;
 
                 var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-                
+
                 while (reader.Read())
                     wishlists.Add(_factory.CreateFromReader(reader));
             }
@@ -42,7 +43,7 @@ private readonly IInstanceFromReader<IWishlist> _factory = new WishListFactory()
                 cmd.Parameters.AddWithValue($"@{WishListSqlServer.ColUserId}", uservId);
 
                 var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-                
+
                 while (reader.Read())
                     wishlists.Add(_factory.CreateFromReader(reader));
             }
@@ -60,7 +61,7 @@ private readonly IInstanceFromReader<IWishlist> _factory = new WishListFactory()
                 cmd.Parameters.AddWithValue($"@{WishListSqlServer.ColDate}", wishList.AddedAt);
                 cmd.Parameters.AddWithValue($"@{WishListSqlServer.ColItemId}", itemId);
                 cmd.Parameters.AddWithValue($"@{WishListSqlServer.ColUserId}", uservId);
-            
+
                 wishList.Id = (int) cmd.ExecuteScalar();
             }
 
@@ -81,7 +82,5 @@ private readonly IInstanceFromReader<IWishlist> _factory = new WishListFactory()
                 return cmd.ExecuteNonQuery() > 0;
             }
         }
-
- 
     }
 }

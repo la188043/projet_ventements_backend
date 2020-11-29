@@ -4,7 +4,6 @@ DROP TABLE IF EXISTS addressuserv;
 DROP TABLE IF EXISTS userv;
 DROP TABLE IF EXISTS category;
 DROP TABLE IF EXISTS item;
-DROP TABLE IF EXISTS bag;
 DROP TABLE IF EXISTS orderv;
 DROP TABLE IF EXISTS review;
 DROP TABLE IF EXISTS wishlist;
@@ -87,7 +86,7 @@ CREATE TABLE wishlist
 	FOREIGN KEY (itemId) REFERENCES item (id)
 );
 
-CREATE TABLE bag
+CREATE TABLE baggedItem
 (
 	id          INT IDENTITY    NOT NULL,
 	addedAt     DATETIME        NOT NULL,

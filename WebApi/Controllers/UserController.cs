@@ -84,5 +84,13 @@ namespace WebApi.Controllers
         {
             return Ok(_baggedItemService.AddToBag(userId, itemId, inputDtoAddItemToBag));
         }
+
+        [Authorize]
+        [HttpPost]
+        [Route("{userId:int}/bag/empty")]
+        public ActionResult<int> EmptyBag(int userId)
+        {
+            return Ok(_baggedItemService.EmptyBag(userId));
+        }
     }
 }

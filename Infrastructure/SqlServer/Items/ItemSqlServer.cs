@@ -8,20 +8,16 @@ namespace Infrastructure.SqlServer.Items
         public static readonly string ColId = "id";
         public static readonly string ColLabel = "label";
         public static readonly string ColPrice = "price";
-        public static readonly string ColQuantity = "quantity";
         public static readonly string ColImageItem = "imageItem";
         public static readonly string ColDescriptionItem = "descriptionItem";
-        public static readonly string ColSize = "size";
         public static readonly string ColCategoryId = "categoryId";
         
         public static readonly string ReqQuery = $@"
             SELECT {TableName}.{ColId},
                    {TableName}.{ColLabel},
                    {TableName}.{ColPrice},
-                   {TableName}.{ColQuantity},
                    {TableName}.{ColImageItem},
                    {TableName}.{ColDescriptionItem},
-                   {TableName}.{ColSize},
                    {TableName}.{ColCategoryId},
                    {CategorySqlServer.TableName}.{CategorySqlServer.ColTitle}
             FROM {TableName}
@@ -34,20 +30,18 @@ namespace Infrastructure.SqlServer.Items
         
         public static readonly string ReqAdd = $@"
             INSERT INTO {TableName} 
-            ({ColLabel}, {ColPrice}, {ColQuantity}, {ColImageItem}, {ColDescriptionItem}, {ColSize}, {ColCategoryId}) 
+            ({ColLabel}, {ColPrice}, {ColImageItem}, {ColDescriptionItem}, {ColCategoryId}) 
             OUTPUT INSERTED.{ColId} 
             VALUES 
-            (@{ColLabel}, @{ColPrice}, @{ColQuantity}, @{ColImageItem}, @{ColDescriptionItem}, @{ColSize}, @{ColCategoryId})
+            (@{ColLabel}, @{ColPrice}, @{ColImageItem}, @{ColDescriptionItem}, @{ColCategoryId})
         ";
         
         public static readonly string ReqPut = $@"
             UPDATE {TableName} SET
             {ColLabel} = @{ColLabel},
             {ColPrice} = @{ColPrice},
-            {ColQuantity} = @{ColQuantity},
             {ColImageItem} = @{ColImageItem},
             {ColDescriptionItem} = @{ColDescriptionItem},
-            {ColSize} = @{ColSize}
             WHERE {ColId} = @{ColId}
         ";
         

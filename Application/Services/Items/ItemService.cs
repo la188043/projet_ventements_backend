@@ -26,10 +26,8 @@ namespace Application.Services.Items
                     Id = item.Id,
                     Label = item.Label,
                     Price = item.Price,
-                    Quantity = item.Quantity,
                     ImageItem = item.ImageItem,
                     DescriptionItem = item.DescriptionItem,
-                    Size = item.Size,
                     ItemCategory = new OutputDtoQueryItem.Category
                     {
                         Id = item.Category.Id,
@@ -47,10 +45,8 @@ namespace Application.Services.Items
                 Id = item.Id,
                 Label = item.Label,
                 Price = item.Price,
-                Quantity = item.Quantity,
                 ImageItem = item.ImageItem,
                 DescriptionItem = item.DescriptionItem,
-                Size = item.Size,
                 ItemCategory = new OutputDtoQueryItem.Category
                 {
                     Id = item.Category.Id,
@@ -68,10 +64,8 @@ namespace Application.Services.Items
                     Id = item.Id,
                     Label = item.Label,
                     Price = item.Price,
-                    Quantity = item.Quantity,
                     ImageItem = item.ImageItem,
                     DescriptionItem = item.DescriptionItem,
-                    Size = item.Size,
                     ItemCategory = new OutputDtoQueryItem.Category
                     {
                         Id = item.Category.Id,
@@ -88,10 +82,8 @@ namespace Application.Services.Items
             {
                 Label = inputDtoAddItem.Label,
                 Price = inputDtoAddItem.Price,
-                Quantity = inputDtoAddItem.Quantity,
                 ImageItem = inputDtoAddItem.ImageItem,
                 DescriptionItem = inputDtoAddItem.DescriptionItem,
-                Size = inputDtoAddItem.Size,
                 Category = categoryFromDto
             };
 
@@ -102,10 +94,8 @@ namespace Application.Services.Items
                 Id = itemInDb.Id,
                 Label = itemInDb.Label,
                 Price = itemInDb.Price,
-                Quantity = itemInDb.Quantity,
                 ImageItem = itemInDb.ImageItem,
                 DescriptionItem = itemInDb.DescriptionItem,
-                Size = itemInDb.Size,
                 ItemCategory = new OutputDtoQueryItem.Category
                 {
                     Id = itemInDb.Category.Id,
@@ -120,10 +110,8 @@ namespace Application.Services.Items
             {
                 Label = inputDtoUpdateItem.Label,
                 Price = inputDtoUpdateItem.Price,
-                Quantity = inputDtoUpdateItem.Quantity,
                 ImageItem = inputDtoUpdateItem.ImageItem,
                 DescriptionItem = inputDtoUpdateItem.DescriptionItem,
-                Size = inputDtoUpdateItem.Size,
             };
 
             return _itemRepository.Update(id, itemFromDto);

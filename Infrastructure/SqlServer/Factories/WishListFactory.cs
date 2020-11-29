@@ -26,7 +26,7 @@ namespace Infrastructure.SqlServer.Factories
                 {
                     Id = reader.GetInt32(reader.GetOrdinal(WishListSqlServer.ColItemId)),
                     Label = reader.GetString(reader.GetOrdinal(ItemSqlServer.ColLabel)),
-                    Price = reader.GetFloat(reader.GetOrdinal(ItemSqlServer.ColPrice)),
+                    Price = (float) reader.GetDouble(reader.GetOrdinal(ItemSqlServer.ColPrice)),
                     ImageItem = reader.GetString(reader.GetOrdinal(ItemSqlServer.ColImageItem)),
                     DescriptionItem = reader.GetString(reader.GetOrdinal(ItemSqlServer.ColDescriptionItem))
                 }

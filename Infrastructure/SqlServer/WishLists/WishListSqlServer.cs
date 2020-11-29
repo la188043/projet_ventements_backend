@@ -19,7 +19,7 @@ namespace Infrastructure.SqlServer.WishLists
                    {UserSqlServer.TableName}.{UserSqlServer.ColFirstname},
                    {UserSqlServer.TableName}.{UserSqlServer.ColLastname},
                    {TableName}.{ColItemId},
-                   {ItemSqlServer.TableName}.{ItemSqlServer.ColLabel}
+                   {ItemSqlServer.TableName}.{ItemSqlServer.ColLabel},
                    {ItemSqlServer.TableName}.{ItemSqlServer.ColPrice},
                    {ItemSqlServer.TableName}.{ItemSqlServer.ColImageItem},
                    {ItemSqlServer.TableName}.{ItemSqlServer.ColDescriptionItem}

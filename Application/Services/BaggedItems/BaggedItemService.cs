@@ -90,17 +90,22 @@ namespace Application.Services.BaggedItems
 
         public int EmptyBag(int userId)
         {
-            throw new System.NotImplementedException();
+            return _baggedItemRepository.EmptyBag(userId);
         }
 
         public bool DeleteItem(int baggedItemId)
         {
-            throw new System.NotImplementedException();
+            return _baggedItemRepository.DeleteItem(baggedItemId);
         }
 
         public bool UpdateQuantity(int baggedItemId, InputDtoUpdateBaggedItem inputDtoUpdateBaggedItem)
         {
-            throw new System.NotImplementedException();
+            var baggedItemFromDto = new BaggedItem
+            {
+                Quantity = inputDtoUpdateBaggedItem.Quantity
+            };
+
+            return _baggedItemRepository.UpdateQuantity(baggedItemId, baggedItemFromDto);
         }
     }
 }

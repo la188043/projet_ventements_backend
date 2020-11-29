@@ -30,7 +30,7 @@ namespace WebApi.Controllers
         [Authorize(Roles = "Admin")]
         [HttpPut]
         [Route("{id:int}")]
-        public ActionResult Update(int id, InputDtoUpdateItem inputDtoUpdateItem)
+        public ActionResult Update(int id, [FromBody] InputDtoUpdateItem inputDtoUpdateItem)
         {
             var response = _itemService.Update(id, inputDtoUpdateItem);
 

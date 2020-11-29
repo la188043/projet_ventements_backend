@@ -52,3 +52,15 @@
 | Add         | POST   | https://localhost:5001/api/reviews/{userId}/item/{itemId} | User          |
 | Update      | PUT    | https://localhost:5001/api/reviews/{reviewId}             | User          |
 | Delete      | DEL    | https://localhost:5001/api/reviews/{reviewId}             | Admin         |
+
+---
+
+# _BaggedItem_
+
+| Utility                   | Method | Route                                                  | Role Required |
+| ------------------------- | ------ | ------------------------------------------------------ | ------------- |
+| Get user bag              | GET    | https://localhost:5001/api/users/{userId}/bag          | User          |
+| Add item to user bag      | POST   | https://localhost:5001/api/users/{userId}/bag/{itemId} | User          |
+| Update item quantity      | PUT    | https://localhost:5001/api/baggedItems/{baggedItemId}  | User          |
+| Delete item from user bag | DEL    | https://localhost:5001/api/baggedItems/{baggedItemId}  | User          |
+| Empty user bag            | DEL    | https://localhost:5001/api/users/{userId}/bag/empty    | User          |

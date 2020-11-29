@@ -24,7 +24,6 @@ namespace Application.Services.Reviews
                 {
                     Id = review.Id,
                     Stars = review.Stars,
-                    Likes = review.Likes,
                     Title = review.Title,
                     DescriptionReview = review.DescriptionReview,
                     Reviewer = new OutputDtoQueryReview.User
@@ -49,7 +48,6 @@ namespace Application.Services.Reviews
                 {
                     Id = review.Id,
                     Stars = review.Stars,
-                    Likes = review.Likes,
                     Title = review.Title,
                     DescriptionReview = review.DescriptionReview,
                     Reviewer = new OutputDtoQueryReview.User

@@ -86,10 +86,8 @@ namespace Infrastructure.SqlServer.Items
 
                 cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColLabel}", item.Label);
                 cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColPrice}", item.Price);
-                cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColQuantity}", item.Quantity);
                 cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColImageItem}", item.ImageItem);
                 cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColDescriptionItem}", item.DescriptionItem);
-                cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColSize}", item.Size);
                 cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColCategoryId}", categoryId);
 
                 item.Id = (int) cmd.ExecuteScalar();
@@ -112,10 +110,8 @@ namespace Infrastructure.SqlServer.Items
                 
                 cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColLabel}", item.Label);
                 cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColPrice}", item.Price);
-                cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColQuantity}", item.Quantity);
                 cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColImageItem}", item.ImageItem);
                 cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColDescriptionItem}", item.DescriptionItem);
-                cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColSize}", item.Size);
 
                 return cmd.ExecuteNonQuery() > 0;
             }

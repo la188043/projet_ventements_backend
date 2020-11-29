@@ -1,11 +1,13 @@
 using Application;
 using Application.Repositories;
 using Application.Services.Addresses;
+using Application.Services.BaggedItems;
 using Application.Services.Categories;
 using Application.Services.Items;
 using Application.Services.Reviews;
 using Application.Services.Users;
 using Infrastructure.SqlServer.Addresses;
+using Infrastructure.SqlServer.BaggedItems;
 using Infrastructure.SqlServer.Categories;
 using Infrastructure.SqlServer.Items;
 using Infrastructure.SqlServer.Reviews;
@@ -50,6 +52,10 @@ namespace WebApi
 
             services.AddSingleton<IReviewService, ReviewService>();
             services.AddSingleton<IReviewRepository, ReviewRepository>();
+
+
+            services.AddSingleton<IBaggedItemService, BaggedItemService>();
+            services.AddSingleton<IBaggedItemRepository, BaggedItemRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

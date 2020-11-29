@@ -3,6 +3,8 @@ using Application.Services.BaggedItems;
 using Application.Services.BaggedItems.Dto;
 using Application.Services.Users;
 using Application.Services.Users.Dto;
+using Application.Services.WishLists;
+using Application.Services.WishLists.Dto;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Helpers;
 
@@ -14,11 +16,14 @@ namespace WebApi.Controllers
     {
         private readonly IUserService _userService;
         private readonly IBaggedItemService _baggedItemService;
+        private readonly IWishListService _wishListService;
 
-        public UserController(IUserService userService, IBaggedItemService baggedItemService)
+        public UserController(IUserService userService, IBaggedItemService baggedItemService,
+            IWishListService wishListService)
         {
             _userService = userService;
             _baggedItemService = baggedItemService;
+            _wishListService = wishListService;
         }
 
         [Authorize(Roles = "Admin")]
@@ -46,7 +51,7 @@ namespace WebApi.Controllers
 
             return Ok(response);
         }
-        
+
         [Authorize]
         [HttpGet]
         [Route("{id:int}")]
@@ -66,7 +71,7 @@ namespace WebApi.Controllers
 
             return NotFound();
         }
-        
+
         // Bag
         [Authorize]
         [HttpGet]
@@ -91,6 +96,23 @@ namespace WebApi.Controllers
         public ActionResult<int> EmptyBag(int userId)
         {
             return Ok(_baggedItemService.EmptyBag(userId));
+        }
+
+        // Wishlist
+        [Authorize]
+        [HttpPost]
+        [Route("{uservId:int}/wishlist/{itemId:int}")]
+        public ActionResult<OutputDtoQueryWishLists> AddItemToWishlist(int uservId, int itemId)
+        {
+            return Ok(_wishListService.Add(uservId, itemId));
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("{uservId:int}/wishlist")]
+        public ActionResult<OutputDtoQueryWishLists> QueryWishlist(int uservId)
+        {
+            return Ok(_wishListService.GetByUserId(uservId));
         }
     }
 }

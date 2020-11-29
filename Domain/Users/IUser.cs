@@ -14,5 +14,6 @@ namespace Domain.Users
         char Gender { get; set; }
         bool Administrator { get; set; }
         IAddress Address { get; set; }
+    
     }
 }

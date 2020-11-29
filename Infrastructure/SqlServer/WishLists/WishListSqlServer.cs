@@ -1,5 +1,4 @@
-﻿using System;
-using Infrastructure.SqlServer.Items;
+﻿using Infrastructure.SqlServer.Items;
 using Infrastructure.SqlServer.Users;
 
 namespace Infrastructure.SqlServer.WishLists
@@ -21,6 +20,9 @@ namespace Infrastructure.SqlServer.WishLists
                    {UserSqlServer.TableName}.{UserSqlServer.ColLastname},
                    {TableName}.{ColItemId},
                    {ItemSqlServer.TableName}.{ItemSqlServer.ColLabel}
+                   {ItemSqlServer.TableName}.{ItemSqlServer.ColPrice},
+                   {ItemSqlServer.TableName}.{ItemSqlServer.ColImageItem},
+                   {ItemSqlServer.TableName}.{ItemSqlServer.ColDescriptionItem}
             FROM {TableName}
             INNER JOIN {UserSqlServer.TableName} 
             ON {TableName}.{ColUserId} = {UserSqlServer.TableName}.{UserSqlServer.ColId}

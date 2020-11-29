@@ -24,6 +24,9 @@ namespace Application.Services.WishLists.Dto
         {
             public int Id { get; set; }
             public string Label { get; set; }
+            public float Price { get; set; }
+            public string ImageItem { get; set; }
+            public string DescriptionItem { get; set; }
         }
     }
 }

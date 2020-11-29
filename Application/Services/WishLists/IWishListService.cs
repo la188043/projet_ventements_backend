@@ -6,7 +6,6 @@ namespace Application.Services.WishLists
 {
     public interface IWishListService
     {
-        IEnumerable<OutputDtoQueryWishLists> Query();
         OutputDtoQueryWishLists GetById(int id);
         IEnumerable<OutputDtoQueryWishLists> GetByUserId(int uservId);
         OutputDtoQueryWishLists Add(int uservId, int itemId);

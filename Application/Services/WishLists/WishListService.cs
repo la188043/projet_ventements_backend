@@ -1,55 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Application.Repositories;
 using Application.Services.WishLists.Dto;
-using Domain.Items;
-using Domain.Users;
-using Domain.Wishlists;
 
 namespace Application.Services.WishLists
 {
     public class WishListService : IWishListService
     {
         private readonly IWishListRepository _wishListRepository;
-        private readonly IItemRepository _itemRepository;
-        private readonly IUserRepository _userRepository;
 
-
-        public WishListService(IWishListRepository wishListRepository, IItemRepository itemRepository,
-            IUserRepository userRepository)
+        public WishListService(IWishListRepository wishListRepository)
         {
             _wishListRepository = wishListRepository;
-            _itemRepository = itemRepository;
-            _userRepository = userRepository;
-        }
-
-        public IEnumerable<OutputDtoQueryWishLists> Query()
-        {
-            return _wishListRepository
-                .Query()
-                .Select(wishList => new OutputDtoQueryWishLists
-                {
-                    Id = wishList.Id,
-                    AddedAt = wishList.AddedAt,
-                    UserWishList = new OutputDtoQueryWishLists.User
-                    {
-                        Id = wishList.UserWishList.Id,
-                        Firstname = wishList.UserWishList.Firstname,
-                        Lastname = wishList.UserWishList.Lastname
-                    },
-                    ItemWishList = new OutputDtoQueryWishLists.Item
-                    {
-                        Id = wishList.ItemWishList.Id,
-                        Label = wishList.ItemWishList.Label
-                    }
-                });
         }
 
         public OutputDtoQueryWishLists GetById(int id)
         {
             var wishlistFromDb = _wishListRepository.GetById(id);
-            
+
             return new OutputDtoQueryWishLists
             {
                 Id = wishlistFromDb.Id,

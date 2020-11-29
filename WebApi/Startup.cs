@@ -6,12 +6,14 @@ using Application.Services.Categories;
 using Application.Services.Items;
 using Application.Services.Reviews;
 using Application.Services.Users;
+using Application.Services.WishLists;
 using Infrastructure.SqlServer.Addresses;
 using Infrastructure.SqlServer.BaggedItems;
 using Infrastructure.SqlServer.Categories;
 using Infrastructure.SqlServer.Items;
 using Infrastructure.SqlServer.Reviews;
 using Infrastructure.SqlServer.Users;
+using Infrastructure.SqlServer.WishLists;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -53,9 +55,11 @@ namespace WebApi
             services.AddSingleton<IReviewService, ReviewService>();
             services.AddSingleton<IReviewRepository, ReviewRepository>();
 
-
             services.AddSingleton<IBaggedItemService, BaggedItemService>();
             services.AddSingleton<IBaggedItemRepository, BaggedItemRepository>();
+            
+            services.AddSingleton<IWishListService, WishListService>();
+            services.AddSingleton<IWishListRepository, WishListRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

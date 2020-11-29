@@ -13,24 +13,6 @@ namespace Infrastructure.SqlServer.WishLists
     {
         private readonly IInstanceFromReader<IWishlist> _factory = new WishListFactory();
 
-        public IEnumerable<IWishlist> Query()
-        {
-            IList<IWishlist> wishlists = new List<IWishlist>();
-            using (var connection = Database.GetConnection())
-            {
-                connection.Open();
-                var cmd = connection.CreateCommand();
-                cmd.CommandText = WishListSqlServer.ReqQuery;
-
-                var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-
-                while (reader.Read())
-                    wishlists.Add(_factory.CreateFromReader(reader));
-            }
-
-            return wishlists;
-        }
-
         public IWishlist GetById(int id)
         {
             using (var connection = Database.GetConnection())

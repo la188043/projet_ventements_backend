@@ -4,25 +4,51 @@
 
 ---
 
-## _User_
+# _User_
 
-| Utility            | Method | Route                                         | Role Required |
-| ------------------ | ------ | --------------------------------------------- | ------------- |
-| Get all users      | GET    | https://localhost:5001/api/users              | Admin         |
-| Sign up            | POST   | https://localhost:5001/api/users              | None          |
-| Log in             | POST   | https://localhost:5001/api/users/authenticate | None          |
-| Get user by its id | GET    | https://localhost:5001/api/users/{id}         | User          |
-| Add address        | POST   | https://localhost:5001/api/users/{id}/address | User          |
-| Get user address   | GET    | https://localhost:5001/api/users/{id}/address | User          |
+| Utility        | Method | Route                                         | Role Required |
+| -------------- | ------ | --------------------------------------------- | ------------- |
+| Get all users  | GET    | https://localhost:5001/api/users              | Admin         |
+| Get user by id | GET    | https://localhost:5001/api/users/{userId}     | User          |
+| Sign up        | POST   | https://localhost:5001/api/users              | None          |
+| Log in         | POST   | https://localhost:5001/api/users/authenticate | None          |
 
 ---
 
+# _Address_
+
+| Utility             | Method | Route                                             | Role Required |
+| ------------------- | ------ | ------------------------------------------------- | ------------- |
+| Add address to user | POST   | https://localhost:5001/api/users/{userId}/address | User          |
+
 # _Category_
 
-| Utility                          | Method | Route                                                    | Role Required |
-| -------------------------------- | ------ | -------------------------------------------------------- | ------------- |
-| Get categories                   | GET    | https://localhost:5001/api/categories                    | None          |
-| Add category                     | POST   | https://localhost:5001/api/categories                    | Admin         |
-| Update category                  | PUT    | https://localhost:5001/api/categories/{id}               | Admin         |
-| Add a subcategory                | POST   | https://localhost:5001/api/categories/{id}/subcategories | Admin         |
-| Get all category's subcategories | GET    | https://localhost:5001/api/categories/{id}/subcategories | None          |
+| Utility            | Method | Route                                                            | Role Required |
+| ------------------ | ------ | ---------------------------------------------------------------- | ------------- |
+| Get categories     | GET    | https://localhost:5001/api/categories                            | None          |
+| Get category by id | GET    | https://localhost:5001/api/categories/{categoryId}/subcategories | None          |
+| Add category       | POST   | https://localhost:5001/api/categories                            | Admin         |
+| Add a subcategory  | POST   | https://localhost:5001/api/categories/{categoryId}/subcategories | Admin         |
+
+---
+
+# _Item_
+
+| Utility         | Method | Route                                                    | Role Required |
+| --------------- | ------ | -------------------------------------------------------- | ------------- |
+| Get by id       | GET    | https://localhost:5001/api/items/{itemId}                | None          |
+| Get by category | GET    | https://localhost:5001/api/categories/{categoryId}/items | None          |
+| Add item        | POST   | https://localhost:5001/api/categories/{categoryId}/items | Admin         |
+| Update item     | PUT    | https://localhost:5001/api/items/{itemId}                | Admin         |
+
+---
+
+# _Review_
+
+| Utility     | Method | Route                                                     | Role Required |
+| ----------- | ------ | --------------------------------------------------------- | ------------- |
+| Get all     | GET    | https://localhost:5001/api/reviews/                       | None          |
+| Get by item | GET    | https://localhost:5001/api/items/{itemId}/reviews         | None          |
+| Add         | POST   | https://localhost:5001/api/reviews/{userId}/item/{itemId} | User          |
+| Update      | PUT    | https://localhost:5001/api/reviews/{reviewId}             | User          |
+| Delete      | DEL    | https://localhost:5001/api/reviews/{reviewId}             | Admin         |

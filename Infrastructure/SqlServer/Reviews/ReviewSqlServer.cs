@@ -8,7 +8,6 @@ namespace Infrastructure.SqlServer.Reviews
         public static readonly string TableName = "review";
         public static readonly string ColId = "id";
         public static readonly string ColStars = "stars";
-        public static readonly string ColLikes = "likes";
         public static readonly string ColTitle = "title";
         public static readonly string ColDescriptionReview = "descriptionReview";
         public static readonly string ColItemId = "itemId";
@@ -17,7 +16,6 @@ namespace Infrastructure.SqlServer.Reviews
         public static readonly string ReqQuery = $@"
             SELECT {TableName}.{ColId},
                    {TableName}.{ColStars},
-                   {TableName}.{ColLikes},
                    {TableName}.{ColTitle},
                    {TableName}.{ColDescriptionReview},
                    {TableName}.{ColUserId},

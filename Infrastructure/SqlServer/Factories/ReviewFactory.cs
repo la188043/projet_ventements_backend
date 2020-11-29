@@ -16,7 +16,6 @@ namespace Infrastructure.SqlServer.Factories
             {
                 Id = reader.GetInt32(reader.GetOrdinal(ReviewSqlServer.ColId)),
                 Stars = reader.GetInt32(reader.GetOrdinal(ReviewSqlServer.ColStars)),
-                Likes = reader.GetInt32(reader.GetOrdinal(ReviewSqlServer.ColLikes)),
                 Title = reader.GetString(reader.GetOrdinal(ReviewSqlServer.ColTitle)),
                 DescriptionReview = reader.GetString(reader.GetOrdinal(ReviewSqlServer.ColDescriptionReview)),
 

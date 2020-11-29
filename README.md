@@ -64,3 +64,13 @@
 | Update item quantity      | PUT    | https://localhost:5001/api/baggedItems/{baggedItemId}  | User          |
 | Delete item from user bag | DEL    | https://localhost:5001/api/baggedItems/{baggedItemId}  | User          |
 | Empty user bag            | DEL    | https://localhost:5001/api/users/{userId}/bag/empty    | User          |
+
+---
+
+# _Wishlist_
+
+| Utility                   | Method | Route                                                       | Role Required |
+| ------------------------- | ------ | ----------------------------------------------------------- | ------------- |
+| Get user wishlist         | GET    | https://localhost:5001/api/users/{userId}/wishlist          | User          |
+| Add item to wishlist      | POST   | https://localhost:5001/api/users/{userId}/wishlist/{itemId} | User          |
+| Delete item from wishlist | DEL    | https://localhost:5001/api/wishlists/{wishlistId}           | User          |

@@ -16,12 +16,6 @@ namespace WebApi.Controllers
             _reviewService = reviewService;
         }
 
-        [HttpGet]
-        public ActionResult<OutputDtoQueryReview> Query()
-        {
-            return Ok(_reviewService.Query());
-        }
-        
         [Authorize]
         [HttpPost]
         [Route("{uservId:int}/item/{itemId:int}")]

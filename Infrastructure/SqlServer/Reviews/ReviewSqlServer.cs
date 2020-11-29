@@ -30,6 +30,8 @@ namespace Infrastructure.SqlServer.Reviews
             ON {TableName}.{ColItemId} = {ItemSqlServer.TableName}.{ItemSqlServer.ColId}
         ";
 
+        public static readonly string ReqGetById = ReqQuery + $" WHERE {TableName}.{ColId} = @{ColId}";
+
         public static readonly string ReqGetByItemId = ReqQuery + $" WHERE {TableName}.{ColItemId} = @{ColItemId}";
         
         public static readonly string ReqCreate = $@"

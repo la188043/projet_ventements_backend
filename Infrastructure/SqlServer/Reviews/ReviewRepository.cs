@@ -12,22 +12,24 @@ namespace Infrastructure.SqlServer.Reviews
     public class ReviewRepository : IReviewRepository
     {
         private readonly IInstanceFromReader<IReview> _factory = new ReviewFactory();
-        public IEnumerable<IReview> Query()
+
+        public IReview GetById(int id)
         {
-            IList<IReview> reviews = new List<IReview>();
             using (var connection = Database.GetConnection())
             {
                 connection.Open();
                 var cmd = connection.CreateCommand();
-                cmd.CommandText = ReviewSqlServer.ReqQuery;
+                cmd.CommandText = ReviewSqlServer.ReqGetById;
+
+                cmd.Parameters.AddWithValue($"@{ReviewSqlServer.ColId}", id);
 
                 var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-                
+
                 while (reader.Read())
-                    reviews.Add(_factory.CreateFromReader(reader));
+                    return _factory.CreateFromReader(reader);
             }
 
-            return reviews;
+            return null;
         }
 
         public IEnumerable<IReview> GetByItemId(int itemId)

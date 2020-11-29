@@ -16,28 +16,28 @@ namespace Application.Services.Reviews
             _reviewRepository = reviewRepository;
         }
 
-        public IEnumerable<OutputDtoQueryReview> Query()
+        public OutputDtoQueryReview GetById(int id)
         {
-            return _reviewRepository
-                .Query()
-                .Select(review => new OutputDtoQueryReview
+            var reviewFromDb = _reviewRepository.GetById(id);
+            
+            return new OutputDtoQueryReview
+            {
+                Id = reviewFromDb.Id,
+                Stars = reviewFromDb.Stars,
+                Title = reviewFromDb.Title,
+                DescriptionReview = reviewFromDb.DescriptionReview,
+                Reviewer = new OutputDtoQueryReview.User
                 {
-                    Id = review.Id,
-                    Stars = review.Stars,
-                    Title = review.Title,
-                    DescriptionReview = review.DescriptionReview,
-                    Reviewer = new OutputDtoQueryReview.User
-                    {
-                        Id = review.Reviewer.Id,
-                        Firstname = review.Reviewer.Firstname,
-                        Lastname = review.Reviewer.Lastname
-                    },
-                    ItemReviewed = new OutputDtoQueryReview.Item
-                    {
-                        Id = review.ItemReviewed.Id,
-                        Label = review.ItemReviewed.Label
-                    }
-                });
+                    Id = reviewFromDb.Reviewer.Id,
+                    Firstname = reviewFromDb.Reviewer.Firstname,
+                    Lastname = reviewFromDb.Reviewer.Lastname
+                },
+                ItemReviewed = new OutputDtoQueryReview.Item
+                {
+                    Id = reviewFromDb.ItemReviewed.Id,
+                    Label = reviewFromDb.ItemReviewed.Label
+                }
+            };
         }
 
         public IEnumerable<OutputDtoQueryReview> GetByItemId(int itemId)
@@ -73,13 +73,7 @@ namespace Application.Services.Reviews
                 DescriptionReview = review.DescriptionReview
             });
 
-            return new OutputDtoQueryReview
-            {
-                Id = reviewFromDb.Id,
-                Stars = review.Stars,
-                Title = review.Title,
-                DescriptionReview = review.DescriptionReview
-            };
+            return GetById(reviewFromDb.Id);
         }
 
         public bool Delete(int id)

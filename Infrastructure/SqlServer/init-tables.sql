@@ -104,9 +104,20 @@ CREATE TABLE orderv
 (
     id    		INT IDENTITY    NOT NULL,
     isPaid 		BIT	DEFAULT 0,
-    ordervedAt	DATETIME        NOT NULL,
-    bagId	 	INT             NOT NULL,
+    orderedAt	DATETIME        NOT NULL,
+    uservid	 	INT             NOT NULL,
 
     PRIMARY KEY (id),
-    FOREIGN KEY (bagId) REFERENCES baggedItem(id),
+    FOREIGN KEY (uservid) REFERENCES userv(id),
+);
+
+CREATE TABLE orderedItem
+(
+    id INT IDENTITY         NOT NULL,
+    ordervId INT            NOT NULL, 
+    itemId INT              NOT NULL,
+    
+    PRIMARY KEY (id),
+    FOREIGN KEY (ordervId)  REFERENCES orderv(id),
+    FOREIGN KEY (itemId)    REFERENCES item(id)
 );

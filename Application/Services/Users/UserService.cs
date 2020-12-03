@@ -112,7 +112,7 @@ namespace Application.Services.Users
                     userFromDb, userFromDb.EncryptedPassword, user.PasswordUser);
 
             if (!passwordVerified)
-                return null;
+                return null; // TODO return Exception
 
             var token = GenerateJwtToken(userFromDb);
 

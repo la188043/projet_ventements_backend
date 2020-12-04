@@ -12,7 +12,7 @@ namespace Domain.Orders
         public IUser Orderer { get; set; }
         public bool IsPaid { get; set; }
         public DateTime OrderedAt { get; set; }
-        public IList<IOrderedItem> OrderedItems { get; set; }
+        public IList<IOrderedItem> OrderedItems { get; }
 
         public UserOrder()
         {

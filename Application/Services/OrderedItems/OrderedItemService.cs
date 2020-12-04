@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Application.Repositories;
 using Application.Services.OrderedItems.Dto;
@@ -69,6 +68,16 @@ namespace Application.Services.OrderedItems
                 new OrderedItem {Quantity = inputDtoAddOrderedItem.Quantity});
 
             return GetById(orderedItemId.Id);
+        }
+
+        public bool UpdateQuantity(int orderedItemId, InputDtoUpdateOrderedItem inputDtoUpdateOrderedItem)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool Delete(int orderedItemId)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -67,5 +67,15 @@ namespace Infrastructure.SqlServer.OrderedItems
 
             return orderedItem;
         }
+
+        public bool UpdateQuantity(int orderedItemId, IOrderedItem orderedItem)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool Delete(int orderedItemId)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

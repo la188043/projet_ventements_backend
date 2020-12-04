@@ -47,7 +47,8 @@ namespace Application.Services.Orders
                             Label = orderedItem.ItemOrdered.Label,
                             Price = orderedItem.ItemOrdered.Price,
                             ImageItem = orderedItem.ItemOrdered.ImageItem,
-                            DescriptionItem = orderedItem.ItemOrdered.DescriptionItem
+                            DescriptionItem = orderedItem.ItemOrdered.DescriptionItem,
+                            Quantity = orderedItem.Quantity
                         })
                     };
                 });
@@ -79,7 +80,8 @@ namespace Application.Services.Orders
                     Label = orderedItem.ItemOrdered.Label,
                     Price = orderedItem.ItemOrdered.Price,
                     ImageItem = orderedItem.ItemOrdered.ImageItem,
-                    DescriptionItem = orderedItem.ItemOrdered.DescriptionItem
+                    DescriptionItem = orderedItem.ItemOrdered.DescriptionItem,
+                    Quantity = orderedItem.Quantity
                 })
             };
         }

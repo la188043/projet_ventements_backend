@@ -7,6 +7,7 @@ namespace Infrastructure.SqlServer.OrderedItems
     {
         public static readonly string TableName = "orderedItem";
         public static readonly string ColId = "id";
+        public static readonly string ColQuantity = "quantity";
         public static readonly string ColOrderId = "ordervId";
         public static readonly string ColItemId = "itemId";
 

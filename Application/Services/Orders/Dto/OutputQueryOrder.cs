@@ -27,6 +27,7 @@ namespace Application.Services.Orders.Dto
             public float Price { get; set; }
             public string ImageItem { get; set; }
             public string DescriptionItem { get; set; }
+            public int Quantity { get; set; }
         }
     }
 }

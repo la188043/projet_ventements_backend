@@ -7,6 +7,7 @@ namespace Application.Services.OrderedItems
     public interface IOrderedItemService
     {
         IEnumerable<OutputDtoQueryOrderedItem> GetByOrderId(int orderId);
-        IOrderedItem AddItemToOrder(int orderId, int itemId, InputDtoAddOrderedItem inputDtoAddOrderedItem);
+        OutputDtoQueryOrderedItem GetById(int orderedItemId);
+        OutputDtoQueryOrderedItem AddItemToOrder(int orderId, int itemId, InputDtoAddOrderedItem inputDtoAddOrderedItem);
     }
 }

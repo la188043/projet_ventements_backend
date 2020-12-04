@@ -4,6 +4,7 @@ using Application.Services.Addresses;
 using Application.Services.BaggedItems;
 using Application.Services.Categories;
 using Application.Services.Items;
+using Application.Services.OrderedItems;
 using Application.Services.Orders;
 using Application.Services.Reviews;
 using Application.Services.Users;
@@ -68,6 +69,7 @@ namespace WebApi
             services.AddSingleton<IOrderService, OrderService>();
             
             services.AddSingleton<IOrderedItemRepository, OrderedItemRepository>();
+            services.AddSingleton<IOrderedItemService, OrderedItemService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

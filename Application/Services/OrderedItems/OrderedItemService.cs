@@ -72,12 +72,13 @@ namespace Application.Services.OrderedItems
 
         public bool UpdateQuantity(int orderedItemId, InputDtoUpdateOrderedItem inputDtoUpdateOrderedItem)
         {
-            throw new System.NotImplementedException();
+            return _orderedItemRepository.UpdateQuantity(orderedItemId,
+                new OrderedItem {Quantity = inputDtoUpdateOrderedItem.Quantity});
         }
 
         public bool Delete(int orderedItemId)
         {
-            throw new System.NotImplementedException();
+            return _orderedItemRepository.Delete(orderedItemId);
         }
     }
 }

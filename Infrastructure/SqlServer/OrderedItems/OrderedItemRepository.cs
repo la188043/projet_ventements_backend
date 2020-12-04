@@ -30,5 +30,23 @@ namespace Infrastructure.SqlServer.OrderedItems
 
             return orderedItems;
         }
+
+        public IOrderedItem AddItemToOrder(int orderId, int itemId, IOrderedItem orderedItem)
+        {
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+                var cmd = connection.CreateCommand();
+                cmd.CommandText = OrderedItemSqlServer.ReqAddItemToOrder;
+
+                cmd.Parameters.AddWithValue($"@{OrderedItemSqlServer.ColQuantity}", orderedItem.Quantity);
+                cmd.Parameters.AddWithValue($"@{OrderedItemSqlServer.ColOrderId}", orderId);
+                cmd.Parameters.AddWithValue($"@{OrderedItemSqlServer.ColItemId}", itemId);
+
+                orderedItem.Id = (int) cmd.ExecuteScalar();
+            }
+
+            return orderedItem;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Infrastructure.SqlServer.Items;
+﻿using System.Globalization;
+using Infrastructure.SqlServer.Items;
 using Infrastructure.SqlServer.Orders;
 
 namespace Infrastructure.SqlServer.OrderedItems
@@ -29,5 +30,12 @@ namespace Infrastructure.SqlServer.OrderedItems
         ";
         
         public static readonly string ReqGetByOrderId = ReqQuery + $" WHERE {TableName}.{ColOrderId} = @{ColOrderId}";
+
+        public static readonly string ReqAddItemToOrder = $@"
+            INSERT INTO {TableName}
+            ({ColQuantity}, {ColOrderId}, {ColItemId})
+            OUTPUT INSERTED.{ColId}
+            VALUES (@{ColQuantity}, @{ColOrderId}, @{ColItemId})
+        ";
     }
 }

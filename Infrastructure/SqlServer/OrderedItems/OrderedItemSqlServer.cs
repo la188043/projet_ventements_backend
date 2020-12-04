@@ -39,5 +39,14 @@ namespace Infrastructure.SqlServer.OrderedItems
             OUTPUT INSERTED.{ColId}
             VALUES (@{ColQuantity}, @{ColOrderId}, @{ColItemId})
         ";
+
+        public static readonly string ReqUpdateQuantity = $@"
+            UPDATE {TableName}
+            SET {ColQuantity} = @{ColQuantity}
+            WHERE {ColId} = @{ColId}
+        ";
+
+        public static readonly string ReqDelete =
+            $"DELETE FROM {TableName} WHERE {ColId} = @{ColId}";
     }
 }

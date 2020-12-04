@@ -8,6 +8,10 @@
         public static readonly string ColOrderedAt = "orderedAt";
         public static readonly string ColUserId = "uservId";
 
+        public static readonly string ReqGetByUserId = $@"
+            SELECT 
+        ";
+
         public static readonly string ReqCreate = $@"
             INSERT INTO {TableName}
             ({ColOrderedAt}, {ColUserId})

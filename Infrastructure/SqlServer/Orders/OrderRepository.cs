@@ -1,4 +1,5 @@
-﻿using Application.Repositories;
+﻿using System.Collections.Generic;
+using Application.Repositories;
 using Domain.Orders;
 using Infrastructure.SqlServer.Shared;
 
@@ -6,6 +7,11 @@ namespace Infrastructure.SqlServer.Orders
 {
     public class OrderRepository : IOrderRepository
     {
+        public IEnumerable<IOrder> GetByUserId(int userId)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public IOrder Create(int userId)
         {
             using (var connection = Database.GetConnection())

@@ -4,6 +4,7 @@ using Application.Services.Addresses;
 using Application.Services.BaggedItems;
 using Application.Services.Categories;
 using Application.Services.Items;
+using Application.Services.Orders;
 using Application.Services.Reviews;
 using Application.Services.Users;
 using Application.Services.WishLists;
@@ -11,6 +12,8 @@ using Infrastructure.SqlServer.Addresses;
 using Infrastructure.SqlServer.BaggedItems;
 using Infrastructure.SqlServer.Categories;
 using Infrastructure.SqlServer.Items;
+using Infrastructure.SqlServer.OrderedItems;
+using Infrastructure.SqlServer.Orders;
 using Infrastructure.SqlServer.Reviews;
 using Infrastructure.SqlServer.Users;
 using Infrastructure.SqlServer.WishLists;
@@ -60,6 +63,11 @@ namespace WebApi
             
             services.AddSingleton<IWishListService, WishListService>();
             services.AddSingleton<IWishListRepository, WishListRepository>();
+            
+            services.AddSingleton<IOrderRepository, OrderRepository>();
+            services.AddSingleton<IOrderService, OrderService>();
+            
+            services.AddSingleton<IOrderedItemRepository, OrderedItemRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

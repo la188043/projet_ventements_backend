@@ -28,6 +28,8 @@ namespace Infrastructure.SqlServer.OrderedItems
             INNER JOIN {ItemSqlServer.TableName}
             ON {TableName}.{ColItemId} = {ItemSqlServer.TableName}.{ItemSqlServer.ColId}
         ";
+
+        public static readonly string ReqGetById = ReqQuery + $" WHERE {TableName}.{ColId} = @{ColId}";
         
         public static readonly string ReqGetByOrderId = ReqQuery + $" WHERE {TableName}.{ColOrderId} = @{ColOrderId}";
 

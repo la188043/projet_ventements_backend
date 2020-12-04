@@ -31,6 +31,25 @@ namespace Infrastructure.SqlServer.OrderedItems
             return orderedItems;
         }
 
+        public IOrderedItem GetById(int orderedItemId)
+        {
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+                var cmd = connection.CreateCommand();
+                cmd.CommandText = OrderedItemSqlServer.ReqGetById;
+
+                cmd.Parameters.AddWithValue($"@{OrderedItemSqlServer.ColId}", orderedItemId);
+
+                var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                while (reader.Read())
+                    return _factory.CreateFromReader(reader);
+            }
+
+            return null;
+        }
+
         public IOrderedItem AddItemToOrder(int orderId, int itemId, IOrderedItem orderedItem)
         {
             using (var connection = Database.GetConnection())

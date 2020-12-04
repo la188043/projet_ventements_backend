@@ -4,10 +4,11 @@ DROP TABLE IF EXISTS addressuserv;
 DROP TABLE IF EXISTS userv;
 DROP TABLE IF EXISTS category;
 DROP TABLE IF EXISTS item;
-DROP TABLE IF EXISTS orderv;
 DROP TABLE IF EXISTS review;
 DROP TABLE IF EXISTS wishlist;
 DROP TABLE IF EXISTS baggedItem;
+DROP TABLE IF EXISTS orderv;
+DROP TABLE IF EXISTS orderedItem;
 
 CREATE TABLE addressuserv
 (
@@ -113,9 +114,10 @@ CREATE TABLE orderv
 
 CREATE TABLE orderedItem
 (
-    id INT IDENTITY         NOT NULL,
+    id       INT IDENTITY   NOT NULL,
+    quantity INT            NOT NULL,
     ordervId INT            NOT NULL, 
-    itemId INT              NOT NULL,
+    itemId   INT            NOT NULL,
     
     PRIMARY KEY (id),
     FOREIGN KEY (ordervId)  REFERENCES orderv(id),

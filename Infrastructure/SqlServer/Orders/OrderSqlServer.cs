@@ -14,7 +14,7 @@ namespace Infrastructure.SqlServer.Orders
             SELECT {TableName}.*,
                    {UserSqlServer.TableName}.{UserSqlServer.ColFirstname},
                    {UserSqlServer.TableName}.{UserSqlServer.ColLastname},
-                   {UserSqlServer.TableName}.{UserSqlServer.ColEmail},
+                   {UserSqlServer.TableName}.{UserSqlServer.ColEmail}
             FROM {TableName}
             INNER JOIN {UserSqlServer.TableName}
             ON {TableName}.{ColUserId} = {UserSqlServer.TableName}.{ColId}

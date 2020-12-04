@@ -1,6 +1,8 @@
 ﻿using Application.Services.Addresses.Dto;
 using Application.Services.BaggedItems;
 using Application.Services.BaggedItems.Dto;
+using Application.Services.Orders;
+using Application.Services.Orders.Dto;
 using Application.Services.Users;
 using Application.Services.Users.Dto;
 using Application.Services.WishLists;
@@ -17,13 +19,15 @@ namespace WebApi.Controllers
         private readonly IUserService _userService;
         private readonly IBaggedItemService _baggedItemService;
         private readonly IWishListService _wishListService;
+        private readonly IOrderService _orderService;
 
         public UserController(IUserService userService, IBaggedItemService baggedItemService,
-            IWishListService wishListService)
+            IWishListService wishListService, IOrderService orderService)
         {
             _userService = userService;
             _baggedItemService = baggedItemService;
             _wishListService = wishListService;
+            _orderService = orderService;
         }
 
         [Authorize(Roles = "Admin")]
@@ -113,6 +117,15 @@ namespace WebApi.Controllers
         public ActionResult<OutputDtoQueryWishLists> QueryWishlist(int uservId)
         {
             return Ok(_wishListService.GetByUserId(uservId));
+        }
+        
+        // Orders
+        [Authorize]
+        [HttpGet]
+        [Route("{userId:int}/orders")]
+        public ActionResult<OutputQueryOrder> GetUserOrders(int userId)
+        {
+            return Ok(_orderService.GetByUserId(userId));
         }
     }
 }

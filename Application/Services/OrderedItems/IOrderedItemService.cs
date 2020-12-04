@@ -9,6 +9,9 @@ namespace Application.Services.OrderedItems
         IEnumerable<OutputDtoQueryOrderedItem> GetByOrderId(int orderId);
         OutputDtoQueryOrderedItem GetById(int orderedItemId);
         OutputDtoQueryOrderedItem AddItemToOrder(int orderId, int itemId, InputDtoAddOrderedItem inputDtoAddOrderedItem);
+
+        IEnumerable<OutputDtoQueryOrderedItem> AddItemsToOrder(int orderId,
+            InputDtoAddOrderedItems inputDtoAddOrderedItems);
         bool UpdateQuantity(int orderedItemId, InputDtoUpdateOrderedItem inputDtoUpdateOrderedItem);
         bool Delete(int orderedItemId);
     }

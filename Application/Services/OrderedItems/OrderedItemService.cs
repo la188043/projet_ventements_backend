@@ -70,6 +70,20 @@ namespace Application.Services.OrderedItems
             return GetById(orderedItemId.Id);
         }
 
+        public IEnumerable<OutputDtoQueryOrderedItem> AddItemsToOrder(int orderId,
+            InputDtoAddOrderedItems inputDtoAddOrderedItems)
+        {
+            IList<OutputDtoQueryOrderedItem> orderedItems = new List<OutputDtoQueryOrderedItem>();
+            
+            foreach (var orderedItem in inputDtoAddOrderedItems.OrderedItems)
+            {
+                orderedItems.Add(AddItemToOrder(orderId, orderedItem.ItemId,
+                    new InputDtoAddOrderedItem {Quantity = orderedItem.Quantity}));
+            }
+
+            return orderedItems;
+        }
+
         public bool UpdateQuantity(int orderedItemId, InputDtoUpdateOrderedItem inputDtoUpdateOrderedItem)
         {
             return _orderedItemRepository.UpdateQuantity(orderedItemId,

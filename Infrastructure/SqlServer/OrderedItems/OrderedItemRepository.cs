@@ -70,12 +70,31 @@ namespace Infrastructure.SqlServer.OrderedItems
 
         public bool UpdateQuantity(int orderedItemId, IOrderedItem orderedItem)
         {
-            throw new System.NotImplementedException();
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+                var cmd = connection.CreateCommand();
+                cmd.CommandText = OrderedItemSqlServer.ReqUpdateQuantity;
+
+                cmd.Parameters.AddWithValue($"@{OrderedItemSqlServer.ColQuantity}", orderedItem.Quantity);
+                cmd.Parameters.AddWithValue($"@{OrderedItemSqlServer.ColId}", orderedItemId);
+
+                return cmd.ExecuteNonQuery() > 0;
+            }
         }
 
         public bool Delete(int orderedItemId)
         {
-            throw new System.NotImplementedException();
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+                var cmd = connection.CreateCommand();
+                cmd.CommandText = OrderedItemSqlServer.ReqDelete;
+
+                cmd.Parameters.AddWithValue($"@{OrderedItemSqlServer.ColId}", orderedItemId);
+
+                return cmd.ExecuteNonQuery() > 0;
+            }
         }
     }
 }

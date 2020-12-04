@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Application.Repositories;
 using Application.Services.OrderedItems.Dto;
 using Domain.OrderedItems;
@@ -17,7 +18,25 @@ namespace Application.Services.OrderedItems
 
         public IEnumerable<OutputDtoQueryOrderedItem> GetByOrderId(int orderId)
         {
-            throw new NotImplementedException();
+            return _orderedItemRepository
+                .GetByOrderId(orderId)
+                .Select(orderedItem => new OutputDtoQueryOrderedItem
+                {
+                    Id = orderedItem.Id,
+                    ItemOrder = new OutputDtoQueryOrderedItem.Order
+                    {
+                        Id = orderedItem.Order.Id
+                    },
+                    ItemOrdered = new OutputDtoQueryOrderedItem.Item
+                    {
+                        Id = orderedItem.ItemOrdered.Id,
+                        Label = orderedItem.ItemOrdered.Label,
+                        Price = orderedItem.ItemOrdered.Price,
+                        ImageItem = orderedItem.ItemOrdered.ImageItem,
+                        DescriptionItem = orderedItem.ItemOrdered.DescriptionItem,
+                        Quantity = orderedItem.Quantity
+                    }
+                });
         }
 
         public OutputDtoQueryOrderedItem GetById(int orderedItemId)

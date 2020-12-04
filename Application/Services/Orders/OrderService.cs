@@ -56,10 +56,15 @@ namespace Application.Services.Orders
 
         public OutputAddOrder Create(int userId)
         {
-            var orderFromDb = _orderRepository.Create(userId);
-
-            // todo
-            throw new NotImplementedException();
+            var orderId = _orderRepository.Create(userId).Id;
+            var orderFromDb = _orderRepository.GetById(orderId);
+            
+            return new OutputAddOrder
+            {
+                Id = orderFromDb.Id,
+                isPaid = orderFromDb.IsPaid,
+                orderedAt = orderFromDb.orderedAt
+            };
         }
     }
 }

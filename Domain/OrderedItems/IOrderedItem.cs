@@ -1,4 +1,5 @@
-﻿using Domain.Orders;
+﻿using Domain.Items;
+using Domain.Orders;
 using Domain.Shared;
 using Domain.Users;
 
@@ -6,7 +7,7 @@ namespace Domain.OrderedItems
 {
     public interface IOrderedItem : IEntity
     {
-        IOrder order { get; set; }
-        IUser orderer { get; set; }
+        IOrder Order { get; set; }
+        IItem ItemOrdered { get; set; }
     }
 }

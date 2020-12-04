@@ -34,7 +34,7 @@ namespace Domain.Orders
 
         public float ComputeOrderPrice()
         {
-            return OrderedItems.Select(orderedItem => orderedItem.ItemOrdered.Price).Sum();
+            return OrderedItems.Select(orderedItem => orderedItem.ItemOrdered.Price * orderedItem.Quantity).Sum();
         }
     }
 }

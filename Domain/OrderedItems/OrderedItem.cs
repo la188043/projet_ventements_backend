@@ -7,6 +7,7 @@ namespace Domain.OrderedItems
     public class OrderedItem : IOrderedItem
     {
         public int Id { get; set; }
+        public int Quantity { get; set; }
         public IOrder Order { get; set; }
         public IItem ItemOrdered { get; set; }
 

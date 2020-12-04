@@ -6,6 +6,7 @@ namespace Application.Services.Orders
     public interface IOrderService
     {
         IEnumerable<OutputQueryOrder> GetByUserId(int userId);
+        OutputQueryOrder GetById(int orderId);
         OutputAddOrder Create(int userId);
     }
 }

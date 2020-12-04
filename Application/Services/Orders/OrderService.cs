@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Application.Repositories;
 using Application.Services.Orders.Dto;
+using Domain.Orders;
 
 namespace Application.Services.Orders
 {
@@ -17,12 +19,15 @@ namespace Application.Services.Orders
 
         public IEnumerable<OutputQueryOrder> GetByUserId(int userId)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public OutputAddOrder Create(int userId)
         {
-            throw new System.NotImplementedException();
+            var orderFromDb = _orderRepository.Create(userId);
+
+            // todo
+            throw new NotImplementedException();
         }
     }
 }

@@ -22,6 +22,8 @@ namespace Infrastructure.SqlServer.Orders
 
         public static readonly string ReqGetByUserId = ReqQuery + $" WHERE {TableName}.{ColUserId} = @{ColUserId}";
 
+        public static readonly string ReqGetById = ReqQuery + $" WHERE {TableName}.{ColId} = @{ColId}";
+
         public static readonly string ReqCreate = $@"
             INSERT INTO {TableName}
             ({ColOrderedAt}, {ColUserId})

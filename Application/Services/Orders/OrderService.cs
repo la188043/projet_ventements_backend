@@ -100,7 +100,7 @@ namespace Application.Services.Orders
 
         public bool Delete(int orderId)
         {
-            throw new System.NotImplementedException();
+            return _orderRepository.Delete(orderId);
         }
     }
 }

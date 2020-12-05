@@ -8,5 +8,6 @@ namespace Application.Repositories
         IEnumerable<IOrder> GetByUserId(int userId);
         IOrder GetById(int orderId);
         IOrder Create(int userId);
+        bool Delete(int orderId);
     }
 }

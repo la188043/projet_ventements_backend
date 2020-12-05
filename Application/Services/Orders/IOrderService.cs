@@ -8,5 +8,6 @@ namespace Application.Services.Orders
         IEnumerable<OutputQueryOrder> GetByUserId(int userId);
         OutputQueryOrder GetById(int orderId);
         OutputAddOrder Create(int userId);
+        bool Delete(int orderId);
     }
 }

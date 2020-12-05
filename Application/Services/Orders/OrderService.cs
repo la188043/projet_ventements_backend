@@ -97,5 +97,10 @@ namespace Application.Services.Orders
                 orderedAt = orderFromDb.orderedAt
             };
         }
+
+        public bool Delete(int orderId)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

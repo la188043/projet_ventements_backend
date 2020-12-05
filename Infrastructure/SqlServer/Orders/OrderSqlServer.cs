@@ -30,5 +30,8 @@ namespace Infrastructure.SqlServer.Orders
             OUTPUT INSERTED.{ColId}
             VALUES (GETDATE(), @{ColUserId});
         ";
+
+        public static readonly string ReqDelete = 
+            $"DELETE FROM {TableName} WHERE {ColId} = @{ColId}";
     }
 }

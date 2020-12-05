@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Application.Services.OrderedItems;
+﻿using Application.Services.OrderedItems;
 using Application.Services.OrderedItems.Dto;
 using Application.Services.Orders;
 using Application.Services.Orders.Dto;

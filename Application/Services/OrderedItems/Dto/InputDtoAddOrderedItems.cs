@@ -4,7 +4,7 @@ namespace Application.Services.OrderedItems.Dto
 {
     public class InputDtoAddOrderedItems
     {
-        public IEnumerable<OrderedItem> OrderedItems { get; set; }
+        public IList<OrderedItem> OrderedItems { get; set; }
         
         public class OrderedItem
         {

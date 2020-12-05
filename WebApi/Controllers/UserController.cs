@@ -127,5 +127,13 @@ namespace WebApi.Controllers
         {
             return Ok(_orderService.GetByUserId(userId));
         }
+
+        [Authorize]
+        [HttpPost]
+        [Route("{userId:int}/orders")]
+        public ActionResult<OutputAddOrder> Create(int userId)
+        {
+            return Ok(_orderService.Create(userId));
+        }
     }
 }

@@ -23,6 +23,7 @@ namespace Application.Services.Orders.Dto
         public class Item
         {
             public int Id { get; set; }
+            public int ItemId { get; set; }
             public string Label { get; set; }
             public float Price { get; set; }
             public string ImageItem { get; set; }

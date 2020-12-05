@@ -42,7 +42,8 @@ namespace Application.Services.Orders
                         },
                         OrderedItems = userOrder.OrderedItems.Select(orderedItem => new OutputDtoQueryOrder.Item
                         {
-                            Id = orderedItem.ItemOrdered.Id,
+                            Id = orderedItem.Id,
+                            ItemId = orderedItem.ItemOrdered.Id,
                             Label = orderedItem.ItemOrdered.Label,
                             Price = orderedItem.ItemOrdered.Price,
                             ImageItem = orderedItem.ItemOrdered.ImageItem,
@@ -75,7 +76,8 @@ namespace Application.Services.Orders
                 },
                 OrderedItems = userOrder.OrderedItems.Select(orderedItem => new OutputDtoQueryOrder.Item
                 {
-                    Id = orderedItem.ItemOrdered.Id,
+                    Id = orderedItem.Id,
+                    ItemId = orderedItem.ItemOrdered.Id,
                     Label = orderedItem.ItemOrdered.Label,
                     Price = orderedItem.ItemOrdered.Price,
                     ImageItem = orderedItem.ItemOrdered.ImageItem,

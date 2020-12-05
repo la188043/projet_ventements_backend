@@ -71,8 +71,8 @@ CREATE TABLE review
 	uservId  			INT             NOT NULL,
 	
     PRIMARY KEY (id),
-    FOREIGN KEY (itemId) REFERENCES item (id),
-    FOREIGN KEY (uservId) REFERENCES userv (id)
+    FOREIGN KEY (itemId) REFERENCES item (id) ON DELETE CASCADE,
+    FOREIGN KEY (uservId) REFERENCES userv (id) ON DELETE CASCADE
 );
 
 CREATE TABLE wishlist
@@ -83,8 +83,8 @@ CREATE TABLE wishlist
 	addedAt     DATETIME        NOT NULL,
 	
     PRIMARY KEY (id),
-	FOREIGN KEY (uservId) REFERENCES userv (id),
-	FOREIGN KEY (itemId) REFERENCES item (id)
+	FOREIGN KEY (uservId) REFERENCES userv (id) ON DELETE CASCADE,
+	FOREIGN KEY (itemId) REFERENCES item (id) 
 );
 
 CREATE TABLE baggedItem
@@ -97,8 +97,8 @@ CREATE TABLE baggedItem
 	itemId      INT             NOT NULL,
 
 	PRIMARY KEY (id),
-	FOREIGN KEY (uservId) REFERENCES userv (id),
-	FOREIGN KEY (itemId) REFERENCES item (id)
+	FOREIGN KEY (uservId) REFERENCES userv (id) ON DELETE CASCADE,
+	FOREIGN KEY (itemId) REFERENCES item (id) ON DELETE CASCADE
 );
 
 CREATE TABLE orderv
@@ -109,7 +109,7 @@ CREATE TABLE orderv
     uservid	 	INT             NOT NULL,
 
     PRIMARY KEY (id),
-    FOREIGN KEY (uservid) REFERENCES userv(id),
+    FOREIGN KEY (uservid) REFERENCES userv(id) ON DELETE CASCADE,
 );
 
 CREATE TABLE orderedItem
@@ -120,6 +120,6 @@ CREATE TABLE orderedItem
     itemId   INT            NOT NULL,
     
     PRIMARY KEY (id),
-    FOREIGN KEY (ordervId)  REFERENCES orderv(id),
+    FOREIGN KEY (ordervId)  REFERENCES orderv(id) ON DELETE CASCADE,
     FOREIGN KEY (itemId)    REFERENCES item(id)
 );

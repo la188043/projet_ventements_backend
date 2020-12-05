@@ -73,3 +73,18 @@
 | Get user wishlist         | GET    | https://localhost:5001/api/users/{userId}/wishlist          | User          |
 | Add item to wishlist      | POST   | https://localhost:5001/api/users/{userId}/wishlist/{itemId} | User          |
 | Delete item from wishlist | DEL    | https://localhost:5001/api/wishlists/{wishlistId}           | User          |
+
+---
+
+# _Order_
+
+| Utility                      | Method | Route                                                             | Role Required |
+| ---------------------------- | ------ | ----------------------------------------------------------------- | ------------- |
+| Get user orders              | GET    | https://localhost:5001/api/users/{userId}/orders                  | User          |
+| Get an order by id           | GET    | https://localhost:5001/api/orders/{orderId}                       | User          |
+| Create an order              | POST   | https://localhost:5001/api/users/{userId}/orders                  | User          |
+| Add an item to an order      | POST   | https://localhost:5001/api/orders/{orderId}/orderedItems/{itemId} | User          |
+| Add items to an order        | POST   | https://localhost:5001/api/orders/{orderId}/orderedItems          | User          |
+| Update quantity of an item   | PUT    | https://localhost:5001/api/orderedItems/{orderedItemId}           | User          |
+| Delete an order              | DEL    | https://localhost:5001/api/orders/{orderId}                       | User          |
+| Delete an item from an order | DEL    | https://localhost:5001/api/orderedItems/{orderedItemId}           | User          |

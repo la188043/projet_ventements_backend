@@ -1,6 +1,5 @@
 ﻿using Application.Services.BaggedItems;
 using Application.Services.BaggedItems.Dto;
-using Domain.BaggedItems;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Helpers;
 

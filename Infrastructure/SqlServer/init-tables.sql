@@ -4,10 +4,11 @@ DROP TABLE IF EXISTS addressuserv;
 DROP TABLE IF EXISTS userv;
 DROP TABLE IF EXISTS category;
 DROP TABLE IF EXISTS item;
-DROP TABLE IF EXISTS orderv;
 DROP TABLE IF EXISTS review;
 DROP TABLE IF EXISTS wishlist;
 DROP TABLE IF EXISTS baggedItem;
+DROP TABLE IF EXISTS orderv;
+DROP TABLE IF EXISTS orderedItem;
 
 CREATE TABLE addressuserv
 (
@@ -70,8 +71,8 @@ CREATE TABLE review
 	uservId  			INT             NOT NULL,
 	
     PRIMARY KEY (id),
-    FOREIGN KEY (itemId) REFERENCES item (id),
-    FOREIGN KEY (uservId) REFERENCES userv (id)
+    FOREIGN KEY (itemId) REFERENCES item (id) ON DELETE CASCADE,
+    FOREIGN KEY (uservId) REFERENCES userv (id) ON DELETE CASCADE
 );
 
 CREATE TABLE wishlist
@@ -82,8 +83,8 @@ CREATE TABLE wishlist
 	addedAt     DATETIME        NOT NULL,
 	
     PRIMARY KEY (id),
-	FOREIGN KEY (uservId) REFERENCES userv (id),
-	FOREIGN KEY (itemId) REFERENCES item (id)
+	FOREIGN KEY (uservId) REFERENCES userv (id) ON DELETE CASCADE,
+	FOREIGN KEY (itemId) REFERENCES item (id) 
 );
 
 CREATE TABLE baggedItem
@@ -96,17 +97,29 @@ CREATE TABLE baggedItem
 	itemId      INT             NOT NULL,
 
 	PRIMARY KEY (id),
-	FOREIGN KEY (uservId) REFERENCES userv (id),
-	FOREIGN KEY (itemId) REFERENCES item (id)
+	FOREIGN KEY (uservId) REFERENCES userv (id) ON DELETE CASCADE,
+	FOREIGN KEY (itemId) REFERENCES item (id) ON DELETE CASCADE
 );
 
 CREATE TABLE orderv
 (
     id    		INT IDENTITY    NOT NULL,
     isPaid 		BIT	DEFAULT 0,
-    ordervedAt	DATETIME        NOT NULL,
-    bagId	 	INT             NOT NULL,
+    orderedAt	DATETIME        NOT NULL,
+    uservid	 	INT             NOT NULL,
 
     PRIMARY KEY (id),
-    FOREIGN KEY (bagId) REFERENCES baggedItem(id),
+    FOREIGN KEY (uservid) REFERENCES userv(id) ON DELETE CASCADE,
+);
+
+CREATE TABLE orderedItem
+(
+    id       INT IDENTITY   NOT NULL,
+    quantity INT            NOT NULL,
+    ordervId INT            NOT NULL, 
+    itemId   INT            NOT NULL,
+    
+    PRIMARY KEY (id),
+    FOREIGN KEY (ordervId)  REFERENCES orderv(id) ON DELETE CASCADE,
+    FOREIGN KEY (itemId)    REFERENCES item(id)
 );

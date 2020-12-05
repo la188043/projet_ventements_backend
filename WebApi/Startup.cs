@@ -23,6 +23,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using WebApi.Helpers;
 
 namespace WebApi
@@ -70,6 +71,18 @@ namespace WebApi
             
             services.AddSingleton<IOrderedItemRepository, OrderedItemRepository>();
             services.AddSingleton<IOrderedItemService, OrderedItemService>();
+            
+            // Swagger api documentation
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Ventements API", 
+                    Version = "v1",
+                    Description = "API of Ventements which is an E-Commerce school project site"
+                });
+                c.CustomSchemaIds(type => type.ToString());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,6 +94,18 @@ namespace WebApi
             }
 
             app.UseHttpsRedirection();
+            
+            // Swagger API Documentation
+            app.UseSwagger(c =>
+            {
+                c.SerializeAsV2 = true;
+            });
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Ventements API Documentation");
+                c.RoutePrefix = "api/documentation";
+            });
+            //
 
             app.UseRouting();
 

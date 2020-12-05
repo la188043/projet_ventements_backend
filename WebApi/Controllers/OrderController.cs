@@ -24,7 +24,7 @@ namespace WebApi.Controllers
         [Authorize]
         [HttpGet]
         [Route("{orderId:int}")]
-        public ActionResult<OutputQueryOrder> GetById(int orderId)
+        public ActionResult<OutputDtoQueryOrder> GetById(int orderId)
         {
             return Ok(_orderService.GetById(orderId));
         }

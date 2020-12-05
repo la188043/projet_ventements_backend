@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Application.Services.Orders.Dto
 {
-    public class OutputQueryOrder
+    public class OutputDtoQueryOrder
     {
         public int Id { get; set; }
         public bool IsPaid { get; set; }

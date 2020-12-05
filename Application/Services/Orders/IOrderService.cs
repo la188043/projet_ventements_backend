@@ -5,9 +5,9 @@ namespace Application.Services.Orders
 {
     public interface IOrderService
     {
-        IEnumerable<OutputQueryOrder> GetByUserId(int userId);
-        OutputQueryOrder GetById(int orderId);
-        OutputAddOrder Create(int userId);
+        IEnumerable<OutputDtoQueryOrder> GetByUserId(int userId);
+        OutputDtoQueryOrder GetById(int orderId);
+        OutputDtoAddOrder Create(int userId);
         bool Delete(int orderId);
     }
 }

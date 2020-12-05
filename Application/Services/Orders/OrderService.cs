@@ -17,7 +17,7 @@ namespace Application.Services.Orders
             _orderedItemRepository = orderedItemRepository;
         }
 
-        public IEnumerable<OutputQueryOrder> GetByUserId(int userId)
+        public IEnumerable<OutputDtoQueryOrder> GetByUserId(int userId)
         {
             return _orderRepository
                 .GetByUserId(userId)
@@ -27,20 +27,20 @@ namespace Application.Services.Orders
                     var userOrder = new UserOrder();
                     userOrder.AddOrderedItems(orderedItems);
 
-                    return new OutputQueryOrder
+                    return new OutputDtoQueryOrder
                     {
                         Id = orderFromDb.Id,
                         IsPaid = orderFromDb.IsPaid,
                         OrderedAt = orderFromDb.orderedAt,
                         TotalPrice = userOrder.ComputeOrderPrice(),
-                        Ordered = new OutputQueryOrder.User
+                        Ordered = new OutputDtoQueryOrder.User
                         {
                             Id = orderFromDb.Orderer.Id,
                             Firstname = orderFromDb.Orderer.Firstname,
                             Lastname = orderFromDb.Orderer.Lastname,
                             Email = orderFromDb.Orderer.Email,
                         },
-                        OrderedItems = userOrder.OrderedItems.Select(orderedItem => new OutputQueryOrder.Item
+                        OrderedItems = userOrder.OrderedItems.Select(orderedItem => new OutputDtoQueryOrder.Item
                         {
                             Id = orderedItem.ItemOrdered.Id,
                             Label = orderedItem.ItemOrdered.Label,
@@ -53,27 +53,27 @@ namespace Application.Services.Orders
                 });
         }
 
-        public OutputQueryOrder GetById(int orderId)
+        public OutputDtoQueryOrder GetById(int orderId)
         {
             var orderFromDb = _orderRepository.GetById(orderId);
             var orderedItems = _orderedItemRepository.GetByOrderId(orderFromDb.Id);
             var userOrder = new UserOrder();
             userOrder.AddOrderedItems(orderedItems);
 
-            return new OutputQueryOrder
+            return new OutputDtoQueryOrder
             {
                 Id = orderFromDb.Id,
                 IsPaid = orderFromDb.IsPaid,
                 OrderedAt = orderFromDb.orderedAt,
                 TotalPrice = userOrder.ComputeOrderPrice(),
-                Ordered = new OutputQueryOrder.User
+                Ordered = new OutputDtoQueryOrder.User
                 {
                     Id = orderFromDb.Orderer.Id,
                     Firstname = orderFromDb.Orderer.Firstname,
                     Lastname = orderFromDb.Orderer.Lastname,
                     Email = orderFromDb.Orderer.Email,
                 },
-                OrderedItems = userOrder.OrderedItems.Select(orderedItem => new OutputQueryOrder.Item
+                OrderedItems = userOrder.OrderedItems.Select(orderedItem => new OutputDtoQueryOrder.Item
                 {
                     Id = orderedItem.ItemOrdered.Id,
                     Label = orderedItem.ItemOrdered.Label,
@@ -85,12 +85,12 @@ namespace Application.Services.Orders
             };
         }
 
-        public OutputAddOrder Create(int userId)
+        public OutputDtoAddOrder Create(int userId)
         {
             var orderId = _orderRepository.Create(userId).Id;
             var orderFromDb = _orderRepository.GetById(orderId);
 
-            return new OutputAddOrder
+            return new OutputDtoAddOrder
             {
                 Id = orderFromDb.Id,
                 isPaid = orderFromDb.IsPaid,

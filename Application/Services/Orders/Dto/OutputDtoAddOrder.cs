@@ -2,7 +2,7 @@
 
 namespace Application.Services.Orders.Dto
 {
-    public class OutputAddOrder
+    public class OutputDtoAddOrder
     {
         public int Id { get; set; }
         public bool isPaid { get; set; }

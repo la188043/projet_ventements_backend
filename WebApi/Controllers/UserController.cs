@@ -123,7 +123,7 @@ namespace WebApi.Controllers
         [Authorize]
         [HttpGet]
         [Route("{userId:int}/orders")]
-        public ActionResult<OutputQueryOrder> GetUserOrders(int userId)
+        public ActionResult<OutputDtoQueryOrder> GetUserOrders(int userId)
         {
             return Ok(_orderService.GetByUserId(userId));
         }
@@ -131,7 +131,7 @@ namespace WebApi.Controllers
         [Authorize]
         [HttpPost]
         [Route("{userId:int}/orders")]
-        public ActionResult<OutputAddOrder> Create(int userId)
+        public ActionResult<OutputDtoAddOrder> Create(int userId)
         {
             return Ok(_orderService.Create(userId));
         }

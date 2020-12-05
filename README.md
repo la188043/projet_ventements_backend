@@ -2,6 +2,8 @@
 
 ## Api Routes
 
+### Go to "api/documentation/" for routes full documentation
+
 ---
 
 # _User_

@@ -30,6 +30,8 @@ namespace WebApi
 {
     public class Startup
     {
+        public static readonly string CorsPolicyName = "MyPolicy";
+        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -41,6 +43,9 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddCors(options =>
+                options.AddPolicy(CorsPolicyName, 
+                    builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
 
             // Dependency injection
             services.AddSingleton<IPasswordEncryption, PasswordEncryption>();
@@ -62,22 +67,22 @@ namespace WebApi
 
             services.AddSingleton<IBaggedItemService, BaggedItemService>();
             services.AddSingleton<IBaggedItemRepository, BaggedItemRepository>();
-            
+
             services.AddSingleton<IWishListService, WishListService>();
             services.AddSingleton<IWishListRepository, WishListRepository>();
-            
+
             services.AddSingleton<IOrderRepository, OrderRepository>();
             services.AddSingleton<IOrderService, OrderService>();
-            
+
             services.AddSingleton<IOrderedItemRepository, OrderedItemRepository>();
             services.AddSingleton<IOrderedItemService, OrderedItemService>();
-            
+
             // Swagger api documentation
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "Ventements API", 
+                    Title = "Ventements API",
                     Version = "v1",
                     Description = "API of Ventements which is an E-Commerce school project site"
                 });
@@ -94,12 +99,11 @@ namespace WebApi
             }
 
             app.UseHttpsRedirection();
-            
+
+            app.UseCors(CorsPolicyName);
+
             // Swagger API Documentation
-            app.UseSwagger(c =>
-            {
-                c.SerializeAsV2 = true;
-            });
+            app.UseSwagger(c => { c.SerializeAsV2 = true; });
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Ventements API Documentation");

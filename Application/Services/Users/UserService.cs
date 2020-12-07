@@ -125,23 +125,21 @@ namespace Application.Services.Users
             // Si null on le créé (?? = nullish operator)
             var addressChecked = _addressService.CheckFromDb(address) ?? _addressService.Create(address);
 
-            var addressFromDb = _userRepository.RegisterAddress(idUser, new Address
-            {
-                Id = addressChecked.Id,
-                Street = addressChecked.Street,
-                HomeNumber = addressChecked.HomeNumber ,
-                Zip = addressChecked.Zip ,
-                City = addressChecked.City ,
-            });
+            var addressFromDb = _userRepository.RegisterAddress(idUser, new Address {Id = addressChecked.Id});
 
-            return new OutputDtoQueryAddress
+            if (addressFromDb)
             {
-                Id = addressFromDb.Id,
-                Street = addressFromDb.Street,
-                HomeNumber = addressFromDb.HomeNumber ,
-                Zip = addressFromDb.Zip ,
-                City = addressFromDb.City ,
-            };
+                return new OutputDtoQueryAddress
+                {
+                    Id = addressChecked.Id,
+                    Street = addressChecked.Street,
+                    HomeNumber = addressChecked.HomeNumber ,
+                    Zip = addressChecked.Zip ,
+                    City = addressChecked.City ,
+                };
+            }
+
+            return null;
         }
 
         public OutputDtoQueryAddress GetUserAddress(int idUser)

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using Application.Repositories;
 using Application.Services.Addresses.Dto;
 using Domain.Addresses;
@@ -90,7 +91,7 @@ namespace Infrastructure.SqlServer.Users
             return null;
         }
 
-        public IAddress RegisterAddress(int idUser, IAddress address)
+        public bool RegisterAddress(int idUser, IAddress address)
         {
             using (var connection = Database.GetConnection())
             {
@@ -100,9 +101,9 @@ namespace Infrastructure.SqlServer.Users
 
                 cmd.Parameters.AddWithValue($"@{UserSqlServer.ColId}", idUser);
                 cmd.Parameters.AddWithValue($"@{UserSqlServer.ColAddress}", address.Id);
+
+                return cmd.ExecuteNonQuery() > 0;
             }
-            
-            return address;
         }
 
         public IAddress GetUserAddress(int idUser)

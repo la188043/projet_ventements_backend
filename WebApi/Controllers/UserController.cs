@@ -70,7 +70,12 @@ namespace WebApi.Controllers
         [Route("{idUser:int}/address")]
         public ActionResult<OutputDtoQueryAddress> RegisterAddress(int idUser, [FromBody] InputDtoAddAddress address)
         {
-            return Ok(_userService.RegisterAddress(idUser, address));
+            var response = _userService.RegisterAddress(idUser, address);
+
+            if (response != null)
+                return Ok(response);
+
+            return NotFound();
         }
 
         // Bag

@@ -107,6 +107,7 @@ namespace Application.Services.Users
         {
             var userFromDb = _userRepository.Authenticate(new User {Email = user.Email});
 
+            // TODO Vérifier si l'utilisateur n'est pas null avant
             bool passwordVerified =
                 _passwordEncryption.VerifyPassword(
                     userFromDb, userFromDb.EncryptedPassword, user.PasswordUser);
@@ -119,19 +120,28 @@ namespace Application.Services.Users
             return new OutputDtoAuthenticateUser(userFromDb, token);
         }
 
-        public bool RegisterAddress(int idUser, InputDtoAddAddress address)
+        public OutputDtoQueryAddress RegisterAddress(int idUser, InputDtoAddAddress address)
         {
             // Si null on le créé (?? = nullish operator)
-            var addressFromDb = _addressService.CheckFromDb(address) ?? _addressService.Create(address);
+            var addressChecked = _addressService.CheckFromDb(address) ?? _addressService.Create(address);
 
-            return _userRepository.RegisterAddress(idUser, new Address
+            var addressFromDb = _userRepository.RegisterAddress(idUser, new Address
+            {
+                Id = addressChecked.Id,
+                Street = addressChecked.Street,
+                HomeNumber = addressChecked.HomeNumber ,
+                Zip = addressChecked.Zip ,
+                City = addressChecked.City ,
+            });
+
+            return new OutputDtoQueryAddress
             {
                 Id = addressFromDb.Id,
                 Street = addressFromDb.Street,
                 HomeNumber = addressFromDb.HomeNumber ,
                 Zip = addressFromDb.Zip ,
                 City = addressFromDb.City ,
-            });
+            };
         }
 
         public OutputDtoQueryAddress GetUserAddress(int idUser)

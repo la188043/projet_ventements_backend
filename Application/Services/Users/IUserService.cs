@@ -10,7 +10,7 @@ namespace Application.Services.Users
         OutputDtoQueryUser GetById(int id);
         OutputDtoAuthenticateUser Create(InputDtoAddUser user);
         OutputDtoAuthenticateUser Authenticate(InputDtoAuthenticateUser user);
-        bool RegisterAddress(int idUser, InputDtoAddAddress address);
+        OutputDtoQueryAddress RegisterAddress(int idUser, InputDtoAddAddress address);
         OutputDtoQueryAddress GetUserAddress(int idUser);
     }
 }

@@ -68,12 +68,9 @@ namespace WebApi.Controllers
         [Authorize]
         [HttpPost]
         [Route("{idUser:int}/address")]
-        public ActionResult RegisterAddress(int idUser, [FromBody] InputDtoAddAddress address)
+        public ActionResult<OutputDtoQueryAddress> RegisterAddress(int idUser, [FromBody] InputDtoAddAddress address)
         {
-            if (_userService.RegisterAddress(idUser, address))
-                return Ok();
-
-            return NotFound();
+            return Ok(_userService.RegisterAddress(idUser, address));
         }
 
         // Bag

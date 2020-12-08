@@ -65,7 +65,7 @@ namespace Application.Services.OrderedItems
             InputDtoAddOrderedItem inputDtoAddOrderedItem)
         {
             var orderedItemId = _orderedItemRepository.AddItemToOrder(orderId, itemId,
-                new OrderedItem {Quantity = inputDtoAddOrderedItem.Quantity});
+                new OrderedItem {Quantity = inputDtoAddOrderedItem.Quantity, Size = inputDtoAddOrderedItem.Size});
 
             return GetById(orderedItemId.Id);
         }
@@ -74,7 +74,7 @@ namespace Application.Services.OrderedItems
             InputDtoAddOrderedItems inputDtoAddOrderedItems)
         {
             IList<OutputDtoQueryOrderedItem> orderedItems = new List<OutputDtoQueryOrderedItem>();
-            
+
             foreach (var orderedItem in inputDtoAddOrderedItems.OrderedItems)
             {
                 orderedItems.Add(AddItemToOrder(orderId, orderedItem.ItemId,

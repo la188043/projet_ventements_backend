@@ -29,6 +29,7 @@ namespace Application.Services.Orders.Dto
             public string ImageItem { get; set; }
             public string DescriptionItem { get; set; }
             public int Quantity { get; set; }
+            public string Size { get; set; }
         }
     }
 }

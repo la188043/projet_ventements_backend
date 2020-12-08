@@ -41,7 +41,7 @@ namespace Application.Services.BaggedItems
                     {
                         Id = baggedItem.AddedItem.Id,
                         Label = baggedItem.AddedItem.Label,
-                        Price = baggedItem.AddedItem.Price,
+                        Price = baggedItem.AddedItem.Price * baggedItem.Quantity,
                         ImageItem = baggedItem.AddedItem.ImageItem,
                         DescriptionItem = baggedItem.AddedItem.DescriptionItem
                     }
@@ -81,7 +81,7 @@ namespace Application.Services.BaggedItems
                 {
                     Id = item.Id,
                     Label = item.Label,
-                    Price = item.Price,
+                    Price = item.Price * baggedItemFromDb.Quantity,
                     ImageItem = item.ImageItem,
                     DescriptionItem = item.DescriptionItem
                 }

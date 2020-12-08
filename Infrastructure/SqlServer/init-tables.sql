@@ -116,6 +116,7 @@ CREATE TABLE orderedItem
 (
     id       INT IDENTITY   NOT NULL,
     quantity INT            NOT NULL,
+    size     VARCHAR(10)    NOT NULL,
     ordervId INT            NOT NULL, 
     itemId   INT            NOT NULL,
     

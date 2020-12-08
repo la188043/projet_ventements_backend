@@ -9,6 +9,7 @@ namespace Infrastructure.SqlServer.OrderedItems
         public static readonly string TableName = "orderedItem";
         public static readonly string ColId = "id";
         public static readonly string ColQuantity = "quantity";
+        public static readonly string ColSize = "size";
         public static readonly string ColOrderId = "ordervId";
         public static readonly string ColItemId = "itemId";
 
@@ -35,9 +36,9 @@ namespace Infrastructure.SqlServer.OrderedItems
 
         public static readonly string ReqAddItemToOrder = $@"
             INSERT INTO {TableName}
-            ({ColQuantity}, {ColOrderId}, {ColItemId})
+            ({ColQuantity}, {ColSize}, {ColOrderId}, {ColItemId})
             OUTPUT INSERTED.{ColId}
-            VALUES (@{ColQuantity}, @{ColOrderId}, @{ColItemId})
+            VALUES (@{ColQuantity}, @{ColSize}, @{ColOrderId}, @{ColItemId})
         ";
 
         public static readonly string ReqUpdateQuantity = $@"

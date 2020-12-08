@@ -48,7 +48,8 @@ namespace Application.Services.Orders
                             Price = orderedItem.ItemOrdered.Price,
                             ImageItem = orderedItem.ItemOrdered.ImageItem,
                             DescriptionItem = orderedItem.ItemOrdered.DescriptionItem,
-                            Quantity = orderedItem.Quantity
+                            Quantity = orderedItem.Quantity,
+                            Size = orderedItem.Size
                         })
                     };
                 });
@@ -82,7 +83,8 @@ namespace Application.Services.Orders
                     Price = orderedItem.ItemOrdered.Price,
                     ImageItem = orderedItem.ItemOrdered.ImageItem,
                     DescriptionItem = orderedItem.ItemOrdered.DescriptionItem,
-                    Quantity = orderedItem.Quantity
+                    Quantity = orderedItem.Quantity,
+                    Size = orderedItem.Size
                 })
             };
         }

@@ -30,7 +30,7 @@ namespace WebApi
 {
     public class Startup
     {
-        public static readonly string CorsPolicyName = "MyPolicy";
+        readonly string CorsPolicyName = "MyPolicy";
         
         public Startup(IConfiguration configuration)
         {
@@ -98,7 +98,10 @@ namespace WebApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            if (env.IsProduction())
+            {
+                app.UseHttpsRedirection();
+            }
 
             app.UseCors(CorsPolicyName);
 

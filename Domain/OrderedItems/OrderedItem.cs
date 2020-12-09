@@ -8,6 +8,7 @@ namespace Domain.OrderedItems
     {
         public int Id { get; set; }
         public int Quantity { get; set; }
+        public string Size { get; set; }
         public IOrder Order { get; set; }
         public IItem ItemOrdered { get; set; }
 

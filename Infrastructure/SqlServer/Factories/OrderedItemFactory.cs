@@ -18,6 +18,7 @@ namespace Infrastructure.SqlServer.Factories
             {
                 Id = reader.GetInt32(reader.GetOrdinal(OrderedItemSqlServer.ColId)),
                 Quantity = reader.GetInt32(reader.GetOrdinal(OrderedItemSqlServer.ColQuantity)),
+                Size = reader.GetString(reader.GetOrdinal(OrderedItemSqlServer.ColSize)),
                 ItemOrdered = new Item
                 {
                   Id = reader.GetInt32(reader.GetOrdinal(OrderedItemSqlServer.ColItemId)),

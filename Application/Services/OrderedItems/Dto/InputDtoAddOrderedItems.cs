@@ -10,6 +10,7 @@ namespace Application.Services.OrderedItems.Dto
         {
             public int ItemId { get; set; }
             public int Quantity { get; set; }
+            public string Size { get; set; }
         }
     }
 }

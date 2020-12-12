@@ -45,6 +45,17 @@ namespace WebApi.Controllers
 
             return NotFound();
         }
+
+        [Authorize(Roles = "Admin")]
+        [HttpDelete]
+        [Route("{id:int}")]
+        public ActionResult Delete(int id)
+        {
+            if (_itemService.Delete(id))
+                return Ok();
+
+            return NotFound();
+        }
         
         // Reviews
         [HttpGet]

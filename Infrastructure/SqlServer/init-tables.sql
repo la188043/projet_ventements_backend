@@ -82,7 +82,7 @@ CREATE TABLE wishlist
 	itemId      INT             NOT NULL,
 	addedAt     DATETIME        NOT NULL,
 	
-    PRIMARY KEY (id),
+    PRIMARY KEY (uservId, itemId),
 	FOREIGN KEY (uservId) REFERENCES userv (id) ON DELETE CASCADE,
 	FOREIGN KEY (itemId) REFERENCES item (id) 
 );
@@ -96,7 +96,7 @@ CREATE TABLE baggedItem
 	uservId     INT             NOT NULL,
 	itemId      INT             NOT NULL,
 
-	PRIMARY KEY (id),
+	PRIMARY KEY (uservId, itemId),
 	FOREIGN KEY (uservId) REFERENCES userv (id) ON DELETE CASCADE,
 	FOREIGN KEY (itemId) REFERENCES item (id) ON DELETE CASCADE
 );
@@ -120,7 +120,7 @@ CREATE TABLE orderedItem
     ordervId INT            NOT NULL, 
     itemId   INT            NOT NULL,
     
-    PRIMARY KEY (id),
+    PRIMARY KEY (ordervId, itemId),
     FOREIGN KEY (ordervId)  REFERENCES orderv(id) ON DELETE CASCADE,
     FOREIGN KEY (itemId)    REFERENCES item(id)
 );

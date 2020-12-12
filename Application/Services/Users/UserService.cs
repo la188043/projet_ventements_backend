@@ -120,6 +120,11 @@ namespace Application.Services.Users
             return new OutputDtoAuthenticateUser(userFromDb, token);
         }
 
+        public bool Delete(int userId)
+        {
+            return _userRepository.Delete(userId);
+        }
+
         public OutputDtoQueryAddress RegisterAddress(int idUser, InputDtoAddAddress address)
         {
             // Si null on le créé (?? = nullish operator)

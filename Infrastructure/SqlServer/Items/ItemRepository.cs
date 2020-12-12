@@ -116,5 +116,19 @@ namespace Infrastructure.SqlServer.Items
                 return cmd.ExecuteNonQuery() > 0;
             }
         }
+
+        public bool Delete(int id)
+        {
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+                var cmd = connection.CreateCommand();
+                cmd.CommandText = ItemSqlServer.ReqDelete;
+
+                cmd.Parameters.AddWithValue($"@{ItemSqlServer.ColId}", id);
+
+                return cmd.ExecuteNonQuery() > 0;
+            }
+        }
     }
 }

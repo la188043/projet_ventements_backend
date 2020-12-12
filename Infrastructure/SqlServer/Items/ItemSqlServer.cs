@@ -46,6 +46,8 @@ namespace Infrastructure.SqlServer.Items
         ";
         
         public static readonly string ReqGetByCategoryId = ReqQuery + $" WHERE {TableName}.{ColCategoryId} = @{ColCategoryId}";
+
+        public static readonly string ReqDelete = $"DELETE FROM {TableName} WHERE {ColId} = @{ColId}";
     }
     
 }

@@ -10,6 +10,7 @@ namespace Application.Repositories
         IItem GetById(int id);
         IEnumerable<IItem> GetByCategoryId(int id);
         IItem Create(int categoryId, IItem item);
-        public bool Update(int id, IItem item);
+        bool Update(int id, IItem item);
+        bool Delete(int id);
     }
 }

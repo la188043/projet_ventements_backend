@@ -21,6 +21,12 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
+        public ActionResult<OutputDtoQueryItem> Query()
+        {
+            return Ok(_itemService.Query());
+        }
+        
+        [HttpGet]
         [Route("{id:int}")]
         public ActionResult<OutputDtoQueryItem> Get(int id)
         {

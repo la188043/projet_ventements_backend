@@ -91,6 +91,20 @@ namespace Infrastructure.SqlServer.Users
             return null;
         }
 
+        public bool Delete(int userId)
+        {
+            using (var connection = Database.GetConnection())
+            {
+                connection.Open();
+                var cmd = connection.CreateCommand();
+                cmd.CommandText = UserSqlServer.ReqDelete;
+
+                cmd.Parameters.AddWithValue($"@{UserSqlServer.ColId}", userId);
+
+                return cmd.ExecuteNonQuery() > 0;
+            }
+        }
+
         public bool RegisterAddress(int idUser, IAddress address)
         {
             using (var connection = Database.GetConnection())

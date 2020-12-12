@@ -64,6 +64,17 @@ namespace WebApi.Controllers
             return Ok(_userService.GetById(id));
         }
 
+        [Authorize(Roles = "Admin")]
+        [HttpDelete]
+        [Route("{id:int}")]
+        public ActionResult Delete(int id)
+        {
+            if (_userService.Delete(id))
+                return Ok();
+
+            return NotFound();
+        }
+
         // Addresses
         [Authorize]
         [HttpPost]

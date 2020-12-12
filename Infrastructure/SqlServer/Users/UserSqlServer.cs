@@ -59,5 +59,7 @@ namespace Infrastructure.SqlServer.Users
                 WHERE {TableName}.{ColId} = @{ColId}
             )
         ";
+
+        public static readonly string ReqDelete = $"DELETE FROM {TableName} WHERE {ColId} = @{ColId}";
     }
 }

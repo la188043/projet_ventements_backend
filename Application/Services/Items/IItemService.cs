@@ -9,6 +9,7 @@ namespace Application.Services.Items
         OutputDtoQueryItem GetById(int id);
         IEnumerable<OutputDtoQueryItem> GetByCategoryId(int id);
         OutputDtoQueryItem Create(int categoryId, InputDtoAddItem inputDtoAddItem);
-        public bool Update(int id, InputDtoUpdateItem inputDtoUpdateItem);
+        bool Update(int id, InputDtoUpdateItem inputDtoUpdateItem);
+        bool Delete(int id);
     }
 }

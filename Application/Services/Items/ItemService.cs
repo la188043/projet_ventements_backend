@@ -116,5 +116,10 @@ namespace Application.Services.Items
 
             return _itemRepository.Update(id, itemFromDto);
         }
+
+        public bool Delete(int id)
+        {
+            return _itemRepository.Delete(id);
+        }
     }
 }

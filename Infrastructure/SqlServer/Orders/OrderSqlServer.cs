@@ -20,9 +20,15 @@ namespace Infrastructure.SqlServer.Orders
             ON {TableName}.{ColUserId} = {UserSqlServer.TableName}.{ColId}
         ";
 
-        public static readonly string ReqGetByUserId = ReqQuery + $" WHERE {TableName}.{ColUserId} = @{ColUserId}";
+        public static readonly string ReqGetByUserId = ReqQuery + $@" 
+            WHERE {TableName}.{ColUserId} = @{ColUserId}
+            ORDER BY {TableName}.{ColOrderedAt} DESC
+        ";
 
-        public static readonly string ReqGetById = ReqQuery + $" WHERE {TableName}.{ColId} = @{ColId}";
+        public static readonly string ReqGetById = ReqQuery + $@" 
+            WHERE {TableName}.{ColId} = @{ColId}
+            ORDER BY {TableName}.{ColOrderedAt} DESC
+        ";
 
         public static readonly string ReqCreate = $@"
             INSERT INTO {TableName}

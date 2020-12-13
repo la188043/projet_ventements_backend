@@ -140,7 +140,16 @@ namespace WebApi.Controllers
         [Route("{uservId:int}/wishlist/{itemId:int}")]
         public ActionResult<OutputDtoQueryWishLists> AddItemToWishlist(int uservId, int itemId)
         {
-            return Ok(_wishListService.Add(uservId, itemId));
+            try
+            {
+                var response = _wishListService.Add(uservId, itemId);
+
+                return Ok(response);
+            }
+            catch (DuplicateException e)
+            {
+                return BadRequest(new {message = e.Message});
+            }
         }
 
         [Authorize]

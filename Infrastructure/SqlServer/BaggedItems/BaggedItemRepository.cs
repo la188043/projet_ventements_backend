@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using Application.Repositories;
 using Domain.BaggedItems;
+using Domain.Exceptions;
 using Infrastructure.SqlServer.Factories;
 using Infrastructure.SqlServer.Shared;
 
@@ -44,7 +46,14 @@ namespace Infrastructure.SqlServer.BaggedItems
                 cmd.Parameters.AddWithValue($"@{BaggedItemSqlServer.ColQuantity}", baggedItem.Quantity);
                 cmd.Parameters.AddWithValue($"@{BaggedItemSqlServer.ColSize}", baggedItem.Size);
 
-                baggedItem.Id = (int) cmd.ExecuteScalar();
+                try
+                {
+                    baggedItem.Id = (int) cmd.ExecuteScalar();
+                }
+                catch (SqlException)
+                {
+                    throw new DuplicateException("Cet article est déjà présent dans le panier");
+                }
             }
 
             return baggedItem;

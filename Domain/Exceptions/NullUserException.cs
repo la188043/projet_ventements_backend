@@ -4,7 +4,7 @@ namespace Domain.Exceptions
 {
     public class NullUserException : Exception
     {
-        public NullUserException(string message) : base(message)
+        public NullUserException() : base("Adresse mail inexistante")
         {
         }
     }

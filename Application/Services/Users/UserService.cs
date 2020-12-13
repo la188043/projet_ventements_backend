@@ -109,14 +109,14 @@ namespace Application.Services.Users
             var userFromDb = _userRepository.Authenticate(new User {Email = user.Email});
 
             if (userFromDb == null)
-                throw new NullUserException("Adresse mail inexistante");
+                throw new NullUserException();
             
             bool passwordVerified =
                 _passwordEncryption.VerifyPassword(
                     userFromDb, userFromDb.EncryptedPassword, user.PasswordUser);
 
             if (!passwordVerified)
-                throw new WrongPasswordException("Mot de passe incorrect");
+                throw new WrongPasswordException();
 
             var token = GenerateJwtToken(userFromDb);
 

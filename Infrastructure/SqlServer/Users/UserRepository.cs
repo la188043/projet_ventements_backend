@@ -73,7 +73,7 @@ namespace Infrastructure.SqlServer.Users
                 }
                 catch (SqlException)
                 {
-                    throw new MailAlreadyUsedException("Cet email est déjà utilisé");
+                    throw new DuplicateException("Cet email est déjà utilisé");
                 }
             }
 

@@ -49,7 +49,7 @@ namespace WebApi.Controllers
                 
                 return Ok(response);
             }
-            catch (MailAlreadyUsedException e)
+            catch (DuplicateException e)
             {
                 return BadRequest(new {message = e.Message});
             }

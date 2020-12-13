@@ -123,7 +123,16 @@ namespace WebApi.Controllers
         public ActionResult<OutputDtoAddBaggedItem> AddToBag(int userId, int itemId,
             [FromBody] InputDtoAddItemToBag inputDtoAddItemToBag)
         {
-            return Ok(_baggedItemService.AddToBag(userId, itemId, inputDtoAddItemToBag));
+            try
+            {
+                var response = _baggedItemService.AddToBag(userId, itemId, inputDtoAddItemToBag);
+
+                return Ok(response);
+            }
+            catch (DuplicateException e)
+            {
+                return BadRequest(new {message = e.Message});
+            }
         }
 
         [Authorize]

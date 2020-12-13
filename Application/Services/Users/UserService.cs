@@ -9,6 +9,7 @@ using Application.Services.Addresses;
 using Application.Services.Addresses.Dto;
 using Application.Services.Users.Dto;
 using Domain.Addresses;
+using Domain.Exceptions;
 using Domain.Users;
 using Microsoft.IdentityModel.Tokens;
 
@@ -107,13 +108,15 @@ namespace Application.Services.Users
         {
             var userFromDb = _userRepository.Authenticate(new User {Email = user.Email});
 
-            // TODO Vérifier si l'utilisateur n'est pas null avant
+            if (userFromDb == null)
+                throw new NullUserException();
+            
             bool passwordVerified =
                 _passwordEncryption.VerifyPassword(
                     userFromDb, userFromDb.EncryptedPassword, user.PasswordUser);
 
             if (!passwordVerified)
-                return null; // TODO return Exception
+                throw new WrongPasswordException();
 
             var token = GenerateJwtToken(userFromDb);
 

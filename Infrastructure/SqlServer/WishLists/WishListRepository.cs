@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using Application.Repositories;
+using Domain.Exceptions;
 using Domain.Items;
 using Domain.Users;
 using Domain.Wishlists;
@@ -62,7 +65,16 @@ namespace Infrastructure.SqlServer.WishLists
                 cmd.Parameters.AddWithValue($"@{WishListSqlServer.ColItemId}", itemId);
                 cmd.Parameters.AddWithValue($"@{WishListSqlServer.ColUserId}", uservId);
 
-                return new WishList {Id = (int) cmd.ExecuteScalar()};
+                try
+                {
+                    var wishlist = new WishList {Id = (int) cmd.ExecuteScalar()};
+                    
+                    return wishlist;
+                }
+                catch (SqlException)
+                {
+                    throw new DuplicateException("Cet article est déjà présent dans la liste de souhaits");
+                }
             }
         }
 

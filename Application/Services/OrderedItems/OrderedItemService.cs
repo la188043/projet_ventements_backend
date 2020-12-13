@@ -80,7 +80,7 @@ namespace Application.Services.OrderedItems
             foreach (var orderedItem in inputDtoAddOrderedItems.OrderedItems)
             {
                 orderedItems.Add(AddItemToOrder(orderId, orderedItem.ItemId,
-                    new InputDtoAddOrderedItem {Quantity = orderedItem.Quantity}));
+                    new InputDtoAddOrderedItem {Quantity = orderedItem.Quantity, Size = orderedItem.Size}));
             }
 
             return orderedItems;

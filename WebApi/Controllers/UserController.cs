@@ -1,4 +1,5 @@
-﻿using Application.Services.Addresses.Dto;
+﻿using System;
+using Application.Services.Addresses.Dto;
 using Application.Services.BaggedItems;
 using Application.Services.BaggedItems.Dto;
 using Application.Services.Orders;
@@ -7,6 +8,7 @@ using Application.Services.Users;
 using Application.Services.Users.Dto;
 using Application.Services.WishLists;
 using Application.Services.WishLists.Dto;
+using Domain.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Helpers;
 
@@ -48,12 +50,20 @@ namespace WebApi.Controllers
         [Route("authenticate")]
         public ActionResult<OutputDtoAuthenticateUser> Authenticate([FromBody] InputDtoAuthenticateUser user)
         {
-            var response = _userService.Authenticate(user);
+            try
+            {
+                var response = _userService.Authenticate(user);
 
-            if (response == null)
-                return BadRequest(new {message = "Username or password is incorrect"});
-
-            return Ok(response);
+                return Ok(response);
+            }
+            catch (NullUserException e)
+            {
+                return BadRequest(new {message = e.Message});
+            }
+            catch (WrongPasswordException e)
+            {
+                return BadRequest(new {message = e.Message});
+            }
         }
 
         [Authorize]

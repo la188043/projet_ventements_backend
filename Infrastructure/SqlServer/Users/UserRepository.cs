@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using Application.Repositories;
 using Application.Services.Addresses.Dto;
 using Domain.Addresses;
+using Domain.Exceptions;
 using Domain.Users;
 using Infrastructure.SqlServer.Factories;
 using Infrastructure.SqlServer.Shared;
@@ -66,7 +67,14 @@ namespace Infrastructure.SqlServer.Users
                 cmd.Parameters.AddWithValue($"@{UserSqlServer.ColPassword}", user.EncryptedPassword);
                 cmd.Parameters.AddWithValue($"@{UserSqlServer.ColGender}", user.Gender);
 
-                user.Id = (int) cmd.ExecuteScalar();
+                try
+                {
+                    user.Id = (int) cmd.ExecuteScalar();
+                }
+                catch (SqlException)
+                {
+                    throw new MailAlreadyUsedException("Cet email est déjà utilisé");
+                }
             }
 
             return user;

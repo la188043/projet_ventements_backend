@@ -43,7 +43,16 @@ namespace WebApi.Controllers
         public ActionResult<OutputDtoAuthenticateUser> Post(
             [FromBody] InputDtoAddUser user)
         {
-            return Ok(_userService.Create(user));
+            try
+            {
+                var response = _userService.Create(user);
+                
+                return Ok(response);
+            }
+            catch (MailAlreadyUsedException e)
+            {
+                return BadRequest(new {message = e.Message});
+            }
         }
 
         [HttpPost]

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Domain.Addresses;
 using Domain.BaggedItems;
+using Domain.Categories;
 using Domain.Exceptions;
 using Domain.Items;
 using Domain.Users;
@@ -17,18 +19,54 @@ namespace UnitTests.Domain
             IList<IBaggedItem> items = new List<IBaggedItem>();
             for (var i = 1; i < 11; i++)
             {
-                items.Add(new BaggedItem
-                {
-                    Id = i,
-                    Quantity = i,
-                    Size = i.ToString(),
-                    AddedAt = DateTime.Now,
-                    BagOwner = new User { Id = i },
-                    AddedItem = new Item { Id = i }
-                });
+                items.Add(CreateBaggedItem(i));
             }
 
             return items;
+        }
+
+        public static IBaggedItem CreateBaggedItem(int i, float price, int quantity)
+        {
+            return new BaggedItem
+            {
+                Id = i,
+                Quantity = quantity,
+                Size = i.ToString(),
+                AddedAt = DateTime.Now,
+                BagOwner = new User
+                {
+                    Id = i,
+                    Firstname = i.ToString(),
+                    Lastname = i.ToString(),
+                    Email = $"{i}@gmail.com",
+                    Birthdate = DateTime.Now,
+                    EncryptedPassword = i.ToString(),
+                    Administrator = false,
+                    Gender = 'M',
+                    Address = new Address
+                    {
+                        Id = i,
+                        Street = i.ToString(),
+                        HomeNumber = i,
+                        Zip = i.ToString(),
+                        City = i.ToString()
+                    },
+                },
+                AddedItem = new Item
+                {
+                    Id = i,
+                    Label = $"Item{i}",
+                    Price = price,
+                    ImageItem = i.ToString(),
+                    DescriptionItem = i.ToString(),
+                    Category = new Category {Id = i}
+                }
+            };
+        }
+
+        public static IBaggedItem CreateBaggedItem(int i)
+        {
+            return CreateBaggedItem(i, i, i);
         }
         
         [Test]
@@ -50,7 +88,7 @@ namespace UnitTests.Domain
         {
             // arrange
             var userBag = new UserBag();
-            var baggedItem = new BaggedItem {Id = 1};
+            var baggedItem = CreateBaggedItem(1);
             
             // act
             userBag.AddItem(baggedItem);
@@ -64,7 +102,7 @@ namespace UnitTests.Domain
         {
             // arrange
             var userBag = new UserBag();
-            var baggedItems = new[] {new BaggedItem {Id = 1}, new BaggedItem {Id = 1}};
+            var baggedItems = new[] {CreateBaggedItem(1), CreateBaggedItem(1)};
 
             // act
             userBag.AddItems(baggedItems);
@@ -81,12 +119,7 @@ namespace UnitTests.Domain
         {
             // arrange
             var userBag = new UserBag();
-            var baggedItems = prices.Select((price, i) => new BaggedItem
-            {
-                Id = i,
-                Quantity = quantities[i],
-                AddedItem = new Item {Price = price}
-            });
+            var baggedItems = prices.Select((price, i) => CreateBaggedItem(i, price, quantities[i]));
             userBag.AddItems(baggedItems);
 
             // act

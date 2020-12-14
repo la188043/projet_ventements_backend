@@ -27,28 +27,7 @@ namespace UnitTests.Domain
 
         public static IOrderedItem CreateOrderedItem(int i)
         {
-            return new OrderedItem
-            {
-                Id = i,
-                Quantity = i,
-                Size = i.ToString(),
-                Order = new Order
-                {
-                    Id = i,
-                    IsPaid = false,
-                    orderedAt = DateTime.Now,
-                    Orderer = new User {Id = i}
-                },
-                ItemOrdered = new Item
-                {
-                    Id = i,
-                    Label = $"Item{i}",
-                    Price = i,
-                    ImageItem = i.ToString(),
-                    DescriptionItem = i.ToString(),
-                    Category = new Category {Id = i}
-                }
-            };
+            return CreateOrderedItem(i, i, i);
         }
 
         public static IOrderedItem CreateOrderedItem(int i, float price, int quantity)

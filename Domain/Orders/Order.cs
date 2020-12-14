@@ -13,5 +13,15 @@ namespace Domain.Orders
         public Order()
         {
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Order order)
+            {
+                return Id == order.Id;
+            }
+
+            return false;
+        }
     }
 }

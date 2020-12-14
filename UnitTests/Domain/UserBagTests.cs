@@ -26,7 +26,7 @@ namespace UnitTests.Domain
         }
         
         [Test]
-        public void Add_Items_IsContaied()
+        public void Add_Items_AreContained()
         {
             // arrange
             var userBag = new UserBag();

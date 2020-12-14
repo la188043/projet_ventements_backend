@@ -1,21 +1,6 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=4ea66166_002D04c9_002D4cae_002Daf21_002D02fe6194a225/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Add_SingleItem_IsSizeOne" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;Or&gt;&#xD;
-    &lt;And&gt;&#xD;
-      &lt;TestAncestor&gt;&#xD;
-        &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Domain.UserBagTests.Add_SingleItem_IsSizeOne&lt;/TestId&gt;&#xD;
-        &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Domain.UserBagTests.Add_SingleItem_IsContaied&lt;/TestId&gt;&#xD;
-        &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Domain.UserBagTests.Add_MultipleItems&lt;/TestId&gt;&#xD;
-        &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Domain.UserBagTests.Add_Items_IsContaied&lt;/TestId&gt;&#xD;
-      &lt;/TestAncestor&gt;&#xD;
-      &lt;Not&gt;&#xD;
-        &lt;TestAncestor&gt;&#xD;
-          &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Domain.UserBagTests.Add_Items_IsContaied&lt;/TestId&gt;&#xD;
-        &lt;/TestAncestor&gt;&#xD;
-      &lt;/Not&gt;&#xD;
-    &lt;/And&gt;&#xD;
-    &lt;TestAncestor&gt;&#xD;
-      &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Domain.UserBagTests.Add_Items_IsContaied&lt;/TestId&gt;&#xD;
-    &lt;/TestAncestor&gt;&#xD;
-  &lt;/Or&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Domain.UserBagTests&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

@@ -73,7 +73,7 @@ namespace Infrastructure.SqlServer.WishLists
                 }
                 catch (SqlException)
                 {
-                    throw new DuplicateException("Cet article est déjà présent dans la liste de souhaits");
+                    throw new DuplicateSqlPrimaryException("Cet article est déjà présent dans la liste de souhaits");
                 }
             }
         }

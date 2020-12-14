@@ -49,7 +49,7 @@ namespace WebApi.Controllers
                 
                 return Ok(response);
             }
-            catch (DuplicateException e)
+            catch (DuplicateSqlPrimaryException e)
             {
                 return BadRequest(new {message = e.Message});
             }
@@ -129,7 +129,7 @@ namespace WebApi.Controllers
 
                 return Ok(response);
             }
-            catch (DuplicateException e)
+            catch (DuplicateSqlPrimaryException e)
             {
                 return BadRequest(new {message = e.Message});
             }
@@ -155,7 +155,7 @@ namespace WebApi.Controllers
 
                 return Ok(response);
             }
-            catch (DuplicateException e)
+            catch (DuplicateSqlPrimaryException e)
             {
                 return BadRequest(new {message = e.Message});
             }

@@ -42,7 +42,7 @@ namespace UnitTests.Domain
             userBag.AddItems(baggedItems);
             
             // assert
-            Assert.AreEqual(baggedItems, userBag.Items.ToList());
+            Assert.AreEqual(baggedItems, userBag.Items);
         }
 
         [Test]

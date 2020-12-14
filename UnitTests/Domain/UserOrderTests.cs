@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Domain.Categories;
@@ -20,28 +19,7 @@ namespace UnitTests.Domain
             IList<IOrderedItem> orderedItems = new List<IOrderedItem>();
             for (var i = 1; i < 11; i++)
             {
-                orderedItems.Add(new OrderedItem
-                {
-                    Id = i,
-                    Quantity = i,
-                    Size = i.ToString(),
-                    Order = new Order
-                    {
-                        Id = i,
-                        IsPaid = false,
-                        orderedAt = DateTime.Now,
-                        Orderer = new User {Id = i}
-                    },
-                    ItemOrdered = new Item
-                    {
-                        Id = i,
-                        Label = $"Item{i}",
-                        Price = i,
-                        ImageItem = i.ToString(),
-                        DescriptionItem = i.ToString(),
-                        Category = new Category {Id = i}
-                    }
-                });
+                orderedItems.Add(CreateOrderedItem(i));
             }
 
             return orderedItems;

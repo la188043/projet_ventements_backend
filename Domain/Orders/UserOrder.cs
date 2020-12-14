@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Domain.Exceptions;
 using Domain.OrderedItems;
 using Domain.Users;
 
@@ -21,6 +22,8 @@ namespace Domain.Orders
 
         public void AddOrderedItem(IOrderedItem orderedItem)
         {
+            if (OrderedItems.Contains(orderedItem)) throw new DuplicateItemException();
+            
             OrderedItems.Add(orderedItem);
         }
 
@@ -28,7 +31,11 @@ namespace Domain.Orders
         {
             foreach (var orderedItem in orderedItems)
             {
-                OrderedItems.Add(orderedItem);
+                try
+                {
+                    OrderedItems.Add(orderedItem);
+                }
+                catch (DuplicateItemException e) {}
             }
         }
 

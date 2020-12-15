@@ -34,5 +34,18 @@ namespace Application.Services.BaggedItems.Dto
             public string Firstname { get; set; }
             public string Lastname { get; set; }
         }
+
+        protected bool Equals(OutputDtoQueryUserBaggedItem other)
+        {
+            return Equals(BagOwner, other.BagOwner) && TotalPrice.Equals(other.TotalPrice) && Equals(Items, other.Items);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((OutputDtoQueryUserBaggedItem) obj);
+        }
     }
 }

@@ -145,6 +145,14 @@ namespace UnitTests.Application
             };
         }
 
+        public static InputDtoUpdateBaggedItem CreateInputDtoUpdateBaggedItem(int i)
+        {
+            return new InputDtoUpdateBaggedItem
+            {
+                Quantity = i
+            };
+        }
+
         [Test]
         public void GetByUserId_SingleNumber_ReturnsOutputDtoQueryUserBaggedItem()
         {
@@ -247,6 +255,56 @@ namespace UnitTests.Application
 
             // ASSERT //
             Assert.AreEqual(rows, output);
+        }
+
+        [Test]
+        [TestCase(true)]
+        [TestCase(false)]
+        public void DeleteItem_ReturnsIsDeleted(bool isDeletedFromRepo)
+        {
+            // ARRANGE //
+
+            // Substitutes
+            var userRep = Substitute.For<IUserRepository>();
+            var itemRep = Substitute.For<IItemRepository>();
+            var baggedItemRep = Substitute.For<IBaggedItemRepository>();
+
+            // Substitutes behavior
+            baggedItemRep.DeleteItem(1).Returns(isDeletedFromRepo);
+
+            // BaggedItem Service
+            var baggedItemService = new BaggedItemService(baggedItemRep, userRep, itemRep); 
+            
+            // ACT //
+            var output = baggedItemService.DeleteItem(1);
+
+            // ASSERT //
+            Assert.AreEqual(isDeletedFromRepo, output);
+        }
+
+        [Test]
+        [TestCase(true)]
+        [TestCase(false)]
+        public void UpdateQuantity_ReturnsIsUpdated(bool isUpdatedFromRepo)
+        {
+            // ARRANGE //
+
+            // Substitutes
+            var userRep = Substitute.For<IUserRepository>();
+            var itemRep = Substitute.For<IItemRepository>();
+            var baggedItemRep = Substitute.For<IBaggedItemRepository>();
+
+            // Substitutes behavior
+            baggedItemRep.UpdateQuantity(1, Arg.Any<IBaggedItem>()).Returns(isUpdatedFromRepo);
+
+            // BaggedItem Service
+            var baggedItemService = new BaggedItemService(baggedItemRep, userRep, itemRep); 
+            
+            // ACT //
+            var output = baggedItemService.UpdateQuantity(1, CreateInputDtoUpdateBaggedItem(1));
+
+            // ASSERT //
+            Assert.AreEqual(isUpdatedFromRepo, output);
         }
     }
 }

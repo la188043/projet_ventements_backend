@@ -7,9 +7,11 @@ using Application.Services.BaggedItems.Dto;
 using Domain.Addresses;
 using Domain.BaggedItems;
 using Domain.Categories;
+using Domain.Exceptions;
 using Domain.Items;
 using Domain.Users;
 using NSubstitute;
+using NSubstitute.ExceptionExtensions;
 using NUnit.Framework;
 
 namespace UnitTests.Application
@@ -102,17 +104,45 @@ namespace UnitTests.Application
                 });
 
             var bagOwner = CreateUser(1);
-             return new OutputDtoQueryUserBaggedItem
-             {
-                 BagOwner = new OutputDtoQueryUserBaggedItem.User
-                 {
-                     Id = bagOwner.Id,
-                     Firstname = bagOwner.Firstname,
-                     Lastname = bagOwner.Lastname
-                 },
-                 TotalPrice = userBag.ComputeTotalPrice(),
-                 Items = dtoBaggedItems
-             };           
+            return new OutputDtoQueryUserBaggedItem
+            {
+                BagOwner = new OutputDtoQueryUserBaggedItem.User
+                {
+                    Id = bagOwner.Id,
+                    Firstname = bagOwner.Firstname,
+                    Lastname = bagOwner.Lastname
+                },
+                TotalPrice = userBag.ComputeTotalPrice(),
+                Items = dtoBaggedItems
+            };
+        }
+
+        public static InputDtoAddItemToBag CreateInputDtoAddItemToBag(int i)
+        {
+            return new InputDtoAddItemToBag
+            {
+                Quantity = i,
+                Size = i.ToString()
+            };
+        }
+
+        public static OutputDtoAddBaggedItem CreateOutputDtoAddBaggedItem(int i)
+        {
+            return new OutputDtoAddBaggedItem
+            {
+                Id = i,
+                AddedAt = DateTime.Now,
+                Quantity = i,
+                Size = i.ToString(),
+                BagItem = new OutputDtoAddBaggedItem.Item
+                {
+                    Id = i,
+                    Label = $"Item{i}",
+                    Price = i,
+                    ImageItem = i.ToString(),
+                    DescriptionItem = i.ToString()
+                }
+            };
         }
 
         [Test]
@@ -140,6 +170,55 @@ namespace UnitTests.Application
 
             // ASSERT //
             Assert.AreEqual(expected, outputBaggedItems);
+        }
+
+        [Test]
+        public void AddToBag_SingleInputBaggedItem_ReturnsOutputBaggedItem()
+        {
+            // ARRANGE //
+
+            // Substitutes
+            var userRep = Substitute.For<IUserRepository>();
+            var itemRep = Substitute.For<IItemRepository>();
+            var baggedItemRep = Substitute.For<IBaggedItemRepository>();
+
+            // Substitutes behavior
+            baggedItemRep.AddToBag(1, 1, Arg.Any<IBaggedItem>()).Returns(CreateBaggedItem(1));
+            itemRep.GetById(1).Returns(CreateItem(1));
+            
+            // BaggedItem Service
+            var baggedItemService = new BaggedItemService(baggedItemRep, userRep, itemRep);
+            
+            // Expectation
+            var expected = CreateOutputDtoAddBaggedItem(1);
+            
+            // ACT //
+            var outputBaggedItem = baggedItemService.AddToBag(1, 1, CreateInputDtoAddItemToBag(1));
+            
+            // ASSERT //
+            Assert.AreEqual(expected, outputBaggedItem);
+        }
+
+        [Test]
+        public void AddToBag_SingleInputBaggedItem_ThrowsException()
+        {
+            // ARRANGE //
+
+            // Substitutes
+            var userRep = Substitute.For<IUserRepository>();
+            var itemRep = Substitute.For<IItemRepository>();
+            var baggedItemRep = Substitute.For<IBaggedItemRepository>();
+
+            // Substitutes behavior
+            baggedItemRep
+                .AddToBag(1, 1, Arg.Any<IBaggedItem>())
+                .Returns(x => { throw new DuplicateSqlPrimaryException("message"); });
+            
+            var baggedItemService = new BaggedItemService(baggedItemRep, userRep, itemRep); 
+            
+            // ASSERT //
+            Assert.Throws<DuplicateSqlPrimaryException>(() =>
+                baggedItemService.AddToBag(1, 1, CreateInputDtoAddItemToBag(1)));
         }
     }
 }

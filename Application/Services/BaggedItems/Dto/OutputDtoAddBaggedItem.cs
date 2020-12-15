@@ -17,12 +17,26 @@ namespace Application.Services.BaggedItems.Dto
             public float Price { get; set; }
             public string ImageItem { get; set; }
             public string DescriptionItem { get; set; }
+
+            private bool Equals(Item other)
+            {
+                return Id == other.Id && Label == other.Label && Price.Equals(other.Price) &&
+                       ImageItem == other.ImageItem && DescriptionItem == other.DescriptionItem;
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (ReferenceEquals(null, obj)) return false;
+                if (ReferenceEquals(this, obj)) return true;
+                if (obj.GetType() != this.GetType()) return false;
+                return Equals((Item) obj);
+            }
         }
 
-        protected bool Equals(OutputDtoAddBaggedItem other)
+        private bool Equals(OutputDtoAddBaggedItem other)
         {
-            return Id == other.Id && AddedAt.Equals(other.AddedAt) && Quantity == other.Quantity &&
-                   Size == other.Size && Equals(BagItem, other.BagItem);
+            return Id == other.Id && Quantity == other.Quantity &&
+                   Size == other.Size && BagItem.Equals(other.BagItem);
         }
 
         public override bool Equals(object obj)

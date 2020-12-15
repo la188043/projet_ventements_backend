@@ -12,6 +12,11 @@
     &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.BaggedItemServiceTest.GetByUserId_SingleNumber_ReturnsOutputDtoQueryUserBaggedItem&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.BaggedItemServiceTest.AddToBag_SingleInputBaggedItem_ReturnsOutputBaggedItem&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.BaggedItemServiceTest.AddToBag_SingleInputBaggedItem_ThrowsException&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.BaggedItemServiceTest.EmptyBag_ReturnsRowsAffected&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.BaggedItemServiceTest.EmptyBag_ReturnsRowsAffected(1)&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.BaggedItemServiceTest.EmptyBag_ReturnsRowsAffected(3)&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.BaggedItemServiceTest.EmptyBag_ReturnsRowsAffected(7)&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.BaggedItemServiceTest.EmptyBag_ReturnsRowsAffected(18)&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=76d25c30_002D021a_002D4272_002Db645_002D6a57f58517a0/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Add_DuplicateItems_ContinueWithoutAdding" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;

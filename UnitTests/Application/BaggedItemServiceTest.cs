@@ -214,11 +214,39 @@ namespace UnitTests.Application
                 .AddToBag(1, 1, Arg.Any<IBaggedItem>())
                 .Returns(x => { throw new DuplicateSqlPrimaryException("message"); });
             
+            // BaggedItem Service
             var baggedItemService = new BaggedItemService(baggedItemRep, userRep, itemRep); 
             
             // ASSERT //
             Assert.Throws<DuplicateSqlPrimaryException>(() =>
                 baggedItemService.AddToBag(1, 1, CreateInputDtoAddItemToBag(1)));
+        }
+
+        [Test]
+        [TestCase(1)]
+        [TestCase(3)]
+        [TestCase(7)]
+        [TestCase(18)]
+        public void EmptyBag_ReturnsRowsAffected(int rows)
+        {
+            // ARRANGE //
+
+            // Substitutes
+            var userRep = Substitute.For<IUserRepository>();
+            var itemRep = Substitute.For<IItemRepository>();
+            var baggedItemRep = Substitute.For<IBaggedItemRepository>();
+
+            // Substitutes behavior
+            baggedItemRep.EmptyBag(1).Returns(rows);
+
+            // BaggedItem Service
+            var baggedItemService = new BaggedItemService(baggedItemRep, userRep, itemRep); 
+            
+            // ACT //
+            var output = baggedItemService.EmptyBag(1);
+
+            // ASSERT //
+            Assert.AreEqual(rows, output);
         }
     }
 }

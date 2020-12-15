@@ -22,4 +22,9 @@
     &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.AddressServiceTest.GetById_SingleAddress_ReturnsOutputAddressDto&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.AddressServiceTest.CheckFormDb_SingleAddress_ReturnsSameAddressFound&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=af77f824_002D1a90_002D4840_002D999c_002Dde97bf669702/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CheckFormDb_SingleAddress_ReturnsSameAddressFound" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.AddressServiceTest.CheckFormDb_SingleAddress_ReturnsSameAddressFound&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

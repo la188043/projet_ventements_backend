@@ -12,7 +12,8 @@ namespace Application.Services.Addresses.Dto
 
         private bool Equals(OutputDtoQueryAddress other)
         {
-            return Id == other.Id && Street == other.Street && HomeNumber == other.HomeNumber && Zip == other.Zip && City == other.City;
+            return Id == other.Id && Street == other.Street && HomeNumber == other.HomeNumber && Zip == other.Zip &&
+                   City == other.City;
         }
 
         public override bool Equals(object obj)

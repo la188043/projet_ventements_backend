@@ -40,13 +40,6 @@ namespace WebApi.Controllers
             return NotFound();
         }
 
-        [HttpGet]
-        [Route("{id:int}/subs")]
-        public ActionResult<OutputDtoQueryCategory> GetByCategoryId(int id)
-        {
-            return Ok(_categoryService.GetByCategoryId(id));
-        }
-
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult<OutputDtoAddCategory> CreateCategory([FromBody] InputDtoAddCategory inputDtoAddCategory)

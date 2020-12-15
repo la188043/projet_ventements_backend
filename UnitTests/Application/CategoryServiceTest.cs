@@ -151,7 +151,6 @@ namespace UnitTests.Application
 
             // ACT //
             var output = categoryService.GetByCategoryId(1);
-            var test = output.ToList();
 
             // ASSERT //
             Assert.AreEqual(expected, output);

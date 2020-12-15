@@ -69,14 +69,31 @@ namespace UnitTests.Application
             };
         }
 
-        public static OutputDtoQueryCategory CreateOutputDtoQueryCategory(int i)
+        public static OutputDtoQueryCategory CreateOutputDtoQueryCategory(int i, int sizeOfSubs)
         {
+            var subs = new OutputDtoQueryCategory.Category[sizeOfSubs];
+            for (var j = 1; j <= sizeOfSubs; j++)
+            {
+                subs[j - 1] = new OutputDtoQueryCategory.Category {Id = j, Title = j.ToString()};
+            }
+            
             return new OutputDtoQueryCategory
             {
                 Id = i,
                 Title = i.ToString(),
-                SubCategories = new[] {new OutputDtoQueryCategory.Category {Id = 1, Title = "1"},new OutputDtoQueryCategory.Category {Id = 2, Title = "2"}}
+                SubCategories = subs
             };
+        }
+
+        public static IEnumerable<OutputDtoQueryCategory> CreateListOfOutputDtoQueryCategories(int sizeOfList)
+        {
+            IList<OutputDtoQueryCategory> categories = new List<OutputDtoQueryCategory>();
+            for (var i = 1; i <= sizeOfList; i++)
+            {
+                categories.Add(CreateOutputDtoQueryCategory(i, 0));
+            }
+
+            return categories;
         }
         
         [Test]
@@ -89,11 +106,53 @@ namespace UnitTests.Application
             
             var categoryService = new CategoryService(categoryRep);
 
-            var expected = new[] {CreateOutputDtoQueryCategory(1)};
+            var expected = new[] {CreateOutputDtoQueryCategory(1, 2)};
             
             // ACT //
             var output = categoryService.Query();
             
+            // ASSERT //
+            Assert.AreEqual(expected, output);
+        }
+
+        [Test]
+        [TestCase(4)]
+        [TestCase(0)]
+        public void GetById_ReturnsSingleParentCategoryWithSubcategoriesList(int numberOfSubs)
+        {
+            // ARRANGE //
+            var categoryRep = Substitute.For<ICategoryRepository>();
+            categoryRep.GetById(1).Returns(CreateParentCategory(1));
+            categoryRep.GetByCategoryId(1).Returns(CreateListOfSubs(CreateParentCategory(1), numberOfSubs));
+            
+            var categoryService = new CategoryService(categoryRep);
+
+            var expected = CreateOutputDtoQueryCategory(1, numberOfSubs);
+            
+            // ACT //
+            var output = categoryService.GetById(1);
+
+            // ASSERT //
+            Assert.AreEqual(expected, output);
+        }
+
+        [Test]
+        [TestCase(0)]
+        [TestCase(2)]
+        [TestCase(6)]
+        public void GetByCategoryId_SingleNumber_ReturnsSubcategoriesOfParent(int nbOfSubs)
+        {
+            // ARRANGE //
+            var categoryRep = Substitute.For<ICategoryRepository>();
+            categoryRep.GetByCategoryId(1).Returns(CreateListOfSubs(CreateParentCategory(1), nbOfSubs));
+            
+            var categoryService = new CategoryService(categoryRep);
+            var expected = CreateListOfOutputDtoQueryCategories(nbOfSubs);
+
+            // ACT //
+            var output = categoryService.GetByCategoryId(1);
+            var test = output.ToList();
+
             // ASSERT //
             Assert.AreEqual(expected, output);
         }

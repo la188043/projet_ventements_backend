@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using Application.Repositories;
+using Application.Services.Addresses.Dto;
 using Application.Services.Categories.Dto;
 using Domain.Categories;
 
 namespace Application.Services.Categories
 {
-    public class CategoryService:ICategoryService
+    public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
-        
+
         public CategoryService(ICategoryRepository categoryRepository)
         {
             _categoryRepository = categoryRepository;
@@ -22,14 +23,14 @@ namespace Application.Services.Categories
                 .Query()
                 .Select(category =>
                 {
-                    var subcategories = 
+                    var subcategories =
                         _categoryRepository.GetByCategoryId(category.Id)
                             .Select(subcategory => new OutputDtoQueryCategory.Category
                             {
                                 Id = subcategory.Id,
                                 Title = subcategory.Title
                             });
-                    
+
                     return new OutputDtoQueryCategory
                     {
                         Id = category.Id,
@@ -49,21 +50,14 @@ namespace Application.Services.Categories
                     Title = subcategory.Title
                 });
 
-            OutputDtoQueryCategory categoryFromDto = null;
-            try
+            var categoryFromDto = new OutputDtoQueryCategory
             {
-                categoryFromDto = new OutputDtoQueryCategory
-                {
-                    Id = category.Id,
-                    Title = category.Title,
-                    SubCategories = subcategories
-                };
-            }
-            catch
-            {
-            }
-
+                Id = category.Id,
+                Title = category.Title,
+                SubCategories = subcategories
+            };
             return categoryFromDto;
+            
         }
 
         public IEnumerable<OutputDtoQueryCategory> GetByCategoryId(int parentCategoryId)
@@ -75,6 +69,7 @@ namespace Application.Services.Categories
                     {
                         Id = category.Id,
                         Title = category.Title,
+                        SubCategories = new OutputDtoQueryCategory.Category[0]
                     };
                 });
         }
@@ -95,7 +90,7 @@ namespace Application.Services.Categories
         {
             var categoryFromDto = new Category {Title = inputDtoAddCategory.Title};
             var categoryInDb = _categoryRepository.CreateSubCategory(parentCategoryId, categoryFromDto);
-            
+
             return new OutputDtoAddCategory
             {
                 Id = categoryInDb.Id,

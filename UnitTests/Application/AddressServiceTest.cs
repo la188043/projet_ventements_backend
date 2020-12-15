@@ -25,17 +25,6 @@ namespace UnitTests.Application
             };
         }
 
-        public static IAddress CreateAddressWithoutId(int i)
-        {
-            return new Address
-            {
-                Street = i.ToString(),
-                HomeNumber = i,
-                Zip = i.ToString(),
-                City = i.ToString()
-            };
-        }
-
         public static InputDtoAddAddress CreateInputDtoAddAddress(int i)
         {
             return new InputDtoAddAddress
@@ -116,6 +105,26 @@ namespace UnitTests.Application
 
             // ASSERT //
             Assert.AreEqual(null, outputAddress);
+        }
+
+        [Test]
+        public void Create_SingleAddress_ReturnsAddedAddress()
+        {
+            // ARRANGE //
+            var addressRep = Substitute.For<IAddressRepository>();
+            addressRep.Create(Arg.Any<IAddress>()).Returns(CreateAddress(1));
+            
+            // Address service
+            var addressService = new AddressService(addressRep);
+            
+            // Expectation
+            var expected = CreateOutputDtoQueryAddress(1);
+
+            // ACT //
+            var outputAddress = addressService.Create(CreateInputDtoAddAddress(1));
+
+            // ASSERT //
+            Assert.AreEqual(expected, outputAddress);
         }
     }
 }

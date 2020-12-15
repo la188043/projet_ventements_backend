@@ -33,6 +33,19 @@
     &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.CategoryServiceTest.CreateSubCategory_SingleInputAddCategory_ReturnsSingleOutputDtoAddCategory&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.ItemServiceTest.Query_ReturnsListOfAllItems&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.ItemServiceTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.ReviewServiceTest.GetById_SingleNumber_ReturnsSingleOutputDtoQueryReview&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.ReviewServiceTest.GetByItemId_SingleNumber_ReturnsListOfOutputDtoQueryReview&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.ReviewServiceTest.GetByItemId_SingleNumber_ReturnsListOfOutputDtoQueryReview(0)&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.ReviewServiceTest.GetByItemId_SingleNumber_ReturnsListOfOutputDtoQueryReview(2)&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.ReviewServiceTest.GetByItemId_SingleNumber_ReturnsListOfOutputDtoQueryReview(5)&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.ReviewServiceTest.GetByItemId_SingleNumber_ReturnsListOfOutputDtoQueryReview(16)&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.ReviewServiceTest.Create_UserIdAndItemIdAndInputDtoAddReview_ReturnsSingleOutputDtoQueryReview&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.ReviewServiceTest.Delete_SingleNumber_ReturnsIsDeleted&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.ReviewServiceTest.Delete_SingleNumber_ReturnsIsDeleted(True)&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.ReviewServiceTest.Delete_SingleNumber_ReturnsIsDeleted(False)&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.ReviewServiceTest.Update_ReviewIdAndInputDtoUpdateReview_ReturnsIsUpdated&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.ReviewServiceTest.Update_ReviewIdAndInputDtoUpdateReview_ReturnsIsUpdated(True)&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.ReviewServiceTest.Update_ReviewIdAndInputDtoUpdateReview_ReturnsIsUpdated(False)&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	

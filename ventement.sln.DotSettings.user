@@ -46,6 +46,17 @@
     &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.ReviewServiceTest.Update_ReviewIdAndInputDtoUpdateReview_ReturnsIsUpdated&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.ReviewServiceTest.Update_ReviewIdAndInputDtoUpdateReview_ReturnsIsUpdated(True)&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.ReviewServiceTest.Update_ReviewIdAndInputDtoUpdateReview_ReturnsIsUpdated(False)&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.WishlistServiceTest.GetById_SingleNumber_ReturnsSingleOutputDtoQueryWishlist&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.WishlistServiceTest.GetByUserId_SingleNumber_ReturnsListOfOutputDtoQueryWishlist&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.WishlistServiceTest.GetByUserId_SingleNumber_ReturnsListOfOutputDtoQueryWishlist(0)&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.WishlistServiceTest.GetByUserId_SingleNumber_ReturnsListOfOutputDtoQueryWishlist(3)&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.WishlistServiceTest.GetByUserId_SingleNumber_ReturnsListOfOutputDtoQueryWishlist(7)&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.WishlistServiceTest.GetByUserId_SingleNumber_ReturnsListOfOutputDtoQueryWishlist(23)&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.WishlistServiceTest.Add_UserIdAndItemId_ReturnsOutputDtoQueryWishlist&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.WishlistServiceTest.Add_UserIdAndItemId_ThrowsExcpetion&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.WishlistServiceTest.Delete_SingleNumber_ReturnsIsDeleted&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.WishlistServiceTest.Delete_SingleNumber_ReturnsIsDeleted(True)&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.WishlistServiceTest.Delete_SingleNumber_ReturnsIsDeleted(False)&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	

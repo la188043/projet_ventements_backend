@@ -155,5 +155,22 @@ namespace UnitTests.Application
             // ASSERT //
             Assert.AreEqual(expected, output);
         }
+
+        [Test]
+        public void CreateCategory_SingleInputAddCategory_ReturnsSingleOutputDtoAddCategory()
+        {
+            // ARRANGE //
+            var categoryRep = Substitute.For<ICategoryRepository>();
+            categoryRep.CreateCategory(Arg.Any<ICategory>()).Returns(CreateParentCategory(1));
+
+            var categoryService = new CategoryService(categoryRep);
+            var expected = CreateOupOutputDtoAddCategory(1);
+
+            // ACT //
+            var output = categoryService.CreateCategory(CreateInputDtoAddCategory(1));
+
+            // ASSERT //
+            Assert.AreEqual(expected, output);
+        }
     }
 }

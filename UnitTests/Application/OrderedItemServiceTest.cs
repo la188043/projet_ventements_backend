@@ -1,8 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using Application.Repositories;
+using Application.Services.OrderedItems;
 using Application.Services.OrderedItems.Dto;
 using Domain.Items;
 using Domain.OrderedItems;
 using Domain.Orders;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace UnitTests.Application
@@ -97,6 +101,29 @@ namespace UnitTests.Application
         public static InputDtoUpdateOrderedItem CreateInputDtoUpdateOrderedItem(int i)
         {
             return new InputDtoUpdateOrderedItem {Quantity = i};
+        }
+
+        [Test]
+        [TestCase(0)]
+        [TestCase(4)]
+        [TestCase(7)]
+        [TestCase(15)]
+        public void GetByOrderId_SingleNumber_ReturnsListOfOutputDtoQueryOrderedItem(int nbOfOrderedItems)
+        {
+            // ARRANGE //
+            var orderedItemRep = Substitute.For<IOrderedItemRepository>();
+
+            orderedItemRep.GetByOrderId(1).Returns(CreateListOfOrderedItems(nbOfOrderedItems));
+            
+            var orderedItemService = new OrderedItemService(orderedItemRep);
+            var expected = CreateListOfOutputDtoQueryOrderedItems(nbOfOrderedItems);
+
+            // ACT //
+            var output = orderedItemService.GetByOrderId(1);
+            var test = output.ToList();
+
+            // ASSERT //
+            Assert.AreEqual(expected, output);
         }
     }
 }

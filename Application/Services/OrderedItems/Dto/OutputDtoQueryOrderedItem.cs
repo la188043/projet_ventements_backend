@@ -9,6 +9,19 @@
         public class Order
         {
             public int Id { get; set; }
+
+            private bool Equals(Order other)
+            {
+                return Id == other.Id;
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (ReferenceEquals(null, obj)) return false;
+                if (ReferenceEquals(this, obj)) return true;
+                if (obj.GetType() != this.GetType()) return false;
+                return Equals((Order) obj);
+            }
         }
 
         public class Item

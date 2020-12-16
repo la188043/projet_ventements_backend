@@ -8,11 +8,9 @@ using Application.Services.BaggedItems.Dto;
 using Domain.Addresses;
 using Domain.BaggedItems;
 using Domain.Categories;
-using Domain.Exceptions;
 using Domain.Items;
 using Domain.Users;
 using NSubstitute;
-using NSubstitute.ExceptionExtensions;
 using NUnit.Framework;
 
 namespace UnitTests.Application

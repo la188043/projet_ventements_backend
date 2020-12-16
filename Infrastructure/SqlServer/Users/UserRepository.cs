@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using Application.Exceptions;
 using Application.Repositories;
 using Application.Services.Addresses.Dto;
 using Domain.Addresses;
@@ -73,7 +74,7 @@ namespace Infrastructure.SqlServer.Users
                 }
                 catch (SqlException)
                 {
-                    throw new DuplicateException("Cet email est déjà utilisé");
+                    throw new DuplicateSqlPrimaryException("Cet email est déjà utilisé");
                 }
             }
 

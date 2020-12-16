@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Domain.Exceptions;
 using Domain.Users;
 
 namespace Domain.BaggedItems
@@ -16,6 +18,7 @@ namespace Domain.BaggedItems
 
         public void AddItem(IBaggedItem item)
         {
+            if (Items.Contains(item)) throw new DuplicateItemException();
             Items.Add(item);
         }
 
@@ -23,7 +26,11 @@ namespace Domain.BaggedItems
         {
             foreach (var item in items)
             {
-                Items.Add(item);
+                try
+                {
+                    AddItem(item);
+                }
+                catch (DuplicateItemException e) {}
             }
         }
 

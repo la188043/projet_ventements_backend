@@ -21,5 +21,20 @@ namespace Application.Services.Users.Dto
             public string Zip { get; set; }
             public string City { get; set; }
         }
+
+        private bool Equals(OutputDtoQueryUser other)
+        {
+            return Id == other.Id && Firstname == other.Firstname && Lastname == other.Lastname &&
+                   Email == other.Email && Gender == other.Gender &&
+                   Administrator == other.Administrator;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((OutputDtoQueryUser) obj);
+        }
     }
 }

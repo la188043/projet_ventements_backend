@@ -15,5 +15,15 @@ namespace Domain.OrderedItems
         public OrderedItem()
         {
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is OrderedItem item)
+            {
+                return ItemOrdered.Equals(item.ItemOrdered) && Order.Equals(item.Order);
+            }
+
+            return false;
+        }
     }
 }

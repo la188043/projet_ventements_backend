@@ -14,5 +14,15 @@ namespace Domain.Items
         public Item()
         {
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Item item)
+            {
+                return Id == item.Id;
+            }
+
+            return false;
+        }
     }
 }

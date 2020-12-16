@@ -1,4 +1,5 @@
 ﻿using System;
+using Application.Exceptions;
 using Application.Services.Addresses.Dto;
 using Application.Services.BaggedItems;
 using Application.Services.BaggedItems.Dto;
@@ -49,7 +50,7 @@ namespace WebApi.Controllers
                 
                 return Ok(response);
             }
-            catch (DuplicateException e)
+            catch (DuplicateSqlPrimaryException e)
             {
                 return BadRequest(new {message = e.Message});
             }
@@ -100,12 +101,16 @@ namespace WebApi.Controllers
         [Route("{idUser:int}/address")]
         public ActionResult<OutputDtoQueryAddress> RegisterAddress(int idUser, [FromBody] InputDtoAddAddress address)
         {
-            var response = _userService.RegisterAddress(idUser, address);
-
-            if (response != null)
+            try
+            {
+                var response= _userService.RegisterAddress(idUser, address);
+                
                 return Ok(response);
-
-            return NotFound();
+            }
+            catch (CouldNotUpdateAddressException e)
+            {
+                return BadRequest(new {mesage = e.Message});
+            }
         }
 
         // Bag
@@ -129,9 +134,9 @@ namespace WebApi.Controllers
 
                 return Ok(response);
             }
-            catch (DuplicateException e)
+            catch (DuplicateSqlPrimaryException e)
             {
-                return BadRequest(new {message = e.Message});
+                return NotFound(new {message = e.Message});
             }
         }
 
@@ -155,7 +160,7 @@ namespace WebApi.Controllers
 
                 return Ok(response);
             }
-            catch (DuplicateException e)
+            catch (DuplicateSqlPrimaryException e)
             {
                 return BadRequest(new {message = e.Message});
             }

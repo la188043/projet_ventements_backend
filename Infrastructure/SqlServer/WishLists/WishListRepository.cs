@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using Application.Exceptions;
 using Application.Repositories;
 using Domain.Exceptions;
 using Domain.Items;
@@ -73,7 +74,7 @@ namespace Infrastructure.SqlServer.WishLists
                 }
                 catch (SqlException)
                 {
-                    throw new DuplicateException("Cet article est déjà présent dans la liste de souhaits");
+                    throw new DuplicateSqlPrimaryException("Cet article est déjà présent dans la liste de souhaits");
                 }
             }
         }

@@ -16,5 +16,15 @@ namespace Domain.BaggedItems
         public BaggedItem()
         {
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is BaggedItem item)
+            {
+                return Id == item.Id;
+            }
+
+            return false;
+        }
     }
 }

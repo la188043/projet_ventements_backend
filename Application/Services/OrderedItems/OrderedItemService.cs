@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Application.Exceptions;
 using Application.Repositories;
 using Application.Services.OrderedItems.Dto;
 using Domain.OrderedItems;
@@ -79,8 +80,14 @@ namespace Application.Services.OrderedItems
 
             foreach (var orderedItem in inputDtoAddOrderedItems.OrderedItems)
             {
-                orderedItems.Add(AddItemToOrder(orderId, orderedItem.ItemId,
-                    new InputDtoAddOrderedItem {Quantity = orderedItem.Quantity, Size = orderedItem.Size}));
+                try
+                {
+                    orderedItems.Add(AddItemToOrder(orderId, orderedItem.ItemId,
+                        new InputDtoAddOrderedItem {Quantity = orderedItem.Quantity, Size = orderedItem.Size}));
+                }
+                catch (DuplicateSqlPrimaryException) // Not added
+                {
+                }
             }
 
             return orderedItems;

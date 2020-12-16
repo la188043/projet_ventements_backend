@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using Application.Exceptions;
 using Application.Repositories;
 using Domain.BaggedItems;
 using Domain.Exceptions;
@@ -52,7 +53,7 @@ namespace Infrastructure.SqlServer.BaggedItems
                 }
                 catch (SqlException)
                 {
-                    throw new DuplicateException("Cet article est déjà présent dans le panier");
+                    throw new DuplicateSqlPrimaryException("Cet article est déjà présent dans le panier");
                 }
             }
 

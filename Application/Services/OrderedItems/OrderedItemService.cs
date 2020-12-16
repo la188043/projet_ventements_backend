@@ -86,7 +86,7 @@ namespace Application.Services.OrderedItems
                     orderedItems.Add(AddItemToOrder(orderId, orderedItem.ItemId,
                         new InputDtoAddOrderedItem {Quantity = orderedItem.Quantity, Size = orderedItem.Size}));
                 }
-                catch (DuplicateSqlPrimaryException)
+                catch (DuplicateSqlPrimaryException) // Not added
                 {
                 }
             }

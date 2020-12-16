@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Application.Exceptions;
 using Application.Repositories;
 using Application.Services.OrderedItems;
 using Application.Services.OrderedItems.Dto;
@@ -7,6 +9,7 @@ using Domain.Items;
 using Domain.OrderedItems;
 using Domain.Orders;
 using NSubstitute;
+using NSubstitute.ExceptionExtensions;
 using NUnit.Framework;
 
 namespace UnitTests.Application
@@ -79,7 +82,7 @@ namespace UnitTests.Application
 
         public static InputDtoAddOrderedItem CreateInputDtoAddOrderedItem(int i)
         {
-            return new InputDtoAddOrderedItem { Quantity = i, Size = i.ToString() };
+            return new InputDtoAddOrderedItem {Quantity = i, Size = i.ToString()};
         }
 
         public static InputDtoAddOrderedItems CreateInputDtoAddOrderedItems(int nbOfOrderedItems)
@@ -114,7 +117,7 @@ namespace UnitTests.Application
             var orderedItemRep = Substitute.For<IOrderedItemRepository>();
 
             orderedItemRep.GetByOrderId(1).Returns(CreateListOfOrderedItems(nbOfOrderedItems));
-            
+
             var orderedItemService = new OrderedItemService(orderedItemRep);
             var expected = CreateListOfOutputDtoQueryOrderedItems(nbOfOrderedItems);
 
@@ -133,12 +136,78 @@ namespace UnitTests.Application
             var orderedItemRep = Substitute.For<IOrderedItemRepository>();
 
             orderedItemRep.GetById(1).Returns(CreateOrderedItem(1));
-            
+
             var orderedItemService = new OrderedItemService(orderedItemRep);
             var expected = CreateOutputDtoQueryOrderedItem(1);
 
             // ACT //
             var output = orderedItemService.GetById(1);
+
+            // ASSERT //
+            Assert.AreEqual(expected, output);
+        }
+
+        [Test]
+        public void AddItemToOrder_OrderIdAndItemIdAndInputDtoAddOrderedItem_ReturnsSingleOutputDtoQueryOrderedItem()
+        {
+            // ARRANGE //
+            var orderedItemRep = Substitute.For<IOrderedItemRepository>();
+
+            orderedItemRep.GetById(1).Returns(CreateOrderedItem(1));
+
+            orderedItemRep.AddItemToOrder(1, 1, Arg.Any<IOrderedItem>())
+                .Returns(CreateOrderedItem(1));
+
+            var orderedItemService = new OrderedItemService(orderedItemRep);
+            var expected = CreateOutputDtoQueryOrderedItem(1);
+
+            // ACT //
+            var output = orderedItemService.AddItemToOrder(1, 1, CreateInputDtoAddOrderedItem(1));
+
+            // ASSERT //
+            Assert.AreEqual(expected, output);
+        }
+
+        [Test]
+        public void AddItemToOrder_OrderIdAndItemIdAndInputDtoAddOrderedItem_ThrowsException()
+        {
+            // ARRANGE //
+            var orderedItemRep = Substitute.For<IOrderedItemRepository>();
+
+            orderedItemRep.AddItemToOrder(1, 1, Arg.Any<OrderedItem>())
+                .Returns(x => { throw new DuplicateSqlPrimaryException("message"); });
+
+            var orderedItemService = new OrderedItemService(orderedItemRep);
+
+            // ASSERT //
+            Assert.Throws<DuplicateSqlPrimaryException>(() =>
+                orderedItemService.AddItemToOrder(1, 1, CreateInputDtoAddOrderedItem(1)));
+        }
+
+        [Test]
+        [TestCase(0)]
+        [TestCase(3)]
+        public void AddItemsToOrder_OrderIdAndInputDtoAddOrderedItems_ReturnsListOfOutputDtoQueryOrderedItem(
+            int nbOfOrderedItems)
+        {
+            // ARRANGE //
+            var orderedItemRep = Substitute.For<IOrderedItemRepository>();
+
+            orderedItemRep
+                .GetById(Arg.Any<int>())
+                .Returns(args => CreateOrderedItem((int) args[0]));
+
+            orderedItemRep
+                .AddItemToOrder(1, Arg.Any<int>(), Arg.Any<IOrderedItem>())
+                .Returns(args => CreateOrderedItem((int) args[1]));
+
+            var orderedItemService = new OrderedItemService(orderedItemRep);
+            var expected = 
+                CreateListOfOutputDtoQueryOrderedItems(nbOfOrderedItems);
+
+            // ACT //
+            var output = 
+                orderedItemService.AddItemsToOrder(1, CreateInputDtoAddOrderedItems(nbOfOrderedItems));
 
             // ASSERT //
             Assert.AreEqual(expected, output);

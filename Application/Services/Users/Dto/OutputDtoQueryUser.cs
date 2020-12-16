@@ -20,6 +20,36 @@ namespace Application.Services.Users.Dto
             public int HomeNumber { get; set; }
             public string Zip { get; set; }
             public string City { get; set; }
+
+            private bool Equals(Address other)
+            {
+                return Id == other.Id && Street == other.Street &&
+                       HomeNumber == other.HomeNumber && Zip == other.Zip &&
+                       City == other.City;
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (ReferenceEquals(null, obj)) return false;
+                if (ReferenceEquals(this, obj)) return true;
+                if (obj.GetType() != this.GetType()) return false;
+                return Equals((Address) obj);
+            }
+        }
+
+        private bool Equals(OutputDtoQueryUser other)
+        {
+            return Id == other.Id && Firstname == other.Firstname && Lastname == other.Lastname &&
+                   Email == other.Email && Gender == other.Gender &&
+                   Administrator == other.Administrator && UserAddress.Equals(other.UserAddress);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((OutputDtoQueryUser) obj);
         }
     }
 }

@@ -95,7 +95,7 @@ namespace Application.Services.Users
                 Lastname = user.Lastname,
                 Birthdate = user.Birthdate,
                 Email = user.Email,
-                EncryptedPassword = _passwordEncryption.HashPassword(new User(), user.UserPassword),
+                EncryptedPassword = _passwordEncryption.HashPassword(new User(), user.PasswordUser),
                 Gender = user.Gender[0]
             });
 

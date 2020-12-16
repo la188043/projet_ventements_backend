@@ -25,5 +25,20 @@ namespace Application.Services.Users.Dto
             Administrator = user.Administrator;
             Token = token;
         }
+
+        private bool Equals(OutputDtoAuthenticateUser other)
+        {
+            return Id == other.Id && Firstname == other.Firstname && Lastname == other.Lastname &&
+                   Email == other.Email && Gender == other.Gender &&
+                   Administrator == other.Administrator && Token == other.Token;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((OutputDtoAuthenticateUser) obj);
+        }
     }
 }

@@ -391,5 +391,25 @@ namespace UnitTests.Application
             Assert.Throws<CouldNotUpdateAddressException>(() =>
                 userService.RegisterAddress(1, CreateInputDtoAddAddress(1)));
         }
+
+        [Test]
+        public void GetUserAddress_SingleNumber_ReturnsOutputDtoQueryAddress()
+        {
+            // ARRANGE //
+            var userRep = Substitute.For<IUserRepository>();
+            var addressService = Substitute.For<IAddressService>();
+            var passwordEncryption = Substitute.For<IPasswordEncryption>();
+
+            userRep.GetUserAddress(1).Returns(CreateAddress(1));
+            
+            var userService = new UserService(userRep, addressService, passwordEncryption);
+            var expected = CreateOutputDtoQueryAddress(1);
+            
+            // ACT //
+            var output = userService.GetUserAddress(1);
+
+            // ASSERT //
+            Assert.AreEqual(expected, output);
+        }
     }
 }

@@ -100,6 +100,17 @@
     &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.OrderedItemServiceTest.Delete_SingleNumber_ReturnsIsDeleted&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.OrderedItemServiceTest.Delete_SingleNumber_ReturnsIsDeleted(True)&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.OrderedItemServiceTest.Delete_SingleNumber_ReturnsIsDeleted(False)&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.OrderServiceTest.GetByUserId_SingleNumber_ReturnsListOfOutputDtoQueryOrder&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.OrderServiceTest.GetByUserId_SingleNumber_ReturnsListOfOutputDtoQueryOrder(0,0)&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.OrderServiceTest.GetByUserId_SingleNumber_ReturnsListOfOutputDtoQueryOrder(1,0)&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.OrderServiceTest.GetByUserId_SingleNumber_ReturnsListOfOutputDtoQueryOrder(6,3)&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.OrderServiceTest.GetByUserId_SingleNumber_ReturnsListOfOutputDtoQueryOrder(13,19)&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.OrderServiceTest.GetById_SingleNumber_ReturnsOuputDtoQuery&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.OrderServiceTest.GetById_SingleNumber_ReturnsOuputDtoQuery(0)&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.OrderServiceTest.GetById_SingleNumber_ReturnsOuputDtoQuery(2)&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.OrderServiceTest.GetById_SingleNumber_ReturnsOuputDtoQuery(7)&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.OrderServiceTest.GetById_SingleNumber_ReturnsOuputDtoQuery(15)&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.OrderServiceTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	

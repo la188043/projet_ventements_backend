@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Application.Services.Addresses.Dto;
+using Application.Repositories;
+using Application.Services.Orders;
 using Application.Services.Orders.Dto;
+using Domain.Items;
+using Domain.OrderedItems;
 using Domain.Orders;
 using Domain.Users;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace UnitTests.Application
@@ -42,6 +46,39 @@ namespace UnitTests.Application
             }
 
             return orders;
+        }
+
+        public static IOrderedItem CreateOrderedItem(int i)
+        {
+            return new OrderedItem
+            {
+                Id = i,
+                Quantity = i,
+                Size = i.ToString(),
+                ItemOrdered = new Item
+                {
+                    Id = i,
+                    Label = $"Item{i}",
+                    Price = i,
+                    ImageItem = i.ToString(),
+                    DescriptionItem = i.ToString(),
+                },
+                Order = new Order
+                {
+                    Id = i
+                }
+            };
+        }
+
+        public static IEnumerable<IOrderedItem> CreateListOfOrderedItems(int sizeOfList)
+        {
+            IList<IOrderedItem> items = new List<IOrderedItem>();
+            for (var i = 1; i <= sizeOfList; i++)
+            {
+                items.Add(CreateOrderedItem(i));
+            }
+
+            return items;
         }
 
         public static OutputDtoAddOrder CreateOutputDtoAddOrder(int i)
@@ -104,6 +141,109 @@ namespace UnitTests.Application
             }
 
             return orders;
+        }
+
+        [Test]
+        [TestCase(0, 0)]
+        [TestCase(1, 0)]
+        [TestCase(6, 3)]
+        [TestCase(13, 19)]
+        public void GetByUserId_SingleNumber_ReturnsListOfOutputDtoQueryOrder(int nbOfOrders, int nbOfOrderedItems)
+        {
+            // ARRANGE //
+            var orderRep = Substitute.For<IOrderRepository>();
+            var orderedItemRep = Substitute.For<IOrderedItemRepository>();
+
+            orderedItemRep
+                .GetByOrderId(Arg.Any<int>())
+                .Returns(CreateListOfOrderedItems(nbOfOrderedItems));
+
+            orderRep.GetByUserId(Arg.Any<int>())
+                .Returns(CreateListOfOrders(nbOfOrders));
+            
+            var orderService = new OrderService(orderRep, orderedItemRep);
+            var expected = 
+                CreateListOfOutputDtoQueryOrder(nbOfOrders, nbOfOrderedItems);
+
+            // ACT //
+            var output = orderService.GetByUserId(1);
+
+            // ASSERT //
+            Assert.AreEqual(expected, output);
+        }
+
+        [Test]
+        [TestCase(0)]
+        [TestCase(2)]
+        [TestCase(7)]
+        [TestCase(15)]
+        public void GetById_SingleNumber_ReturnsOuputDtoQuery(int nbOfOrderedItems)
+        {
+            // ARRANGE //
+            var orderRep = Substitute.For<IOrderRepository>();
+            var orderedItemRep = Substitute.For<IOrderedItemRepository>();
+
+            orderedItemRep
+                .GetByOrderId(Arg.Any<int>())
+                .Returns(CreateListOfOrderedItems(nbOfOrderedItems));
+
+            orderRep
+                .GetById(Arg.Any<int>())
+                .Returns(CreateOrder(1));
+            
+            var orderService = new OrderService(orderRep, orderedItemRep);
+            var expected = CreateOutputDtoQueryOrder(1, nbOfOrderedItems);
+
+            // ACT //
+            var output = orderService.GetById(1);
+
+            // ASSERT //
+            Assert.AreEqual(expected, output);
+        }
+
+        [Test]
+        public void Create_SingleNumber_ReturnsOutputDtoAddOrder()
+        {
+            // ARRANGE //
+            var orderRep = Substitute.For<IOrderRepository>();
+            var orderedItemRep = Substitute.For<IOrderedItemRepository>();
+
+            orderRep
+                .GetById(Arg.Any<int>())
+                .Returns(args => CreateOrder((int) args[0]));
+
+            orderRep
+                .Create(Arg.Any<int>())
+                .Returns(CreateOrder(1));
+            
+            var orderService = new OrderService(orderRep, orderedItemRep);
+            var expected = CreateOutputDtoAddOrder(1);
+
+            // ACT //
+            var output = orderService.Create(1);
+
+            // ASSERT //
+            Assert.AreEqual(expected, output);
+        }
+
+        [Test]
+        [TestCase(true)]
+        [TestCase(false)]
+        public void Delete_SingleNumber_ReturnsIsDeleted(bool isDeletedFromRepo)
+        {
+            // ARRANGE //
+            var orderRep = Substitute.For<IOrderRepository>();
+            var orderedItemRep = Substitute.For<IOrderedItemRepository>();
+
+            orderRep.Delete(Arg.Any<int>()).Returns(isDeletedFromRepo);
+            
+            var orderService = new OrderService(orderRep, orderedItemRep);
+
+            // ACT //
+            var output = orderService.Delete(1);
+
+            // ASSERT //
+            Assert.AreEqual(isDeletedFromRepo, output);
         }
     }
 }

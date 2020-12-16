@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
+using Application.Exceptions;
 using Application.Repositories;
 using Domain.OrderedItems;
 using Infrastructure.SqlServer.Factories;
@@ -63,7 +66,14 @@ namespace Infrastructure.SqlServer.OrderedItems
                 cmd.Parameters.AddWithValue($"@{OrderedItemSqlServer.ColOrderId}", orderId);
                 cmd.Parameters.AddWithValue($"@{OrderedItemSqlServer.ColItemId}", itemId);
 
-                orderedItem.Id = (int) cmd.ExecuteScalar();
+                try
+                {
+                    orderedItem.Id = (int) cmd.ExecuteScalar();
+                }
+                catch (SqlException)
+                {
+                    throw new DuplicateSqlPrimaryException("Cet objet est déjà présent dans la commande");
+                }
             }
 
             return orderedItem;

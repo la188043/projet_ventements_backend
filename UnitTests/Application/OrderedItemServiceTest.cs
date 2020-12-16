@@ -125,5 +125,23 @@ namespace UnitTests.Application
             // ASSERT //
             Assert.AreEqual(expected, output);
         }
+
+        [Test]
+        public void GetById_SingleNumber_ReturnsSingleOutputDtoQueryOrderedItem()
+        {
+            // ARRANGE //
+            var orderedItemRep = Substitute.For<IOrderedItemRepository>();
+
+            orderedItemRep.GetById(1).Returns(CreateOrderedItem(1));
+            
+            var orderedItemService = new OrderedItemService(orderedItemRep);
+            var expected = CreateOutputDtoQueryOrderedItem(1);
+
+            // ACT //
+            var output = orderedItemService.GetById(1);
+
+            // ASSERT //
+            Assert.AreEqual(expected, output);
+        }
     }
 }

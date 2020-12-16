@@ -1,4 +1,5 @@
-﻿using Application.Services.OrderedItems;
+﻿using Application.Exceptions;
+using Application.Services.OrderedItems;
 using Application.Services.OrderedItems.Dto;
 using Application.Services.Orders;
 using Application.Services.Orders.Dto;
@@ -47,7 +48,17 @@ namespace WebApi.Controllers
         public ActionResult<OutputDtoQueryOrderedItem> AddItemToOrder(int orderId,
             int itemId, [FromBody] InputDtoAddOrderedItem inputDtoAddOrderedItem)
         {
-            return Ok(_orderedItemService.AddItemToOrder(orderId, itemId, inputDtoAddOrderedItem));
+            try
+            {
+                var response = 
+                    _orderedItemService.AddItemToOrder(orderId, itemId, inputDtoAddOrderedItem);
+                
+                return Ok(response);
+            }
+            catch (DuplicateSqlPrimaryException e)
+            {
+                return BadRequest(new {message = e.Message});
+            }
         }
 
         [Authorize]

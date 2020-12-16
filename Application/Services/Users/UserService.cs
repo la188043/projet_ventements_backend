@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using Application.Exceptions;
 using Application.Repositories;
 using Application.Services.Addresses;
 using Application.Services.Addresses.Dto;
@@ -35,16 +36,18 @@ namespace Application.Services.Users
                 .Query()
                 .Select(user =>
                 {
-                    var userAddress = user.Address != null ? new OutputDtoQueryUser.Address
-                    {
-                        Id = user.Address.Id,
-                        Street = user.Address.Street,
-                        HomeNumber = user.Address.HomeNumber,
-                        Zip = user.Address.Zip,
-                        City = user.Address.City
-                    } : null;
-                                                              
-                    
+                    var userAddress = user.Address != null
+                        ? new OutputDtoQueryUser.Address
+                        {
+                            Id = user.Address.Id,
+                            Street = user.Address.Street,
+                            HomeNumber = user.Address.HomeNumber,
+                            Zip = user.Address.Zip,
+                            City = user.Address.City
+                        }
+                        : null;
+
+
                     return new OutputDtoQueryUser
                     {
                         Id = user.Id,
@@ -73,7 +76,7 @@ namespace Application.Services.Users
                     City = user.Address.City
                 }
                 : null;
-            
+
             return new OutputDtoQueryUser
             {
                 Id = user.Id,
@@ -110,7 +113,7 @@ namespace Application.Services.Users
 
             if (userFromDb == null)
                 throw new NullUserException();
-            
+
             bool passwordVerified =
                 _passwordEncryption.VerifyPassword(
                     userFromDb, userFromDb.EncryptedPassword, user.PasswordUser);
@@ -135,25 +138,25 @@ namespace Application.Services.Users
 
             var addressFromDb = _userRepository.RegisterAddress(idUser, new Address {Id = addressChecked.Id});
 
-            if (addressFromDb)
+            if (!addressFromDb)
             {
-                return new OutputDtoQueryAddress
-                {
-                    Id = addressChecked.Id,
-                    Street = addressChecked.Street,
-                    HomeNumber = addressChecked.HomeNumber ,
-                    Zip = addressChecked.Zip ,
-                    City = addressChecked.City ,
-                };
+                throw new CouldNotUpdateAddressException();
             }
 
-            return null;
+            return new OutputDtoQueryAddress
+            {
+                Id = addressChecked.Id,
+                Street = addressChecked.Street,
+                HomeNumber = addressChecked.HomeNumber,
+                Zip = addressChecked.Zip,
+                City = addressChecked.City,
+            };
         }
 
         public OutputDtoQueryAddress GetUserAddress(int idUser)
         {
             var addressFromDb = _userRepository.GetUserAddress(idUser);
-            
+
             return new OutputDtoQueryAddress
             {
                 Id = addressFromDb.Id,
@@ -168,7 +171,7 @@ namespace Application.Services.Users
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(AppSettings.Secret);
-            
+
             // Token claims
             IList<Claim> tokenClaims = new List<Claim>();
             tokenClaims.Add(new Claim("id", user.Id.ToString()));

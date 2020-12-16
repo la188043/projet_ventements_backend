@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Domain.Exceptions
+namespace Application.Exceptions
 {
     public class DuplicateSqlPrimaryException : Exception
     {

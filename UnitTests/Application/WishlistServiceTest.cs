@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Application.Exceptions;
 using Application.Repositories;
 using Application.Services.WishLists;
 using Application.Services.WishLists.Dto;

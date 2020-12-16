@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Application.Exceptions;
 using Application.Repositories;
 using Application.Services.BaggedItems;
 using Application.Services.BaggedItems.Dto;

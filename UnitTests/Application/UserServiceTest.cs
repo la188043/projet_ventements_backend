@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using Application;
+using Application.Exceptions;
 using Application.Repositories;
 using Application.Services.Addresses;
+using Application.Services.Addresses.Dto;
 using Application.Services.Users;
 using Application.Services.Users.Dto;
 using Domain.Addresses;
 using Domain.Exceptions;
 using Domain.Users;
-using Newtonsoft.Json;
 using NSubstitute;
 using NSubstitute.ReturnsExtensions;
 using NUnit.Framework;
@@ -111,7 +112,41 @@ namespace UnitTests.Application
                 PasswordUser = i.ToString()
             };
         }
+        
+        public static IAddress CreateAddress(int i)
+        {
+            return new Address
+            {
+                Id = i,
+                Street = i.ToString(),
+                HomeNumber = i,
+                Zip = i.ToString(),
+                City = i.ToString()
+            };
+        }
 
+        public static InputDtoAddAddress CreateInputDtoAddAddress(int i)
+        {
+            return new InputDtoAddAddress
+            {
+                Street = i.ToString(),
+                HomeNumber = i,
+                Zip = i.ToString(),
+                City = i.ToString()
+            };
+        }
+        
+        public static OutputDtoQueryAddress CreateOutputDtoQueryAddress(int i)
+        {
+            return new OutputDtoQueryAddress
+            {
+                Id = i,
+                Street = i.ToString(),
+                HomeNumber = i,
+                Zip = i.ToString(),
+                City = i.ToString()
+            };
+        }
         [Test]
         [TestCase(0)]
         [TestCase(4)]
@@ -280,6 +315,81 @@ namespace UnitTests.Application
             
             // ASSERT //
             Assert.AreEqual(output, isDeletedFromRepo);
+        }
+
+        [Test]
+        public void RegisterAlreadyExistingAddress_UserIdAndInputDtoAddAddress_ReturnsOutputDtoQueryAddress()
+        {
+            // ARRANGE //
+            var userRep = Substitute.For<IUserRepository>();
+            var addressService = Substitute.For<IAddressService>();
+            var passwordEncryption = Substitute.For<IPasswordEncryption>();
+
+            addressService.CheckFromDb(Arg.Any<InputDtoAddAddress>())
+                .Returns(CreateOutputDtoQueryAddress(1));
+            
+            userRep.RegisterAddress(Arg.Any<int>(), Arg.Any<IAddress>())
+                .Returns(true);
+            
+            var userService = new UserService(userRep, addressService, passwordEncryption);
+            var expected = CreateOutputDtoQueryAddress(1);
+
+            // ACT //
+            var output = userService.RegisterAddress(1, CreateInputDtoAddAddress(1));
+
+            // ASSERT //
+            Assert.AreEqual(expected, output);
+        }
+
+        [Test]
+        public void RegisterNotAlreadyExistingAddress_UserIdAndInputDtoAddAddress_ReturnsOutputDtoQueryAddress()
+        {
+            // ARRANGE //
+            var userRep = Substitute.For<IUserRepository>();
+            var addressService = Substitute.For<IAddressService>();
+            var passwordEncryption = Substitute.For<IPasswordEncryption>();
+
+            addressService.CheckFromDb(Arg.Any<InputDtoAddAddress>())
+                .ReturnsNull();
+
+            addressService.Create(Arg.Any<InputDtoAddAddress>())
+                .Returns(CreateOutputDtoQueryAddress(1));
+            
+            userRep.RegisterAddress(Arg.Any<int>(), Arg.Any<IAddress>())
+                .Returns(true);
+            
+            var userService = new UserService(userRep, addressService, passwordEncryption);
+            var expected = CreateOutputDtoQueryAddress(1);
+
+            // ACT //
+            var output = userService.RegisterAddress(1, CreateInputDtoAddAddress(1));
+
+            // ASSERT //
+            Assert.AreEqual(expected, output);
+        }
+
+        [Test]
+        public void RegisterAddress_UserIdAndInputDtoAddAddress_ThrowsExcpetion()
+        {
+            // ARRANGE //
+            var userRep = Substitute.For<IUserRepository>();
+            var addressService = Substitute.For<IAddressService>();
+            var passwordEncryption = Substitute.For<IPasswordEncryption>();
+
+            addressService.CheckFromDb(Arg.Any<InputDtoAddAddress>())
+                .ReturnsNull();
+
+            addressService.Create(Arg.Any<InputDtoAddAddress>())
+                .Returns(CreateOutputDtoQueryAddress(1));
+            
+            userRep.RegisterAddress(Arg.Any<int>(), Arg.Any<IAddress>())
+                .Returns(false);
+            
+            var userService = new UserService(userRep, addressService, passwordEncryption);
+            
+            // ASSERT //
+            Assert.Throws<CouldNotUpdateAddressException>(() =>
+                userService.RegisterAddress(1, CreateInputDtoAddAddress(1)));
         }
     }
 }

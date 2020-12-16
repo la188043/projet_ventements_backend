@@ -41,7 +41,7 @@ namespace Application.Services.Users.Dto
         {
             return Id == other.Id && Firstname == other.Firstname && Lastname == other.Lastname &&
                    Email == other.Email && Gender == other.Gender &&
-                   Administrator == other.Administrator && UserAddress.Equals(other.UserAddress);
+                   Administrator == other.Administrator;
         }
 
         public override bool Equals(object obj)

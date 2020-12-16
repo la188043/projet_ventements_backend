@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Application.Exceptions;
 using Application.Repositories;
@@ -9,7 +8,6 @@ using Domain.Items;
 using Domain.OrderedItems;
 using Domain.Orders;
 using NSubstitute;
-using NSubstitute.ExceptionExtensions;
 using NUnit.Framework;
 
 namespace UnitTests.Application
@@ -202,15 +200,91 @@ namespace UnitTests.Application
                 .Returns(args => CreateOrderedItem((int) args[1]));
 
             var orderedItemService = new OrderedItemService(orderedItemRep);
-            var expected = 
+            var expected =
                 CreateListOfOutputDtoQueryOrderedItems(nbOfOrderedItems);
 
             // ACT //
-            var output = 
+            var output =
                 orderedItemService.AddItemsToOrder(1, CreateInputDtoAddOrderedItems(nbOfOrderedItems));
 
             // ASSERT //
             Assert.AreEqual(expected, output);
+        }
+
+        [Test]
+        public void AddItemsToOrder_OrderIdAndInputDtoAddOrderedItems_DuplicateContinueWithoutAdding()
+        {
+            // ARRANGE //
+            var orderedItemRep = Substitute.For<IOrderedItemRepository>();
+
+            orderedItemRep
+                .GetById(Arg.Any<int>())
+                .Returns(args => CreateOrderedItem((int) args[0]));
+
+
+            orderedItemRep
+                .AddItemToOrder(1, Arg.Any<int>(), Arg.Any<IOrderedItem>())
+                .Returns(args =>
+                {
+                    if ((int) args[1] == 2)
+                    {
+                        throw new DuplicateSqlPrimaryException("message");
+                    }
+
+                    return CreateOrderedItem((int) args[1]);
+                });
+
+            var orderedItemService = new OrderedItemService(orderedItemRep);
+            var expected = CreateListOfOutputDtoQueryOrderedItems(1); // Size 1
+
+            // ACT //
+            // Is size 2 but the second element is duplicate so it will not be added
+            var output =
+                orderedItemService.AddItemsToOrder(1, CreateInputDtoAddOrderedItems(2));
+
+            // ASSERT //
+            Assert.AreEqual(expected, output);
+        }
+
+        [Test]
+        [TestCase(true)]
+        [TestCase(false)]
+        public void UpdateQuantity_OrderedItemIdAndInputDtoUpdateOrderedItem_ReturnsIsModified(bool isModifierFromRepo)
+        {
+            // ARRANGE //
+            var orderedItemRep = Substitute.For<IOrderedItemRepository>();
+
+            orderedItemRep
+                .UpdateQuantity(Arg.Any<int>(), Arg.Any<IOrderedItem>())
+                .Returns(isModifierFromRepo);
+            
+            var orderedItemService = new OrderedItemService(orderedItemRep);
+
+            // ACT //
+            var output = 
+                orderedItemService.UpdateQuantity(1, CreateInputDtoUpdateOrderedItem(1));
+
+            // ASSERT //
+            Assert.AreEqual(isModifierFromRepo, output);
+        }
+
+        [Test]
+        [TestCase(true)]
+        [TestCase(false)]
+        public void Delete_SingleNumber_ReturnsIsDeleted(bool isDeletedFromRepo)
+        {
+            // ARRANGE //
+            var orderedItemRep = Substitute.For<IOrderedItemRepository>();
+
+            orderedItemRep.Delete(1).Returns(isDeletedFromRepo);
+            
+            var orderedItemService = new OrderedItemService(orderedItemRep);
+
+            // ACT //
+            var output = orderedItemService.Delete(1);
+
+            // ASSERT //
+            Assert.AreEqual(isDeletedFromRepo, output);
         }
     }
 }

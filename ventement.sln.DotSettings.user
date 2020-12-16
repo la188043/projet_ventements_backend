@@ -93,6 +93,13 @@
     &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.OrderedItemServiceTest.AddItemsToOrder_OrderIdAndInputDtoAddOrderedItems_ReturnsListOfOutputDtoQueryOrderedItem&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.OrderedItemServiceTest.AddItemsToOrder_OrderIdAndInputDtoAddOrderedItems_ReturnsListOfOutputDtoQueryOrderedItem(0)&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.OrderedItemServiceTest.AddItemsToOrder_OrderIdAndInputDtoAddOrderedItems_ReturnsListOfOutputDtoQueryOrderedItem(3)&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.OrderedItemServiceTest.AddItemsToOrder_OrderIdAndInputDtoAddOrderedItems_DuplicateContinueWithoutAdding&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.OrderedItemServiceTest.UpdateQuantity_OrderedItemIdAndInputDtoUpdateOrderedItem_ReturnsIsModified&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.OrderedItemServiceTest.UpdateQuantity_OrderedItemIdAndInputDtoUpdateOrderedItem_ReturnsIsModified(True)&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.OrderedItemServiceTest.UpdateQuantity_OrderedItemIdAndInputDtoUpdateOrderedItem_ReturnsIsModified(False)&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.OrderedItemServiceTest.Delete_SingleNumber_ReturnsIsDeleted&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.OrderedItemServiceTest.Delete_SingleNumber_ReturnsIsDeleted(True)&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::23296159-CC87-4F59-B624-17E5F97F34FC::.NETCoreApp,Version=v3.1::UnitTests.Application.OrderedItemServiceTest.Delete_SingleNumber_ReturnsIsDeleted(False)&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	

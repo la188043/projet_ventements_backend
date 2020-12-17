@@ -122,5 +122,5 @@ CREATE TABLE orderedItem
     
     PRIMARY KEY (ordervId, itemId),
     FOREIGN KEY (ordervId)  REFERENCES orderv(id) ON DELETE CASCADE,
-    FOREIGN KEY (itemId)    REFERENCES item(id)
+    FOREIGN KEY (itemId)    REFERENCES item(id) ON DELETE CASCADE
 );

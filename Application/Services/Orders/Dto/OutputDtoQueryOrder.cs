@@ -30,8 +30,7 @@ namespace Application.Services.Orders.Dto
             {
                 if (ReferenceEquals(null, obj)) return false;
                 if (ReferenceEquals(this, obj)) return true;
-                if (obj.GetType() != this.GetType()) return false;
-                return Equals((User) obj);
+                return obj.GetType() == this.GetType() && Equals((User) obj);
             }
         }
 
@@ -57,8 +56,7 @@ namespace Application.Services.Orders.Dto
             {
                 if (ReferenceEquals(null, obj)) return false;
                 if (ReferenceEquals(this, obj)) return true;
-                if (obj.GetType() != this.GetType()) return false;
-                return Equals((Item) obj);
+                return obj.GetType() == this.GetType() && Equals((Item) obj);
             }
         }
 
@@ -80,8 +78,7 @@ namespace Application.Services.Orders.Dto
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((OutputDtoQueryOrder) obj);
+            return obj.GetType() == this.GetType() && Equals((OutputDtoQueryOrder) obj);
         }
     }
 }

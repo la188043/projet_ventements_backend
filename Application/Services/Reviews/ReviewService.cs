@@ -16,6 +16,30 @@ namespace Application.Services.Reviews
             _reviewRepository = reviewRepository;
         }
 
+        public IEnumerable<OutputDtoQueryReview> Query()
+        {
+            return _reviewRepository
+                .Query()
+                .Select(review => new OutputDtoQueryReview
+                {
+                   Id = review.Id,
+                    Stars = review.Stars,
+                    Title = review.Title,
+                    DescriptionReview = review.DescriptionReview,
+                    Reviewer = new OutputDtoQueryReview.User
+                    {
+                        Id = review.Reviewer.Id,
+                        Firstname = review.Reviewer.Firstname,
+                        Lastname = review.Reviewer.Lastname
+                    },
+                    ItemReviewed = new OutputDtoQueryReview.Item
+                    {
+                        Id = review.ItemReviewed.Id,
+                        Label = review.ItemReviewed.Label
+                    }
+                });
+        }
+
         public OutputDtoQueryReview GetById(int id)
         {
             var reviewFromDb = _reviewRepository.GetById(id);

@@ -19,8 +19,7 @@
             {
                 if (ReferenceEquals(null, obj)) return false;
                 if (ReferenceEquals(this, obj)) return true;
-                if (obj.GetType() != this.GetType()) return false;
-                return Equals((Order) obj);
+                return obj.GetType() == this.GetType() && Equals((Order) obj);
             }
         }
 
@@ -45,8 +44,7 @@
             {
                 if (ReferenceEquals(null, obj)) return false;
                 if (ReferenceEquals(this, obj)) return true;
-                if (obj.GetType() != this.GetType()) return false;
-                return Equals((Item) obj);
+                return obj.GetType() == this.GetType() && Equals((Item) obj);
             }
         }
 
@@ -59,8 +57,7 @@
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((OutputDtoQueryOrderedItem) obj);
+            return obj.GetType() == this.GetType() && Equals((OutputDtoQueryOrderedItem) obj);
         }
     }
 }

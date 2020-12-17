@@ -35,8 +35,7 @@ namespace Application.Services.BaggedItems.Dto
                 {
                     if (ReferenceEquals(null, obj)) return false;
                     if (ReferenceEquals(this, obj)) return true;
-                    if (obj.GetType() != this.GetType()) return false;
-                    return Equals((Item) obj);
+                    return obj.GetType() == this.GetType() && Equals((Item) obj);
                 }
             }
 
@@ -49,8 +48,7 @@ namespace Application.Services.BaggedItems.Dto
             {
                 if (ReferenceEquals(null, obj)) return false;
                 if (ReferenceEquals(this, obj)) return true;
-                if (obj.GetType() != this.GetType()) return false;
-                return Equals((BaggedItem) obj);
+                return obj.GetType() == this.GetType() && Equals((BaggedItem) obj);
             }
         }
 
@@ -69,8 +67,7 @@ namespace Application.Services.BaggedItems.Dto
             {
                 if (ReferenceEquals(null, obj)) return false;
                 if (ReferenceEquals(this, obj)) return true;
-                if (obj.GetType() != this.GetType()) return false;
-                return Equals((User) obj);
+                return obj.GetType() == this.GetType() && Equals((User) obj);
             }
         }
 
@@ -91,8 +88,7 @@ namespace Application.Services.BaggedItems.Dto
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((OutputDtoQueryUserBaggedItem) obj);
+            return obj.GetType() == this.GetType() && Equals((OutputDtoQueryUserBaggedItem) obj);
         }
     }
 }

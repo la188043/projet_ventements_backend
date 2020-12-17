@@ -28,8 +28,7 @@ namespace Application.Services.BaggedItems.Dto
             {
                 if (ReferenceEquals(null, obj)) return false;
                 if (ReferenceEquals(this, obj)) return true;
-                if (obj.GetType() != this.GetType()) return false;
-                return Equals((Item) obj);
+                return obj.GetType() == this.GetType() && Equals((Item) obj);
             }
         }
 
@@ -43,8 +42,7 @@ namespace Application.Services.BaggedItems.Dto
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((OutputDtoAddBaggedItem) obj);
+            return obj.GetType() == this.GetType() && Equals((OutputDtoAddBaggedItem) obj);
         }
     }
 }

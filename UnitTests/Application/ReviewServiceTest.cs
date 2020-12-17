@@ -111,6 +111,27 @@ namespace UnitTests.Application
         }
 
         [Test]
+        [TestCase(0)]
+        [TestCase(3)]
+        [TestCase(14)]
+        [TestCase(36)]
+        public void Query_ReturnsListOfOutputDtoQueryReview(int nbOfReviews)
+        {
+            // ARRANGE //
+            var reviewRep = Substitute.For<IReviewRepository>();
+            reviewRep.Query().Returns(CreateListOfReviews(nbOfReviews));
+
+            var reviewService = new ReviewService(reviewRep);
+            var expected = CreateListOfOutputDtoQueryReviews(nbOfReviews);
+
+            // ACT //
+            var output = reviewService.Query();
+
+            // ASSERT //
+            Assert.AreEqual(expected, output);
+        }
+        
+        [Test]
         public void GetById_SingleNumber_ReturnsSingleOutputDtoQueryReview()
         {
             // ARRANGE //

@@ -52,12 +52,12 @@ CREATE TABLE item
     id                  INT IDENTITY    NOT NULL,
     label               VARCHAR(100)    NOT NULL,
 	price               FLOAT           NOT NULL,
-	imageItem           VARCHAR(400)    NOT NULL,
+	imageItem           VARCHAR(600)    NOT NULL,
 	descriptionItem     VARCHAR(1000)   NOT NULL,
 	categoryId          INT             NOT NULL,
 	
     PRIMARY KEY (id),
-	FOREIGN KEY (categoryId) REFERENCES category (id)
+	FOREIGN KEY (categoryId) REFERENCES category (id) ON DELETE CASCADE
 );
 
 
@@ -84,7 +84,7 @@ CREATE TABLE wishlist
 	
     PRIMARY KEY (uservId, itemId),
 	FOREIGN KEY (uservId) REFERENCES userv (id) ON DELETE CASCADE,
-	FOREIGN KEY (itemId) REFERENCES item (id) 
+	FOREIGN KEY (itemId) REFERENCES item (id) ON DELETE CASCADE
 );
 
 CREATE TABLE baggedItem

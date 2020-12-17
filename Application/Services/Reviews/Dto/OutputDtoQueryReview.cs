@@ -28,8 +28,7 @@ namespace Application.Services.Reviews.Dto
             {
                 if (ReferenceEquals(null, obj)) return false;
                 if (ReferenceEquals(this, obj)) return true;
-                if (obj.GetType() != this.GetType()) return false;
-                return Equals((User) obj);
+                return obj.GetType() == this.GetType() && Equals((User) obj);
             }
         }
 
@@ -47,8 +46,7 @@ namespace Application.Services.Reviews.Dto
             {
                 if (ReferenceEquals(null, obj)) return false;
                 if (ReferenceEquals(this, obj)) return true;
-                if (obj.GetType() != this.GetType()) return false;
-                return Equals((Item) obj);
+                return obj.GetType() == this.GetType() && Equals((Item) obj);
             }
         }
 
@@ -63,22 +61,7 @@ namespace Application.Services.Reviews.Dto
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((OutputDtoQueryReview) obj);
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                var hashCode = Id;
-                hashCode = (hashCode * 397) ^ Stars;
-                hashCode = (hashCode * 397) ^ (Title != null ? Title.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (DescriptionReview != null ? DescriptionReview.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Reviewer != null ? Reviewer.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (ItemReviewed != null ? ItemReviewed.GetHashCode() : 0);
-                return hashCode;
-            }
+            return obj.GetType() == this.GetType() && Equals((OutputDtoQueryReview) obj);
         }
     }
 }

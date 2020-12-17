@@ -14,8 +14,7 @@
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((OutputDtoAddCategory) obj);
+            return obj.GetType() == this.GetType() && Equals((OutputDtoAddCategory) obj);
         }
     }
 }

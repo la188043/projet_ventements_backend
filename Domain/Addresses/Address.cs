@@ -1,6 +1,4 @@
-﻿using Domain.Users;
-
-namespace Domain.Addresses
+﻿namespace Domain.Addresses
 {
     public class Address : IAddress
     {
@@ -9,9 +7,5 @@ namespace Domain.Addresses
         public int HomeNumber { get; set; }
         public string Zip { get; set; }
         public string City { get; set; }
-
-        public Address()
-        {
-        }
     }
 }

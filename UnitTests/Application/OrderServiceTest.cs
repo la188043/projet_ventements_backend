@@ -22,7 +22,7 @@ namespace UnitTests.Application
             {
                 Id = i,
                 IsPaid = false,
-                orderedAt = DateTime.Now,
+                OrderedAt = DateTime.Now,
                 Orderer = new User
                 {
                     Id = i,
@@ -86,8 +86,8 @@ namespace UnitTests.Application
             return new OutputDtoAddOrder
             {
                 Id = i,
-                isPaid = false,
-                orderedAt = DateTime.Now
+                IsPaid = false,
+                OrderedAt = DateTime.Now
             };
         }
 

@@ -7,12 +7,8 @@ namespace Domain.Orders
     {
         public int Id { get; set; }
         public bool IsPaid { get; set; }
-        public DateTime orderedAt { get; set; }
+        public DateTime OrderedAt { get; set; }
         public IUser Orderer { get; set; }
-
-        public Order()
-        {
-        }
 
         public override bool Equals(object obj)
         {

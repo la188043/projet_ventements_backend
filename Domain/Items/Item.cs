@@ -11,10 +11,6 @@ namespace Domain.Items
         public string DescriptionItem { get; set; }
         public ICategory Category { get; set; }
 
-        public Item()
-        {
-        }
-
         public override bool Equals(object obj)
         {
             if (obj is Item item)

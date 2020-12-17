@@ -7,7 +7,7 @@ namespace Domain.Orders
     public interface IOrder : IEntity
     {
         bool IsPaid { get; set; }
-        DateTime orderedAt { get; set; }
+        DateTime OrderedAt { get; set; }
         IUser Orderer { get; set; }
     }
 }

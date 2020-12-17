@@ -4,7 +4,6 @@ using System.Data.SqlClient;
 using Application.Exceptions;
 using Application.Repositories;
 using Domain.BaggedItems;
-using Domain.Exceptions;
 using Infrastructure.SqlServer.Factories;
 using Infrastructure.SqlServer.Shared;
 

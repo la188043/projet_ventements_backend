@@ -41,7 +41,7 @@ namespace UnitTests.Domain
                 {
                     Id = i,
                     IsPaid = false,
-                    orderedAt = DateTime.Now,
+                    OrderedAt = DateTime.Now,
                     Orderer = new User {Id = i}
                 },
                 ItemOrdered = new Item

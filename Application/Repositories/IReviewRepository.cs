@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using Domain.Items;
 using Domain.reviews;
-using Domain.Users;
 
 namespace Application.Repositories
 {

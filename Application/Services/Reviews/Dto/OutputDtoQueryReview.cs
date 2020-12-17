@@ -1,8 +1,4 @@
-﻿using System;
-using Domain.Items;
-using Domain.Users;
-
-namespace Application.Services.Reviews.Dto
+﻿namespace Application.Services.Reviews.Dto
 {
     public class OutputDtoQueryReview
     {

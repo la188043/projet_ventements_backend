@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Application.Exceptions;
 using Application.Repositories;
 using Application.Services.OrderedItems;
@@ -121,7 +120,6 @@ namespace UnitTests.Application
 
             // ACT //
             var output = orderedItemService.GetByOrderId(1);
-            var test = output.ToList();
 
             // ASSERT //
             Assert.AreEqual(expected, output);

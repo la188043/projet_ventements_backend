@@ -1,6 +1,5 @@
 ﻿using Domain.Items;
 using Domain.Orders;
-using Domain.Users;
 
 namespace Domain.OrderedItems
 {
@@ -11,10 +10,6 @@ namespace Domain.OrderedItems
         public string Size { get; set; }
         public IOrder Order { get; set; }
         public IItem ItemOrdered { get; set; }
-
-        public OrderedItem()
-        {
-        }
 
         public override bool Equals(object obj)
         {

@@ -5,7 +5,6 @@ using Application.Repositories;
 using Application.Services.WishLists;
 using Application.Services.WishLists.Dto;
 using Domain.Categories;
-using Domain.Exceptions;
 using Domain.Items;
 using Domain.Users;
 using Domain.Wishlists;

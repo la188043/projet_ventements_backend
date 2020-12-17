@@ -5,12 +5,12 @@ namespace Application.Services.Orders.Dto
     public class OutputDtoAddOrder
     {
         public int Id { get; set; }
-        public bool isPaid { get; set; }
-        public DateTime orderedAt { get; set; }
+        public bool IsPaid { get; set; }
+        public DateTime OrderedAt { get; set; }
 
         private bool Equals(OutputDtoAddOrder other)
         {
-            return Id == other.Id && isPaid == other.isPaid;
+            return Id == other.Id && IsPaid == other.IsPaid;
         }
 
         public override bool Equals(object obj)

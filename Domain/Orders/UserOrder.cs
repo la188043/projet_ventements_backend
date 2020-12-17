@@ -35,7 +35,7 @@ namespace Domain.Orders
                 {
                     AddOrderedItem(orderedItem);
                 }
-                catch (DuplicateItemException e) 
+                catch (DuplicateItemException) 
                 {}
             }
         }

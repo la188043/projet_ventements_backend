@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Application.Services.Addresses.Dto
+﻿namespace Application.Services.Addresses.Dto
 {
     public class OutputDtoQueryAddress
     {

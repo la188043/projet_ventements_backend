@@ -31,7 +31,7 @@ namespace Application.Services.Orders
                     {
                         Id = orderFromDb.Id,
                         IsPaid = orderFromDb.IsPaid,
-                        OrderedAt = orderFromDb.orderedAt,
+                        OrderedAt = orderFromDb.OrderedAt,
                         TotalPrice = userOrder.ComputeOrderPrice(),
                         Ordered = new OutputDtoQueryOrder.User
                         {
@@ -66,7 +66,7 @@ namespace Application.Services.Orders
             {
                 Id = orderFromDb.Id,
                 IsPaid = orderFromDb.IsPaid,
-                OrderedAt = orderFromDb.orderedAt,
+                OrderedAt = orderFromDb.OrderedAt,
                 TotalPrice = userOrder.ComputeOrderPrice(),
                 Ordered = new OutputDtoQueryOrder.User
                 {
@@ -97,8 +97,8 @@ namespace Application.Services.Orders
             return new OutputDtoAddOrder
             {
                 Id = orderFromDb.Id,
-                isPaid = orderFromDb.IsPaid,
-                orderedAt = orderFromDb.orderedAt
+                IsPaid = orderFromDb.IsPaid,
+                OrderedAt = orderFromDb.OrderedAt
             };
         }
 

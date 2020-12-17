@@ -1,12 +1,10 @@
-﻿using System;
-using Application.Repositories;
+﻿using Application.Repositories;
 using Application.Services.Addresses;
 using Application.Services.Addresses.Dto;
 using Domain.Addresses;
 using NSubstitute;
 using NSubstitute.ReturnsExtensions;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
 namespace UnitTests.Application
 {

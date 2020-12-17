@@ -1,7 +1,6 @@
 ﻿using Domain.Items;
 using Domain.Orders;
 using Domain.Shared;
-using Domain.Users;
 
 namespace Domain.OrderedItems
 {

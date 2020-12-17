@@ -8,7 +8,6 @@ using Application.Services.Addresses.Dto;
 using Application.Services.Users;
 using Application.Services.Users.Dto;
 using Domain.Addresses;
-using Domain.Exceptions;
 using Domain.Users;
 using NSubstitute;
 using NSubstitute.ReturnsExtensions;

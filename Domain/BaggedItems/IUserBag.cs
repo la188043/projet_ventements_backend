@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Domain.Items;
 using Domain.Users;
 
 namespace Domain.BaggedItems

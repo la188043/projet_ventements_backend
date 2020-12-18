@@ -1,5 +1,4 @@
 ﻿using Application.Services.WishLists;
-using Application.Services.WishLists.Dto;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Helpers;
 

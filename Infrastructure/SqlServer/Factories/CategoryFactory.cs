@@ -1,5 +1,4 @@
 ﻿using System.Data.SqlClient;
-using Domain;
 using Domain.Categories;
 using Infrastructure.SqlServer.Categories;
 

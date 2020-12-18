@@ -3,7 +3,6 @@ using System.Data;
 using Application.Repositories;
 using Domain.Orders;
 using Infrastructure.SqlServer.Factories;
-using Infrastructure.SqlServer.OrderedItems;
 using Infrastructure.SqlServer.Shared;
 
 namespace Infrastructure.SqlServer.Orders

@@ -1,7 +1,4 @@
 ﻿using System.Collections.Generic;
-using Domain.Addresses;
-using Domain.Items;
-using Domain.Users;
 using Domain.Wishlists;
 
 namespace Application.Repositories

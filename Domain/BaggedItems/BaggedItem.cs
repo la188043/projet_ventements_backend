@@ -13,10 +13,6 @@ namespace Domain.BaggedItems
         public IUser BagOwner { get; set; }
         public IItem AddedItem { get; set; }
 
-        public BaggedItem()
-        {
-        }
-
         public override bool Equals(object obj)
         {
             if (obj is BaggedItem item)

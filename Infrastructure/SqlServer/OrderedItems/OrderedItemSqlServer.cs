@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using Infrastructure.SqlServer.Items;
+﻿using Infrastructure.SqlServer.Items;
 using Infrastructure.SqlServer.Orders;
 
 namespace Infrastructure.SqlServer.OrderedItems

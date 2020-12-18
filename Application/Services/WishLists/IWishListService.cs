@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Application.Services.WishLists.Dto;
-using Domain.Wishlists;
 
 namespace Application.Services.WishLists
 {

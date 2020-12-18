@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using Domain.Addresses;
 using Domain.Users;
 using Infrastructure.SqlServer.Addresses;

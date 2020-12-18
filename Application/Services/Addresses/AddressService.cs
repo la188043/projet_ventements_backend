@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Application.Repositories;
+﻿using Application.Repositories;
 using Application.Services.Addresses.Dto;
 using Domain.Addresses;
 

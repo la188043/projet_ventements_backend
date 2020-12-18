@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Domain.Exceptions;
 using Domain.Users;
@@ -30,7 +29,7 @@ namespace Domain.BaggedItems
                 {
                     AddItem(item);
                 }
-                catch (DuplicateItemException e) {}
+                catch (DuplicateItemException) {}
             }
         }
 

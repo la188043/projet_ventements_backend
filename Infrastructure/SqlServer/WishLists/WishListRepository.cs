@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using Application.Exceptions;
 using Application.Repositories;
-using Domain.Exceptions;
-using Domain.Items;
-using Domain.Users;
 using Domain.Wishlists;
 using Infrastructure.SqlServer.Factories;
 using Infrastructure.SqlServer.Shared;

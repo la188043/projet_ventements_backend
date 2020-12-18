@@ -1,0 +1,8 @@
+mail: admin@ventements.com
+password: administrator
+
+mail: johndoe@gmail.com
+password: motdepasse123
+
+mail: ferrari@gmail.com
+password: motdepasse123
